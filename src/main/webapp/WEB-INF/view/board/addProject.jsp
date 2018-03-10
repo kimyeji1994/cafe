@@ -24,7 +24,7 @@
 				function(data) {
 					if (data != "FAIL") {
 						alert("code : "+data)
-						window.location.href = "/cafe/scedule/list/" + data ;
+						window.location.href = "/scedule/list/" + data ;
 					} else if (data == "FAIL") {
 						location.reload();
 					}

@@ -9,6 +9,14 @@
 	<mvc:resources mapping="/static/js/**" location="/WEB-INF/resources/js/" />
 	<mvc:resources mapping="/static/css/**" location="/WEB-INF/resources/css/" />
 	<mvc:resources mapping="/static/img/**" location="/WEB-INF/resources/img/" />
+	<mvc:resources mapping="/static/vendor/bootstrap/css/**" location="/WEB-INF/resources/vendor/bootstrap/css/" />
+	<mvc:resources mapping="/static/vendor/bootstrap/js/**" location="/WEB-INF/resources/vendor/bootstrap/js/" />
+	<mvc:resources mapping="/static/vendor/font-awesome/css/**" location="/WEB-INF/resources/vendor/font-awesome/css/" />
+	<mvc:resources mapping="/static/vendor/font-awesome/fonts/**" location="/WEB-INF/resources/vendor/font-awesome/fonts/" />
+	<mvc:resources mapping="/static/vendor/jquery/**" location="/WEB-INF/resources/vendor/jquery/" />
+	<mvc:resources mapping="/static/vendor/vide/**" location="/WEB-INF/resources/vendor/vide/" />
+	<mvc:resources mapping="/static/mp4/**" location="/WEB-INF/resources/mp4/" />
+	
 
 <bean id="validator"
 class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
