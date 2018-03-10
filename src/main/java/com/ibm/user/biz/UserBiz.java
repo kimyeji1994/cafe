@@ -1,0 +1,15 @@
+package com.ibm.user.biz;
+
+import java.util.Map;
+
+public interface UserBiz {
+
+	String checkUser(Map<String, Object> params);
+
+	boolean updateUser(Map<String, Object> params);
+
+	boolean insertUser(Map<String, Object> params);
+
+	boolean insertManager(Map<String, Object> params);
+
+}
