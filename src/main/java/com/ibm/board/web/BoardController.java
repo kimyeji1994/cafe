@@ -57,6 +57,7 @@ public class BoardController {
 	
 	@RequestMapping(value ="/project/write", method=RequestMethod.POST)
 	public String writePojectAction(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response) throws ParseException {
+		logger.info("params {}" ,params);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
@@ -64,19 +65,19 @@ public class BoardController {
 		String end = (String)params.get("endDate");
 		Date endDateD =dateFormat.parse(end);
 		String endDateS = dateFormat2.format(endDateD);
-		System.out.println("endDate : " + endDateS);
+
 		params.put("endDate", endDateS);
 		
 		String start = (String) params.get("startDate");
 		Date startDateD =dateFormat.parse(start);
 		String startDateS = dateFormat2.format(startDateD);
-		System.out.println("startDate : " + startDateS);		
+	
 		params.put("startDate", startDateS);
 
 		String due = (String) params.get("dueDate");
 		Date dueDateD =dateFormat.parse(due);
 		String dueDateS = dateFormat2.format(dueDateD);
-		System.out.println("dueDate : " + dueDateS);		
+		
 		params.put("dueDate", dueDateS);
 
 		
