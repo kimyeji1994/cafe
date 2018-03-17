@@ -22,7 +22,7 @@ public class BoardBizImpl  implements BoardBiz{
 		}
 
 	@Override
-	public String checkCode(int code) {
+	public String checkCode(String code) {
 	
 		return boardDao.selectOneCode(code);
 	}
@@ -75,6 +75,16 @@ public class BoardBizImpl  implements BoardBiz{
 		
 		
 		return sceduleList;
+	}
+
+	@Override
+	public HashMap<String, Object> selectBoardInfoWithCode(Map<String, Object> params) {
+		
+		
+		HashMap<String, Object> boardInfo = boardDao.selectBoardInfoWithCode(params);
+		logger.info("boardInfo : {} " , boardInfo);
+		
+		return boardInfo;
 	}
 		
 	

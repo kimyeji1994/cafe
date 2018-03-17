@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cafe</groupId>
   <artifactId>cafe</artifactId>
-  <version>v1.1</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <build>
     <plugins>
@@ -12,17 +12,11 @@
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
-          <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.0.0</version>
-        <configuration>
-        	<sourceEncoding>UTF-8</sourceEncoding>
-        	<encoding>UTF-8</encoding>
-        	<charset>UTF-8</charset>
-        </configuration>
       </plugin>
     </plugins>
   </build>

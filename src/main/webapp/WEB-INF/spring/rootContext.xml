@@ -9,37 +9,28 @@
 
 
 <!-- connection을 대체할 bean -->
-<!-- <bean id ="dataSource"
+<bean id ="dataSource"
 	  class = "org.apache.commons.dbcp.BasicDataSource">
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 	  <property name="url" value="jdbc:mysql://localhost:3306/ibm?useSSL=false"></property>
 	  <property name="username" value="root"></property>
 	  <property name="password" value=""></property>
-</bean> -->
-
-<bean id ="dataSource" class = "org.apache.commons.dbcp.BasicDataSource">
-	  <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-	  <property name="url" value="jdbc:mysql://au-cdbr-sl-syd-01.cleardb.net/ibmx_970d00c255e06ff?autoReconnect=yes&amp;useUnicode=yes&amp;characterEncoding=utf8&amp;characterSetResults=utf8&amp;connectionCollation=utf8_general_ci"></property>
- 	  <property name="username" value="b25c9b94b1adcd"></property>
-	  <property name="password" value="6eda66e2"></property>
-	  <property name="maxActive" value="2"></property>
 </bean>
 
-<!--       <property name="connectionProperties" value="autoReconnect=yes;useUnicode=yes;characterEncoding=utf8;connection Collation=utf8_general_ci;characterSetResults=utf8;characterSetServer=utf8;"></property> 
- -->
-<!-- <bean id="dataSource-log4jdbc" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+  <bean id="dataSource-log4jdbc" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
         <property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/ibm?useSSL=falsep" />
         <property name="username" value="root" />
         <property name="password" value="" />
-    </bean>  -->  
+    </bean>
 
 
 
 
    <bean   id="sqlSessionFactory"
         class="org.mybatis.spring.SqlSessionFactoryBean">
-     <property name="dataSource" ref="dataSource" />
+    <property name="dataSource" ref="dataSource" />
      <property name="configLocation" value="classpath:/mybatis.xml" />
 </bean>
 

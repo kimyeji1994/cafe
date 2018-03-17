@@ -1,6 +1,8 @@
 package com.ibm.board.dao;
 
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -20,7 +22,7 @@ public class BoardDaoImpl  extends SqlSessionDaoSupport implements BoardDao{
 	}
 
 	@Override
-	public String selectOneCode(int code) {
+	public String selectOneCode(String code) {
 	
 		return getSqlSession().selectOne("BoardDao.selectOneCode", code);
 	}
@@ -48,5 +50,15 @@ public class BoardDaoImpl  extends SqlSessionDaoSupport implements BoardDao{
 	
 		return getSqlSession().selectOne("BoardDao.selectOneDayWithInScedule", params);
 	}
+
+	@Override
+	public HashMap<String, Object> selectBoardInfoWithCode(Map<String, Object> params) {
+	
+		 return getSqlSession().selectOne("BoardDao.selectBoardInfoWithCode", params);
+	}
+	
+	
 	
 }
+	
+

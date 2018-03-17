@@ -12,7 +12,7 @@
 	</select>
 	
 	
-	<select id="selectOneCode" parameterType="_int"  resultType="string">
+	<select id="selectOneCode" parameterType="string"  resultType="string">
 		
 		SELECT 	code		
 	    FROM 	codet
@@ -29,9 +29,9 @@
 	<insert id="insertBoard" parameterType="map">
 	
 	INSERT INTO boards(title, importance, start_date
-						, end_date, code, project)
+						, end_date, due_date, code, project)
 					VALUES(	#{title}, 0, STR_TO_DATE(#{startDate}  ,'%Y %m %d' )
-							, STR_TO_DATE(#{endDate}  ,'%Y %m %d' ), #{code}, 'easy')
+							, STR_TO_DATE(#{endDate}  ,'%Y %m %d' ),STR_TO_DATE(#{dueDate} ,'%Y %m %d' ), #{code}, 'easy')
 	
 	
 	</insert>
@@ -59,6 +59,14 @@
 		and a.oneday <![CDATA[ <=  ]]> end_date
 	
 	</select> 
+	
+	<select id="selectBoardInfoWithCode" parameterType="map"  resultType="map">
+		
+		SELECT board_id, title, importance, start_date, end_date, code, project
+		FROM boards
+		where code = #{code}
+	</select>
+	
 	
 
 </mapper>

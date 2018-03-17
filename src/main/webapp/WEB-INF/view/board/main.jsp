@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
-     <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
 
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <meta charset="utf-8"> -->    
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -33,7 +31,7 @@
     <div class="overlay"></div>
 
     <div class="masthead">
-      <div class="masthead-bg"></div>
+    <div class="masthead-bg"></div>
       <div class="container h-100">
         <div class="row h-100">
           <div class="col-12 my-auto">
@@ -43,7 +41,7 @@
                 <strong>January 2019</strong>! Sign up for updates using the form below!</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->
-                <button class="btn btn-secondary" type="button"> Join  </button>
+             <a href="<c:url value="/project/join" />" > <button class="btn btn-secondary" type="button"> Join  </button> </a>
                 <div class="input-group-append">
                 &emsp;<a href="<c:url value="/project/write" />" >  <button class="btn btn-secondary" type="button">Create</button> </a>
                 </div>
