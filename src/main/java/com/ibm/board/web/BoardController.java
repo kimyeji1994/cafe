@@ -57,7 +57,7 @@ public class BoardController {
 	
 	@RequestMapping(value ="/project/write", method=RequestMethod.POST)
 	public String writePojectAction(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response) throws ParseException {
-		
+		logger.info("params {}" ,params);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
 		
