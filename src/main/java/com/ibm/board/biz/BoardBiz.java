@@ -1,11 +1,12 @@
 package com.ibm.board.biz;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public interface BoardBiz {
 
-	String checkCode(int code);
+	String checkCode(String code);
 
 	boolean insertProjectCode(Map<String, Object> params);
 
@@ -15,6 +16,8 @@ public interface BoardBiz {
 	int getBoardId(Map<String, Object> params);
 
 	List<String> getSceduleList(String code);
+
+	HashMap<String, Object> selectBoardInfoWithCode(Map<String, Object> params);
 	
 	
 	
