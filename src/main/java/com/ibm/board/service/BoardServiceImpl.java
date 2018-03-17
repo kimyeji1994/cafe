@@ -110,7 +110,7 @@ public class BoardServiceImpl implements BoardService {
 			 code = checkCode;
 		 }
 		 else {
-			 return null;
+			 return "";
 		 }
 		 
 		//user가 있는지 확인 
