@@ -65,27 +65,35 @@
 /* 		$("#save").click( function() {
 			
 			$.post(
-				"<c:url value="/project/write" />",
-				$("#writeForm").serialize(),
-				function(data) {
-					if (data != "FAIL") {
+					
+				if(formCheck()!=true){
+					alert("false");
+					return false;
+					
+				}else if{
+					"<c:url value="/project/write" />",
+					$("#writeForm").serialize(),
+					function(data) {
+						if (data != "FAIL") {
 						
-						bootbox.alert({
+							bootbox.alert({
 							 	message: "code : "+data,
 							  size: 'small',
 						    callback: function () {
 						    	window.location.href = "/scedule/list/" + data ;
 						    }
-						});
+							});
 						
 						//alert("code : "+data)
 						
 					} else if (data == "FAIL") {
 						location.reload();
 					}
+				}
 			});
 		}); */
-		$("#save2").click( function() {
+
+/* 		$("#save2").click( function() {
 						
 			$.post(
 				"<c:url value="/project/write" />",
@@ -104,14 +112,64 @@
 						}
 				});
 			});
-
-	});
+*/
+	}); 
+		 		function saveClick() {
+					
+					$.post(
+							
+							"<c:url value="/project/write" />",
+							$("#writeForm").serialize(),
+							function(data) {
+								if (data != "FAIL") {
+								
+									bootbox.alert({
+									 	message: "code : "+data,
+									  size: 'small',
+								    callback: function () {
+								    	window.location.href = "/scedule/list/" + data ;
+								    }
+									});
+								
+								//alert("code : "+data)
+								
+							} else if (data == "FAIL") {
+								location.reload();
+							}
+						});
+				};
+		 		function saveClick2() {
+					
+					$.post(
+							
+							"<c:url value="/project/write" />",
+							$("#writeForm2").serialize(),
+							function(data) {
+								if (data != "FAIL") {
+								
+									bootbox.alert({
+									 	message: "code : "+data,
+									  size: 'small',
+								    callback: function () {
+								    	window.location.href = "/scedule/list/" + data ;
+								    }
+									});
+								
+								//alert("code : "+data)
+								
+							} else if (data == "FAIL") {
+								location.reload();
+							}
+						});
+				};
  
 
 				function formCheck() {
 				    // 사용하기 쉽도록 변수를 선언하여 담아주고,
+				    
 				    var phone = $("#phone").val();
-				    if (phone == null || phone == "") { // null인지 비교한 뒤
+				    if (phone == null || phone == "" || phone.length<10) { // null인지 비교한 뒤
+				    		alert("phone length : "+phone.length);
 				        $("#phone").focus(); // 해당태그에 포커스를 준뒤")
 				        $("#phoneMsg").show();
 				    }else{
@@ -133,7 +191,7 @@
 				    }else{
 				    	$("#titleMsg").hide();
 				    };
-
+				    
 				    var startDate = $("#startDate").val();
 				    if (startDate == null || startDate == "") { // null인지 비교한 뒤
 			        $("#startDtMsg").show();
@@ -156,14 +214,80 @@
 				    };
 				    
 				    if($("#phoneMsg").css("display") == "block" || $("#userMsg").css("display") == "block" || $("#titleMsg").css("display") == "block" || $("#startDtMsg").css("display") == "block" || $("#endDtMsg").css("display") == "block" || $("#dueDtMsg").css("display") == "block"){
+
+				    	//하나라도 빈칸이 있는 것 이기 때문에 return false로 vali check!!!
+				    	return false;
+				    }else{
+				    	saveClick();
+				    }
+				    	
+				};
+				function formCheck2() {
+				    // 사용하기 쉽도록 변수를 선언하여 담아주고,
+						
+				    var phone = $("#phone2").val();
+				    if (phone == null || phone == "") { // null인지 비교한 뒤
+				        $("#phone2").focus(); // 해당태그에 포커스를 준뒤")
+				        $("#phoneMsg2").show();
+				    }else{
+				    	$("#phoneMsg2").hide();
+				    };
+				    
+				    var user = $("#name2").val();
+				    if (user == null || user == "") { // null인지 비교한 뒤
+			        $("#name2").focus(); // 해당태그에 포커스를 준뒤")
+			        $("#userMsg2").show();
+				    }else{
+				    	$("#userMsg2").hide();
+				    };
+				    
+				    var project = $("#project").val();
+				    if (project == null || project == "") { // null인지 비교한 뒤
+				    	$("#project").focus();
+			        $("#projectMsg").show();
+				    }else{
+				    	$("#projectMsg").hide();
+				    };
+				    
+				    var title = $("#title2").val();
+				    if (title == null || title == "") { // null인지 비교한 뒤
+			        $("#title2").focus(); // 해당태그에 포커스를 준뒤")
+			        $("#titleMsg2").show();
+				    }else{
+				    	$("#titleMsg2").hide();
+				    };
+				    
+				    var startDate = $("#startDate2").val();
+				    if (startDate == null || startDate == "") { // null인지 비교한 뒤
+			        $("#startDtMsg2").show();
+				    }else{
+				    	$("#startDtMsg2").hide();
+				    };
+				    
+				    var endDate = $("#endDate2").val();
+				    if (endDate == null || endDate == "") { // null인지 비교한 뒤
+			        $("#endDtMsg2").show();
+				    }else{
+				    	$("#endDtMsg2").hide();
+				    };
+
+				    var dueDate = $("#dueDate2").val();
+				    if (dueDate == null || dueDate == "") { // null인지 비교한 뒤
+			        $("#dueDtMsg2").show();
+				    }else{
+				    	$("#dueDtMsg2").hide();
+				    };
+				    
+				    if($("#phoneMsg2").css("display") == "block" || $("#userMsg2").css("display") == "block" || $("#projectMsg").css("display") == "block" || $("#titleMsg2").css("display") == "block" || $("#startDtMsg2").css("display") == "block" || $("#endDtMsg2").css("display") == "block" || $("#dueDtMsg2").css("display") == "block"){
 				    	
 				    	//하나라도 빈칸이 있는 것 이기 때문에 return false로 vali check!!!
 				    	return false;
+				    }else{
+				    	saveClick2();
 				    }
-				    
-				    
 				    	
 				};
+
 	
 	</script>
 
@@ -190,7 +314,7 @@
 	  		<form action="" id="writeForm">
 	  							
 						<div class="row">
-							<div id="phoneMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out phone number!</div>
+							<div id="phoneMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please enter your phone number more than 10 digits.</div>
 						</div>
 						<div class="form-group input-group">
 						      	<!-- <div class="col-xs-3"> -->
@@ -248,79 +372,76 @@
 				
 	  	<div class="tab-pane fade"id="writeDiv2">
 	  		<form id="writeForm2">
-	  			<fieldset>
-						<div class="form-group has-feedback">
-							<div class="input-group">
+						<div class="row">
+							<div id="phoneMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please enter your phone number more than 10 digits.</div>
+						</div>
+	
+						<div class="form-group input-group">
 						      	<!-- <div class="col-xs-3"> -->
 					      	<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-					   			<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
-					    </div>
+					   			<input type="text" class="form-control" id="phone2" name="phone" placeholder="Phone Number">
 						</div>
-						<div class="form-group required">
-				    	<div class="input-group">
+						<div class="row">
+							<div id="userMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out user name!</div>
+						</div>
+	
+						<div class="form-group input-group">
 				      		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				      		<input type="text" class="form-control" id="name" name="name" placeholder="User Name">
-				    	</div>
+				      		<input type="text" class="form-control" id="name2" name="name" placeholder="User Name">
 				   	</div>
-				   	<div class="form-group required">
-				    	<div class="input-group">
-				      		<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-				      		<input type="text" class="form-control" id="title" name="title" placeholder="Title">
-				    	</div>
-				   	</div>
-				   	<div class="form-group required">
-				    	<div class="input-group">
+				   	<div class="row">
+							<div id="projectMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out your project!</div>
+						</div>
+
+				   	<div class="form-group input-group">
 				      		<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
 				      		<input type="text" class="form-control" id="project" name="project" placeholder="Project">
-				    	</div>
 				   	</div>
-						<div class="form-group required">
-							<div class="input-group date input-append date" id="dpDOB4">
-								<span class="input-group-addon add-on">
-								<span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" name="startDate" placeholder="From Date" /> 
-							</div>
+	
+				   	<div class="row">
+							<div id="titleMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
 						</div>
-						<div class="form-group required">
-							<div class="input-group date input-append date" id="dpDOB5">
-								<span class="input-group-addon add-on">
-								<span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" name="endDate" placeholder="To Date" /> 
-							</div>
+	
+				   	<div class="form-group input-group">
+				      		<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+				      		<input type="text" class="form-control" id="title2" name="title" placeholder="Title">
+				   	</div>
+
+						<div class="row">
+							<div id="startDtMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
 						</div>
-						<div class="form-group required">
-							<div class="input-group date input-append date" id="dpDOB6">
+	
+						<div class="form-group input-group date input-append date" id="dpDOB4">
 								<span class="input-group-addon add-on">
 								<span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" name="dueDate" placeholder="Due Date" /> 
-							</div>
+								<input type="text" class="form-control" id="startDate2" name="startDate" placeholder="From Date" /> 
+						</div>
+						<div class="row">
+							<div id="endDtMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
+						</div>
+	
+						<div class="form-group input-group date input-append date" id="dpDOB5">
+								<span class="input-group-addon add-on">
+								<span class="glyphicon glyphicon-calendar"></span></span>
+								<input type="text" class="form-control" id="endDate2" name="endDate" placeholder="To Date" /> 
+						</div>
+
+						<div class="row">
+							<div id="dueDtMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
+						</div>
+
+						<div class="form-group input-group date input-append date" id="dpDOB6">
+								<span class="input-group-addon add-on">
+								<span class="glyphicon glyphicon-calendar"></span></span>
+								<input type="text" class="form-control" id="dueDate2" name="dueDate" placeholder="Due Date" /> 
 						</div>
 						<div class="form-group required text-right">		
-							<button type="button" class="btn btn-default btn-sm" id="save2">Save</button>		
+							<button type="button" class="btn btn-default btn-sm" id="save2" onClick="formCheck2();">Save</button>		
 						</div>
-					</fieldset>		
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
-<script>
-
-/* $(document).ready(function () {
-	
-function formCheck() {
-    // 사용하기 쉽도록 변수를 선언하여 담아주고,
-    var phone = document.writeForm.phone.value;
-    alert(phone+' : phone');
- 
-    if (phone == null || phone == "") { // null인지 비교한 뒤
-        alert('please enter your phone number'); // 경고창을 띄우고
-        document.writeForm.phone.focus(); // 해당태그에 포커스를 준뒤
-        return false; // false를 리턴합니다.
-    }
-
-};
-}); */
-</script>
 </body>
 </html>

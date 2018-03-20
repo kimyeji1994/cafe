@@ -85,7 +85,7 @@ public class BoardController {
 		String due = (String) params.get("dueDate");
 		Date dueDateD =dateFormat.parse(due);
 		String dueDateS = dateFormat2.format(dueDateD);
-		
+		System.out.println("dueDate : " + dueDateS);		
 		params.put("dueDate", dueDateS);
 
 		
