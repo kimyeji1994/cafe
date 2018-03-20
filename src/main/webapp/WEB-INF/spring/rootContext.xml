@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+<!-- connection을 대체할 bean -->
+<bean id ="dataSource"
+	  class = "org.apache.commons.dbcp.BasicDataSource">
+	  <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	  <property name="url" value="jdbc:mysql://localhost:3306/ibm?useSSL=false"></property>
+	  <property name="username" value="root"></property>
+	  <property name="password" value=""></property>
+</bean>
+
+
+  <bean id="dataSource-log4jdbc" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
+        <property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/ibm?useSSL=falsep" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
+    </bean>
+
+
+
+
+   <bean   id="sqlSessionFactory"
+        class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+     <property name="configLocation" value="classpath:/mybatis.xml" />
+</bean>
+
+<bean  id="sqlSessionTemplate"
+       class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg ref="sqlSessionFactory" />
+</bean>
+
+
+<bean   id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" /><!-- 어떤 db한테 데이터 소스 오류나면 롤벡 대상 -->
+</bean>
+
+<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+    <tx:attributes>
+      <tx:method name="insert*" rollback-for="RuntimeException" />
+       
+        <tx:method name="write*" rollback-for="RuntimeException" /> 
+        <tx:method name="add*" rollback-for="RuntimeException" />
+        <tx:method name="append*" rollback-for="RuntimeException" />
+        <tx:method name="create*" rollback-for="RuntimeException" />
+        <tx:method name="plus*" rollback-for="RuntimeException" />
+        <tx:method name="new*" rollback-for="RuntimeException" />
+        
+          <tx:method name="update*" rollback-for="RuntimeException" />
+        <tx:method name="modify*" rollback-for="RuntimeException" />
+        <tx:method name="edit*" rollback-for="RuntimeException" />
+        <tx:method name="fix*" rollback-for="RuntimeException" />
+        <tx:method name="alter*" rollback-for="RuntimeException" />
+        <tx:method name="change*" rollback-for="RuntimeException" />
+        
+        
+          <tx:method name="delete*" rollback-for="RuntimeException" />
+        <tx:method name="remove*" rollback-for="RuntimeException" />
+        <tx:method name="erase*" rollback-for="RuntimeException" />
+        <tx:method name="signOut*" rollback-for="RuntimeException" />
+        
+        
+          <tx:method name="get*" read-only="true" />
+          <tx:method name="select*" read-only="true" />
+          <tx:method name="read*" read-only="true" />
+          <tx:method name="view*" read-only="true" /> 
+   <!--      단순히 가져오는거 데이터 수정 하지말아라 -->
+        
+        
+        
+        
+        
+        <tx:method name="tx*" rollback-for="RuntimeException" />
+        <tx:method name="*Action" rollback-for="RuntimeException" />
+        
+        
+    </tx:attributes>
+</tx:advice>
+<!-- 어떤 메소드를 할때 뭘하겠다, 메소드 지정,메소드 실행중에 어떤일이일어나면 롤벡 -->
+
+   
+
+<aop:config>
+    <aop:pointcut id="transactionScope" 
+                  expression="execution(public * com.ibm..*.*ServiceImpl.*(..))" />
+    <aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionScope"/>
+</aop:config>
+
+<!-- 누구한테 할꺼냐 id="transactionScope"  정하고 pointcut-ref="transactionScope" 여기다 붙여라 이포이트컷으로 advice-ref="transactionAdvice" 어디바이서써라
+expression 누구한테 걸꺼냐 public * 퍼블릭시작 모든 리턴 타입  com.ktds 페키지 ..하위 모든페키지를 의미 모든 서비스 임플에 모든 메소드에 파라미터X  -->
+
+
+
+</beans>

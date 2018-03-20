@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<mvc:resources mapping="/static/js/**" location="/WEB-INF/resources/js/" />
+	<mvc:resources mapping="/static/css/**" location="/WEB-INF/resources/css/" />
+	<mvc:resources mapping="/static/img/**" location="/WEB-INF/resources/img/" />
+	<mvc:resources mapping="/static/vendor/bootstrap/css/**" location="/WEB-INF/resources/vendor/bootstrap/css/" />
+	<mvc:resources mapping="/static/vendor/bootstrap/js/**" location="/WEB-INF/resources/vendor/bootstrap/js/" />
+	<mvc:resources mapping="/static/vendor/font-awesome/css/**" location="/WEB-INF/resources/vendor/font-awesome/css/" />
+	<mvc:resources mapping="/static/vendor/font-awesome/fonts/**" location="/WEB-INF/resources/vendor/font-awesome/fonts/" />
+	<mvc:resources mapping="/static/vendor/jquery/**" location="/WEB-INF/resources/vendor/jquery/" />
+	<mvc:resources mapping="/static/vendor/vide/**" location="/WEB-INF/resources/vendor/vide/" />
+	<mvc:resources mapping="/static/mp4/**" location="/WEB-INF/resources/mp4/" />
+	
+
+<bean id="validator"
+class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+
+
+	<bean id="viewReslover"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<bean id="multipartResolver"
+	      class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+		<property name="maxUploadSize" value="104857600" /> 
+			<!-- 100MB 파일 만 받는다  보통은 30mb-->
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	
+	<bean id="boardController" class="com.ibm.board.web.BoardController">
+		<property name="boardService" ref="boardServiceImpl" />
+	</bean>
+	
+	
+
+</beans>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BoardDao" >
+
+	<select id="getDailyPartsByDLID" parameterType="string"  resultType="string">
+		
+		SELECT  title
+	    FROM 	BOARD
+		
+	
+	</select>
+	
+	
+	<select id="selectOneCode" parameterType="string"  resultType="string">
+		
+		SELECT 	code		
+	    FROM 	codet
+		where code = #{code}
+	
+	</select>
+	
+	<insert id="insertProjectCode" parameterType="map">
+	INSERT INTO codet(code, code_name)
+			VALUES  (#{code}, #{project})
+
+	</insert>
+	
+	<insert id="insertBoard" parameterType="map">
+	
+	INSERT INTO boards(title, importance, start_date
+						, end_date, due_date, code, project)
+					VALUES(	#{title}, 0, STR_TO_DATE(#{startDate}  ,'%Y %m %d' )
+							, STR_TO_DATE(#{endDate}  ,'%Y %m %d' ),STR_TO_DATE(#{dueDate} ,'%Y %m %d' ), #{code}, 'easy')
+	
+	
+	</insert>
+	<select id="selectBoardId" parameterType="map"  resultType="_int">
+		
+		SELECT 	board_id		
+	    FROM 	boards
+		where code = #{code}
+	
+	</select>
+	
+	
+	<select id="selectOneDayWithInScedule" parameterType="map"  resultType="string">
+		
+		select DATE_FORMAT(a.oneday , '%Y/%m/%d') 
+		from
+		(
+			select adddate(start_date, #{count}) oneday, code  
+			from boards 
+			where code = #{code}) A 
+ 		,boards B
+		where 1=1
+		and A.code = B.code
+		and a.oneday >= start_date
+		and a.oneday <![CDATA[ <=  ]]> end_date
+	
+	</select> 
+	
+	<select id="selectBoardInfoWithCode" parameterType="map"  resultType="map">
+		
+		SELECT board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, code, project
+		FROM boards
+		where code = #{code}
+	</select>
+	
+	<select id="selectSceduleInfo" parameterType="map"  resultType="map">
+		
+		SELECT distinct info_id, board_id, phone,  DATE_FORMAT(info_date  , '%Y%m%d')
+		FROM info
+		where board_id = #{boardId}
+		and phone = #{phone}
+		and DATE_FORMAT(info_date  , '%Y/%m/%d')= #{date}
+	</select>
+	
+	<insert id="insertSceduleInfo" parameterType="map">
+	
+	INSERT INTO info(board_id, phone, info_date)
+				VALUES(#{boardId}, #{phone}, STR_TO_DATE(#{date}  ,'%Y/%m/%d' ));
+	
+	</insert>
+	
+	
+	<delete id="deleteSceduleInfo" parameterType="map">
+	DELETE FROM  info
+		where board_id = #{boardId}
+		and phone = #{phone}
+		and DATE_FORMAT(info_date , '%Y/%m/%d') = #{date}
+	
+	
+	
+	</delete>
+	
+	
+	<select id="selectOneDayLogCount" parameterType="map"  resultType="string">
+		
+		select count(info_id)
+		from info 
+		where board_id = #{boardInfo.board_id}
+		and   DATE_FORMAT(info_date , '%Y/%m/%d')   = #{oneDay}
+	</select> 
+	
+	
+
+	
+	<select id="selectDayFormat" parameterType="map"  resultType="string">
+		
+		select DATE_FORMAT(#{oneDay} , '%m/%d') 
+		from dual
+	</select> 
+	
+	
+	
+
+</mapper>
