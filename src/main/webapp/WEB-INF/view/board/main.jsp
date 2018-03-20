@@ -23,6 +23,14 @@
 
     <!-- Custom styles for this template -->
     <link href="<c:url value="/static/css/coming-soon.min.css"/> " rel="stylesheet">
+    
+    <!-- input box style -->
+<%-- 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 	<script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --> 	
+	 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ --%>    
+ 		
 
   </head>
 
@@ -41,7 +49,7 @@
                 <strong>January 2019</strong>! Sign up for updates using the form below!</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->
-             <a href="<c:url value="/project/join" />" > <button class="btn btn-secondary" type="button"> Join  </button> </a>
+							 <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#myModal"> Join  </button> 
                 <div class="input-group-append">
                 &emsp;<a href="<c:url value="/project/write" />" >  <button class="btn btn-secondary" type="button">Create</button> </a>
                 </div>
@@ -72,6 +80,47 @@
         </li>
       </ul>
     </div>
+    
+    
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+	        <h4 class="modal-title">Join</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          
+          <form id="writeForm">
+						<div class="form-group input-group">
+						      	<!-- <div class="col-xs-3"> -->
+					  <!-- 	<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span> -->
+					  	<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+						</div>
+						<div class="form-group input-group">
+				      		<!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
+				      <input type="text" class="form-control" id="name" name="name" placeholder="User Name">
+				   	</div>
+						<div class="form-group input-group">
+				      		<!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
+				      <input type="text" class="form-control" id="code" name="code" placeholder="Code Number">
+				   	</div>
+<!-- 	
+						이름 : <input type ="text" id="name"  name="name"><br/>
+						코드 : <input type ="text" id="code" name ="code"><br/>
+ -->						
+<!-- 						<input type="button" id="joinButt" value="join">
+ -->						
+						
+					</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="joinButt" value="join">Join</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="<c:url value="/static/vendor/jquery/jquery.min.js"/>"></script>
@@ -82,6 +131,27 @@
    
     <!-- Custom scripts for this template -->
     <script src="<c:url value="/static/js/coming-soon.min.js"/>"></script>
+
+ 
+    <script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
+    <script type="text/javascript">
+		$().ready(function(){
+				$("#joinButt").click( function() {
+					
+					$.post(
+						"<c:url value="/project/join" />",
+						$("#writeForm").serialize(),
+						function(data) {
+							if (data != "fail") {
+								window.location.href = "/scedule/list/" + data ;
+							} else if (data == "fail") {
+								alert("No Available Code");
+								location.reload();
+							}
+					});
+				});
+		 });
+		</script>
 
 
 
