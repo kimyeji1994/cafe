@@ -41,5 +41,16 @@
 	
 	
 	</insert> 
+	
+ <select id="selectApplicantList"   parameterType="map"  resultType="string">
+ 
+   select distinct a.name
+   from user a , boards b , info c
+   where b.board_id = c.board_id
+   and c.phone = a.phone
+   and b.board_id = #{boardInfo.board_id}
+ 
+ 
+ </select>
 
 </mapper>

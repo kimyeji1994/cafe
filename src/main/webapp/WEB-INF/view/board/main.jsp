@@ -36,12 +36,11 @@
         <div class="row h-100">
           <div class="col-12 my-auto">
             <div class="masthead-content text-white py-5 py-md-0">
-              <h1 class="mb-3">Scedule App</h1>
-              <p class="mb-5">We're working hard to finish the development of this site. Our target launch date is
-                <strong>January 2019</strong>! Sign up for updates using the form below!</p>
+              <h1 class="mb-3">Get Together With Code</h1>
+              <p class="mb-5">The simple way to decide on dates</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->
-             <a href="<c:url value="/project/join" />" > <button class="btn btn-secondary" type="button"> Join  </button> </a>
+             <a href="<c:url value="/project/join" />" > <button class="btn btn-secondary" type="button"> &nbsp;Join&nbsp;&nbsp;   </button> </a>
                 <div class="input-group-append">
                 &emsp;<a href="<c:url value="/project/write" />" >  <button class="btn btn-secondary" type="button">Create</button> </a>
                 </div>

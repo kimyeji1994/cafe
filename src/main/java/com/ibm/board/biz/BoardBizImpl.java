@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.ibm.board.dao.BoardDao;
 import com.ibm.board.web.BoardController;
+import com.ibm.user.dao.UserDao;
+import com.mysql.fabric.xmlrpc.base.Array;
 
 public class BoardBizImpl  implements BoardBiz{
 
@@ -86,6 +88,79 @@ public class BoardBizImpl  implements BoardBiz{
 		
 		return boardInfo;
 	}
+
+	@Override
+	public boolean addSceduleInfo(Map<String, Object> params) {
+		logger.info("params : {} " , params);
+		// 1. 있나 호ㅏㄱ인
+		HashMap<String, Object> isAlreadySced = boardDao.selectSceduleInfo(params);
+		logger.info("isAlreadySced : " + isAlreadySced);
+		if(isAlreadySced == null) {
+			boolean isAddSceduleInfo = boardDao.insertSceduleInfo(params);
+			logger.info("isAddSceduleInfo : " + isAddSceduleInfo);
+			
+		}
+		else {
+			boolean isDeleteSceduleInfo = boardDao.deleteSceduleInfo(params);
+			logger.info("isDeleteSceduleInfo : " + isDeleteSceduleInfo);
+		}
+		
+		return false;
+	}
+
+	@Override
+	public List<ArrayList<String>> getsceduleLogList(Map<String, Object> params) {
+		List<ArrayList<String>> sceduleLogList = new ArrayList<ArrayList<String>>();
+		ArrayList<String> sceduleOneLog = new ArrayList<String>();
+		
+		String oneDay = null;
+		String logCount = null;
+		int i =0;
+		
+		sceduleOneLog.add( "Date" );
+		sceduleOneLog.add("Scedule");
+		sceduleLogList.add(0, sceduleOneLog ); 
+	
+		while(true) {
+			
+			params.put("count", i);
+		
+			
+			sceduleOneLog = new ArrayList<String>();
+			
+			
+			oneDay = boardDao.selectOneDayWithInScedule(params);
+			// oneDay
+			
+			 if(oneDay == null) {
+				 logger.info("sceduleList : {} " , sceduleLogList );
+				 break;
+			 }
+			params.put("oneDay", oneDay);
+			
+			logger.info("params : {}" , params);
+			logCount = boardDao.selectOneDayLogCount(params);
+			String dayFormat = boardDao.selectDayFormat(params);
+			
+		
+			 if(logCount == null) {
+				 logCount = "0";
+			 }
+			 sceduleOneLog.add( dayFormat);
+			 sceduleOneLog.add( logCount);
+			
+			 
+			 sceduleLogList.add(i + 1 , sceduleOneLog);
+		
+			 i++;
+			 
+			
+			
+		}
+		return sceduleLogList;
+	}
+
+
 		
 	
 	

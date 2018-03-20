@@ -1,5 +1,6 @@
 package com.ibm.board.biz;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,11 @@ public interface BoardBiz {
 	List<String> getSceduleList(String code);
 
 	HashMap<String, Object> selectBoardInfoWithCode(Map<String, Object> params);
-	
+
+	boolean addSceduleInfo(Map<String, Object> params);
+
+	List<ArrayList<String>> getsceduleLogList(Map<String, Object> params);
+
 	
 	
 	

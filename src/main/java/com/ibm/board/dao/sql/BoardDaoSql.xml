@@ -46,7 +46,7 @@
 	
 	<select id="selectOneDayWithInScedule" parameterType="map"  resultType="string">
 		
-		select DATE_FORMAT(a.oneday , '%Y%m%d') 
+		select DATE_FORMAT(a.oneday , '%Y/%m/%d') 
 		from
 		(
 			select adddate(start_date, #{count}) oneday, code  
@@ -62,10 +62,56 @@
 	
 	<select id="selectBoardInfoWithCode" parameterType="map"  resultType="map">
 		
-		SELECT board_id, title, importance, start_date, end_date, code, project
+		SELECT board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, code, project
 		FROM boards
 		where code = #{code}
 	</select>
+	
+	<select id="selectSceduleInfo" parameterType="map"  resultType="map">
+		
+		SELECT distinct info_id, board_id, phone,  DATE_FORMAT(info_date  , '%Y%m%d')
+		FROM info
+		where board_id = #{boardId}
+		and phone = #{phone}
+		and DATE_FORMAT(info_date  , '%Y/%m/%d')= #{date}
+	</select>
+	
+	<insert id="insertSceduleInfo" parameterType="map">
+	
+	INSERT INTO info(board_id, phone, info_date)
+				VALUES(#{boardId}, #{phone}, STR_TO_DATE(#{date}  ,'%Y/%m/%d' ));
+	
+	</insert>
+	
+	
+	<delete id="deleteSceduleInfo" parameterType="map">
+	DELETE FROM  info
+		where board_id = #{boardId}
+		and phone = #{phone}
+		and DATE_FORMAT(info_date , '%Y/%m/%d') = #{date}
+	
+	
+	
+	</delete>
+	
+	
+	<select id="selectOneDayLogCount" parameterType="map"  resultType="string">
+		
+		select count(info_id)
+		from info 
+		where board_id = #{boardInfo.board_id}
+		and   DATE_FORMAT(info_date , '%Y/%m/%d')   = #{oneDay}
+	</select> 
+	
+	
+
+	
+	<select id="selectDayFormat" parameterType="map"  resultType="string">
+		
+		select DATE_FORMAT(#{oneDay} , '%m/%d') 
+		from dual
+	</select> 
+	
 	
 	
 

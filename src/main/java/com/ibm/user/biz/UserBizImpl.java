@@ -1,5 +1,6 @@
 package com.ibm.user.biz;
 
+import java.util.List;
 import java.util.Map;
 
 import com.ibm.user.dao.UserDao;
@@ -37,6 +38,12 @@ public class UserBizImpl implements UserBiz{
 	public boolean insertManager(Map<String, Object> params) {
 		
 		return  userDao.insertManager(params) > 0;
+	}
+
+	@Override
+	public List<String> selectApplicantList(Map<String, Object> params) {
+		
+		return userDao.selectApplicantList(params);
 	}
 	
 }

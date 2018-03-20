@@ -1,5 +1,6 @@
 package com.ibm.board.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,6 +141,25 @@ public class BoardServiceImpl implements BoardService {
 		HashMap<String, Object> boardInfo =  boardBiz.selectBoardInfoWithCode(params);
 
 		return boardInfo;
+	}
+
+	@Override
+	public void addSceduleInfo(Map<String, Object> params) {
+		
+		 boolean isAddScedule = boardBiz.addSceduleInfo(params);
+		
+	}
+
+	@Override
+	public List<ArrayList<String>> getsceduleLogList(Map<String, Object> params) {
+		List<ArrayList<String>> sceduleLogList = boardBiz.getsceduleLogList(params);
+		return sceduleLogList;
+	}
+
+	@Override
+	public List<String> getapplicantList(Map<String, Object> params) {
+		List<String> applicantList = userBiz.selectApplicantList(params);
+		return applicantList;
 	}
 	
 	

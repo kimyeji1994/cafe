@@ -56,6 +56,36 @@ public class BoardDaoImpl  extends SqlSessionDaoSupport implements BoardDao{
 	
 		 return getSqlSession().selectOne("BoardDao.selectBoardInfoWithCode", params);
 	}
+
+	@Override
+	public HashMap<String, Object> selectSceduleInfo(Map<String, Object> params) {
+	
+		return  getSqlSession().selectOne("BoardDao.selectSceduleInfo", params);
+	}
+
+	@Override
+	public boolean insertSceduleInfo(Map<String, Object> params) {
+		
+		return getSqlSession().insert("BoardDao.insertSceduleInfo" , params) > 0;
+	}
+
+	@Override
+	public boolean deleteSceduleInfo(Map<String, Object> params) {
+
+		return getSqlSession().delete("BoardDao.deleteSceduleInfo" , params) > 0;
+	}
+
+	@Override
+	public String selectOneDayLogCount(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("BoardDao.selectOneDayLogCount", params);
+	}
+
+	@Override
+	public String selectDayFormat(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("BoardDao.selectDayFormat", params);
+	}
 	
 	
 	

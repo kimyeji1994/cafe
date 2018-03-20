@@ -21,6 +21,16 @@ public interface BoardDao {
 	public String selectOneDayWithInScedule(Map<String, Object> params);
 
 	public HashMap<String, Object> selectBoardInfoWithCode(Map<String, Object> params);
+
+	public HashMap<String, Object> selectSceduleInfo(Map<String, Object> params);
+
+	public boolean insertSceduleInfo(Map<String, Object> params);
+
+	public boolean deleteSceduleInfo(Map<String, Object> params);
+
+	public String selectOneDayLogCount(Map<String, Object> params);
+
+	public String selectDayFormat(Map<String, Object> params);
 	
 	
 }

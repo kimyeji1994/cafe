@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +48,13 @@ public class BoardController {
 	public String mainView(){
 
 		return "board/main";
+
+	}
+	
+	@RequestMapping(value ="/sample", method=RequestMethod.GET)
+	public String sampleView(){
+
+		return "board/sample";
 
 	}
 	@RequestMapping(value ="/project/write", method=RequestMethod.GET)
@@ -118,9 +126,27 @@ public class BoardController {
 		List<String> sceduleList = boardService.getSceduleList(code);
 		view.addObject("sceduleList", sceduleList);
 		params.put("code", code);
+		
+		
+		
 		//정보 가져오기 
 		HashMap<String, Object> boardInfo = boardService.getboardInfo(params);
 		view.addObject("boardInfo" , boardInfo);
+		
+		params.put("boardInfo", boardInfo);
+		//도표 정보 가져오기 
+		List<ArrayList<String>> sceduleLogList = boardService.getsceduleLogList(params);
+		view.addObject("sceduleLogList", sceduleLogList);
+		
+		//참석자 정보 가져오기 
+		logger.info("**********참석자 정보 **********");
+		logger.info("params : {}" , params);
+		List<String> applicantList = boardService.getapplicantList(params);
+		logger.info("applicantList : {} " , applicantList);
+		view.addObject("applicantList", applicantList);
+		
+		
+		
 		
 		view.setViewName("board/listScedule");
 		
@@ -153,7 +179,7 @@ public class BoardController {
 		 userVo.setPhone(params.get("phone").toString());
 		HttpSession session = request.getSession();
 		session.setAttribute("_USER_", userVo);
-		logger.info("***********Log In************");
+		logger.info("***********Log In*************");
 		logger.info("userVo {}" ,userVo);
 		 
 		 PrintWriter write;
@@ -188,11 +214,23 @@ public class BoardController {
 		
 		
 	@RequestMapping(value ="/project/addScedule", method=RequestMethod.POST)
-	public ResponseEntity<HashMap<String, Object>> addSceduleProcess(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map ){
+	public ResponseEntity<HashMap<String, Object>> addSceduleProcess(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
 		HashMap<String, Object> rtnMap = new HashMap<String, Object>() ;
-		rtnMap.put("data" ,  "fail" );	
+		
+		UserVo userVo =  (UserVo) session.getAttribute("_USER_");
+		params.put("phone", userVo.getPhone());
+
+		logger.info("params : {}" , params);
+		boardService.addSceduleInfo(params);
+		
+		
+		
+		rtnMap.put("data" ,  "true" );	
 
 		return ResponseEntity.ok(rtnMap);		
 	}
+	
+	
+	
 	
 }
