@@ -2,6 +2,7 @@ package com.ibm.board.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,6 +67,8 @@ public class BoardController {
 	@RequestMapping(value ="/project/write", method=RequestMethod.POST)
 	public String writePojectAction(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response) throws ParseException {
 		logger.info("params {}" ,params);
+		
+		
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
@@ -166,10 +169,35 @@ public class BoardController {
 	public String joinPojectAction(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map ) {
 		
 		logger.info("params {}" ,params);
+		String name = "";
 		
+		try {
+			request.setCharacterEncoding("UTF-8");
+//			name = URLEncoder.encode((String) params.get("name"), "UTF-8");
+			name = request.getParameter("name");
+			logger.info("name{}", name);
+			
+			
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+//		String name = params.get("name").toString();
+//		try {
+//			name=URLEncoder.encode(name, "UTF-8");
+//		} catch (UnsupportedEncodingException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+
+//		try {
+//			name = new String(name.getBytes("8859_1"), "utf-8" );
+//		} catch (UnsupportedEncodingException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		
-		
-		
+		params.put("name", name);
 		 String code = boardService.joinProjectAction(params);
 		 
 		 // login 처리

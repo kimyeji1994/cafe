@@ -1,17 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%
+// 인코딩
+request.setCharacterEncoding("UTF-8");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
 
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scedule</title>
+    <title>Schedule</title>
    
     <!-- Bootstrap core CSS -->
     <link href=" <c:url value="/static/vendor/bootstrap/css/bootstrap.min.css"/> " rel="stylesheet">
@@ -40,7 +45,7 @@
               <p class="mb-5">The simple way to decide on dates</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->
-				<button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#myModal"> &nbsp;Join&nbsp;&nbsp;  </button> 
+								<a href="<c:url value="/project/join" />" data-toggle="modal">	<button class="btn btn-secondary" type="button"> &nbsp;Join&nbsp;&nbsp;  </button> </a>
                 <div class="input-group-append">
                 &emsp;<a href="<c:url value="/project/write" />" >  <button class="btn btn-secondary" type="button">Create</button> </a>
                 </div>
@@ -134,6 +139,9 @@
 						$("#writeForm").serialize(),
 						function(data) {
 							if (data != "fail") {
+								var user = $("#name").val();
+								console.log(user);
+								alert("user : "+user);
 								window.location.href = "/scedule/list/" + data ;
 							} else if (data == "fail") {
 								alert("No Available Code");

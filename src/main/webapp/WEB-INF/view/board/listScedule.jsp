@@ -4,7 +4,7 @@
 <!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
@@ -64,8 +64,8 @@ function sceduleClick(date) {
 			{ "date" : String(date)   , "boardId" : boardId  },
 			function(data) {
 				if (data != "FAIL") {
-					alert("code : "+data)
-				
+					
+					alert("code : "+data);
 					//window.location.href = "/scedule/list/" + data ;
 					location.reload();
 				} else if (data == "FAIL") {
