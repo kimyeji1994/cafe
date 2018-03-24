@@ -1,9 +1,11 @@
 package com.ibm.board.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +30,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int writeEasyProject(Map<String, Object> params) {
+	public String writeEasyProject(Map<String, Object> params) {
 		int code =0 ;
 		//code 생성
 		
@@ -66,6 +68,9 @@ public class BoardServiceImpl implements BoardService {
 		
 		//board 
 		
+		params.put("grade" , "easy");
+		logger.info("EASY PROJECT");
+		
 		
 		boolean isInsertBoard = boardBiz.insertBoard(params);
 		logger.info("isInsertBoard : " + isInsertBoard);
@@ -83,13 +88,13 @@ public class BoardServiceImpl implements BoardService {
 		
 
 		
-		return code;
+		return String.valueOf(code);
 	}
 
 	@Override
 	public List<String> getSceduleList(String code) {
 		
-		logger.info("************* 간편일정 날짜 불러오기 ************** " );
+
 		
 		List<String> sceduleList = boardBiz.getSceduleList(code);
 		
@@ -137,7 +142,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public HashMap<String, Object> getboardInfo(Map<String, Object> params) {
-		logger.info("************* project 정보 가져오기  ************** " );
+		logger.info("************* project 정보 가져오기  params : {} ************** " ,params);
+		
 		HashMap<String, Object> boardInfo =  boardBiz.selectBoardInfoWithCode(params);
 
 		return boardInfo;
@@ -160,6 +166,106 @@ public class BoardServiceImpl implements BoardService {
 	public List<String> getapplicantList(Map<String, Object> params) {
 		List<String> applicantList = userBiz.selectApplicantList(params);
 		return applicantList;
+	}
+
+	@Override
+	public String writeDiffProject(Map<String, Object> params) {
+		String code =null ;
+		//code 생성
+		
+		logger.info("************* 프로젝트 일정  만들기 ************** " );
+		while(true) {
+			Calendar cal = Calendar.getInstance();
+			
+			StringBuffer getDay = new StringBuffer();
+			getDay.append(String.format("%02d", cal.get(cal.MONTH) + 1));
+			getDay.append(String.format("%02d", cal.get(cal.DATE)));
+		
+			
+			String day = getDay.toString();
+			logger.info("day : " + day);
+			String token = UUID.randomUUID().toString().substring(0, 3);
+			
+			
+			
+			
+			
+			code = day + token;
+			logger.info("code : " + code);
+			 String checkCode = boardBiz.checkCode(code);
+			logger.info("checkCode : " + checkCode);
+			
+			if(checkCode == null) {
+				params.put("code", code);
+				boolean isInsertProjectCode = boardBiz.insertProjectCode(params);
+				logger.info("isCheckProjectCode : " + isInsertProjectCode);
+				break;
+			}
+		}
+		
+	
+		
+		//user가 있는지 확인 
+		String checkUser = userBiz.checkUser(params);
+		logger.info("checkUser :" + checkUser);
+		
+		if (checkUser != null) {
+			boolean isUpdateUser = userBiz.updateUser(params);
+			logger.info("isUpdateUser : " + isUpdateUser);
+			
+			
+		} 
+		else {
+			boolean isInsertUser =  userBiz.insertUser(params);
+			logger.info("isInsertUser : " + isInsertUser);
+		}
+		
+		//board 
+		if(params.get("project") == null) {
+			params.put("grade" , "easy");
+			logger.info("EASY PROJECT");
+		}
+		else {
+			params.put("grade" , "diff");
+			logger.info("DIFF PROJECT");
+			
+		}
+		
+		boolean isInsertBoard = boardBiz.insertBoard(params);
+		logger.info("isInsertBoard : " + isInsertBoard);
+		
+		
+		int boardId = boardBiz.getBoardId(params);
+		
+		params.put("boardId", boardId);
+		logger.info("boardId : " + boardId);
+		
+		//manager
+		
+		boolean isInsertManager = userBiz.insertManager(params);
+		logger.info("isInsertManager : " + isInsertManager);
+		
+
+		
+		return String.valueOf(code);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getProjectBoardList(Map<String, Object> params) {
+		
+		return boardBiz.getProjectBoardList(params);
+	}
+
+	@Override
+	public List<String> getSceduleListWithBoardId(String boardId) {
+	
+		return boardBiz.getSceduleListWithBoardId(boardId);
+	}
+
+	@Override
+	public List<String> getApplicantInOneDay(Map<String, Object> params) {
+	
+		return boardBiz.getApplicantInOneDay(params);
 	}
 	
 	

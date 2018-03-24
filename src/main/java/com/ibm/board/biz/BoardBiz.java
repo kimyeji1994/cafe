@@ -24,6 +24,12 @@ public interface BoardBiz {
 
 	List<ArrayList<String>> getsceduleLogList(Map<String, Object> params);
 
+	List<HashMap<String, Object>> getProjectBoardList(Map<String, Object> params);
+
+	List<String> getSceduleListWithBoardId(String boardId);
+
+	List<String> getApplicantInOneDay(Map<String, Object> params);
+
 	
 	
 	

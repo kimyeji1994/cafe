@@ -2,6 +2,7 @@ package com.ibm.board.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -92,9 +94,18 @@ public class BoardController {
 		logger.info("params {}" ,params);
 	
 		UserVo userVo = new UserVo(); //login
-		 int code = boardService.writeEasyProject(params);
-		// login 처리
-		userVo.setCode(String.valueOf(code));
+		
+		String code = null;
+		if(params.get("project")  == null) {
+		  code = boardService.writeEasyProject(params);
+		}
+		else {
+		  code = boardService.writeDiffProject(params);
+		}
+		 
+		 
+		 // login 처리
+		userVo.setCode(code);
 		userVo.setName(params.get("name").toString());
 		userVo.setPhone(params.get("phone").toString());
 		HttpSession session = request.getSession();
@@ -121,13 +132,32 @@ public class BoardController {
 	public ModelAndView SceduleListView(@RequestParam Map<String , Object> params  ,HttpServletRequest request, HttpServletResponse response, @PathVariable String code) {
 		ModelAndView view = new ModelAndView();
 		
-		
-		//날짜 가져오기
-		List<String> sceduleList = boardService.getSceduleList(code);
-		view.addObject("sceduleList", sceduleList);
+		String boardId = request.getParameter("board");
+		logger.info("boardId : " + boardId); // 차이
+		logger.info("code : " + code); // 차이
+		List<String> sceduleList = null;
+		params.put("code1", boardId);	
 		params.put("code", code);
 		
 		
+		//날짜 가져오기
+		if(boardId != null) {
+			// diff
+			logger.info("sceduleList : " + "diff"); // 차이
+			sceduleList = boardService.getSceduleListWithBoardId(boardId);
+		
+		}
+		else {
+		
+			sceduleList = boardService.getSceduleList(code);
+		
+			
+		}	
+		
+		view.addObject("sceduleList", sceduleList);
+	
+		
+	
 		
 		//정보 가져오기 
 		HashMap<String, Object> boardInfo = boardService.getboardInfo(params);
@@ -146,8 +176,18 @@ public class BoardController {
 		view.addObject("applicantList", applicantList);
 		
 		
+		//그당일 
+		HttpSession session = request.getSession();
+		HashMap<String, Object> onedayParams  = (HashMap<String, Object>) session.getAttribute("_DATE_");
+		logger.info("onedayParams : {} " , onedayParams);
+		List<String> applicantInOneDay = null;
+		if(onedayParams != null) {
+			view.addObject("oneday", onedayParams.get("date"));
+			applicantInOneDay = boardService.getApplicantInOneDay(onedayParams); 
+			logger.info("applicantInOneDay : {} " , applicantInOneDay);
+		}
 		
-		
+		view.addObject("applicantInOneDay", applicantInOneDay);
 		view.setViewName("board/listScedule");
 		
 		return view;
@@ -167,8 +207,7 @@ public class BoardController {
 		
 		logger.info("params {}" ,params);
 		
-		
-		
+	
 		
 		 String code = boardService.joinProjectAction(params);
 		 
@@ -223,14 +262,32 @@ public class BoardController {
 		logger.info("params : {}" , params);
 		boardService.addSceduleInfo(params);
 		
+		// 그날 참석자 가져오기 
 		
 		
 		rtnMap.put("data" ,  "true" );	
-
+	    rtnMap.put("date" , params.get("date"));
+	    rtnMap.put("boardId" , params.get("boardId"));
+	   
+		session.setAttribute("_DATE_", rtnMap);
+		
+	
 		return ResponseEntity.ok(rtnMap);		
 	}
 	
-	
-	
+	@RequestMapping(value ="/project/list/{code}", method=RequestMethod.GET)
+	public String projectListView(@RequestParam Map<String , Object> params, ModelMap map, @PathVariable String code) {
+		map.addAttribute("projectInfo", "");
+		
+		
+		params.put("code", code);
+		List<HashMap<String, Object>> boardList = boardService.getProjectBoardList(params);
+		map.addAttribute("boardInfo", boardList );
+		
+		
+		
+		
+		return "board/listProject";
+	}
 	
 }
