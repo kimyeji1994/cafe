@@ -42,8 +42,12 @@ public class BoardController {
 
 	private Logger logger = LoggerFactory.getLogger(BoardController.class);
 
+	@RequestMapping(value ="/project/board", method=RequestMethod.GET)
+	public String boardView(){
 
+		return "board/index";
 
+	}
 
 	@RequestMapping(value ="/", method=RequestMethod.GET)
 	public String mainView(){
@@ -58,6 +62,7 @@ public class BoardController {
 		return "board/sample";
 
 	}
+	
 	@RequestMapping(value ="/project/write", method=RequestMethod.GET)
 	public String writePojectView() {
 		

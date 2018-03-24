@@ -28,6 +28,13 @@ request.setCharacterEncoding("UTF-8");
 
     <!-- Custom styles for this template -->
     <link href="<c:url value="/static/css/coming-soon.min.css"/> " rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+    	#joinText{
+    		font-weight: bold;
+    	}
+    
+    </style>
 
   </head>
 
@@ -45,9 +52,12 @@ request.setCharacterEncoding("UTF-8");
               <p class="mb-5">The simple way to decide on dates</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->
-								<a href="<c:url value="/project/join" />" data-toggle="modal">	<button class="btn btn-secondary" type="button"> &nbsp;Join&nbsp;&nbsp;  </button> </a>
+		<!-- <a href="<c:url value="/project/join" />" data-toggle="modal">	<button class="btn btn-secondary" type="button"> &nbsp;Join&nbsp;&nbsp;  </button> </a> -->						
+					<!-- 			<button class="btn btn-secondary" type="button" onclick="myFunction()"> &nbsp;Join&nbsp;&nbsp;  </button> -->
+								<button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#myModal"> &nbsp;Join&nbsp;&nbsp;  </button>
                 <div class="input-group-append">
-                &emsp;<a href="<c:url value="/project/write" />" >  <button class="btn btn-secondary" type="button">Create</button> </a>
+								&emsp;<a href="<c:url value="/project/write" />" >  <button class="btn btn-secondary" type="button">Create</button> </a>
+							<!--   &emsp; <button class="btn btn-secondary" type="button" onclick="myFunction2()">Create</button> -->
                 </div>
                 
               </div>
@@ -77,13 +87,12 @@ request.setCharacterEncoding("UTF-8");
       </ul>
     </div>
     
-    
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-sm w3-modal-content w3-animate-top w3-card-4">
       <div class="modal-content">
         <div class="modal-header">
-	        <h4 class="modal-title">Join</h4>
+	        <h4 id="joinText" class="modal-title" style="text-align:right;">Join Project</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
@@ -91,7 +100,7 @@ request.setCharacterEncoding("UTF-8");
           <form id="writeForm">
 						<div class="form-group input-group">
 						      	<!-- <div class="col-xs-3"> -->
-					  <!-- 	<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span> -->
+					  	<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
 					  	<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
 						</div>
 						<div class="form-group input-group">
@@ -117,6 +126,23 @@ request.setCharacterEncoding("UTF-8");
       </div>
     </div>
   </div>
+  
+<!--   <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+      <header class="w3-container"> 
+        <span onclick="document.getElementById('id01').style.display='none'" 
+        class="w3-button w3-display-topright">&times;</span>
+        <h2>Modal Header</h2>
+      </header>
+      <div class="w3-container">
+        <p>Some text..</p>
+        <p>Some text..</p>
+      </div>
+      <footer class="w3-container">
+        <p>Modal Footer</p>
+      </footer>
+    </div>
+  </div>   -->
 
     <!-- Bootstrap core JavaScript -->
     <script src="<c:url value="/static/vendor/jquery/jquery.min.js"/>"></script>
@@ -128,8 +154,7 @@ request.setCharacterEncoding("UTF-8");
     <!-- Custom scripts for this template -->
     <script src="<c:url value="/static/js/coming-soon.min.js"/>"></script>
 
- 
-    <script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
 		$().ready(function(){
 				$("#joinButt").click( function() {
@@ -150,58 +175,17 @@ request.setCharacterEncoding("UTF-8");
 					});
 				});
 		 });
+/* 		
+								function myFunction() {
+								    window.open("<c:url value="/project/join" />","window","width=400, height=400");
+								}
+								function myFunction2() {
+								    window.open("<c:url value="/project/write" />","window","width=400, height=400");
+								} 
+*/
 		</script>
 
 
 
  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
-<!DOCTYPE html >
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Scedule</title>
-<script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
-<script type="text/javascript">
-
-$().ready(function(){
-	
-	$("#join").click(function(){
-	
-		
-	});
-	
-	$("#create").click(function(){
-	
-		
-		
-	});
-	
-});
-
-
-
-</script>
-</head>
-
-
-
-<body> --%>
-
-
-
-<!-- </body>
-</html> -->

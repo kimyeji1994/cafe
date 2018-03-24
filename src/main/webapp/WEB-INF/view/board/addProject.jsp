@@ -62,57 +62,6 @@
 			format: 'yyyy-mm-dd'	   	
 		});
 
-/* 		$("#save").click( function() {
-			
-			$.post(
-					
-				if(formCheck()!=true){
-					alert("false");
-					return false;
-					
-				}else if{
-					"<c:url value="/project/write" />",
-					$("#writeForm").serialize(),
-					function(data) {
-						if (data != "FAIL") {
-						
-							bootbox.alert({
-							 	message: "code : "+data,
-							  size: 'small',
-						    callback: function () {
-						    	window.location.href = "/scedule/list/" + data ;
-						    }
-							});
-						
-						//alert("code : "+data)
-						
-					} else if (data == "FAIL") {
-						location.reload();
-					}
-				}
-			});
-		}); */
-
-/* 		$("#save2").click( function() {
-						
-			$.post(
-				"<c:url value="/project/write" />",
-				$("#writeForm2").serialize(),
-					function(data) {
-						if (data != "FAIL") {
-							bootbox.alert({
-							 	message: "code : "+data,
-							  size: 'small',
-						    callback: function () {
-						    	window.location.href = "/scedule/list/" + data ;
-						    }
-							});						
-						} else if (data == "FAIL") {
-								location.reload();
-						}
-				});
-			});
-*/
 	}); 
 		 		function saveClick() {
 					
@@ -151,7 +100,8 @@
 									 	message: "code : "+data,
 									  size: 'small',
 								    callback: function () {
-								    	window.location.href = "/scedule/list/" + data ;
+								    	/* window.location.href = "/scedule/list/" + data ; */
+								    	window.location.href = "/project/board";
 								    }
 									});
 								
