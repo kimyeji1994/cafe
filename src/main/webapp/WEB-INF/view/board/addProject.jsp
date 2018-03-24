@@ -8,7 +8,7 @@
 <head>
 
 	<!-- input box style -->
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -62,6 +62,57 @@
 			format: 'yyyy-mm-dd'	   	
 		});
 
+/* 		$("#save").click( function() {
+			
+			$.post(
+					
+				if(formCheck()!=true){
+					alert("false");
+					return false;
+					
+				}else if{
+					"<c:url value="/project/write" />",
+					$("#writeForm").serialize(),
+					function(data) {
+						if (data != "FAIL") {
+						
+							bootbox.alert({
+							 	message: "code : "+data,
+							  size: 'small',
+						    callback: function () {
+						    	window.location.href = "/scedule/list/" + data ;
+						    }
+							});
+						
+						//alert("code : "+data)
+						
+					} else if (data == "FAIL") {
+						location.reload();
+					}
+				}
+			});
+		}); */
+
+/* 		$("#save2").click( function() {
+						
+			$.post(
+				"<c:url value="/project/write" />",
+				$("#writeForm2").serialize(),
+					function(data) {
+						if (data != "FAIL") {
+							bootbox.alert({
+							 	message: "code : "+data,
+							  size: 'small',
+						    callback: function () {
+						    	window.location.href = "/scedule/list/" + data ;
+						    }
+							});						
+						} else if (data == "FAIL") {
+								location.reload();
+						}
+				});
+			});
+*/
 	}); 
 		 		function saveClick() {
 					
@@ -70,13 +121,23 @@
 							"<c:url value="/project/write" />",
 							$("#writeForm").serialize(),
 							function(data) {
+				
 								if (data != "FAIL") {
 								
 									bootbox.alert({
 									 	message: "code : "+data,
 									  size: 'small',
 								    callback: function () {
-								    	window.location.href = "/scedule/list/" + data ;
+								    	alert(data.length);
+								    	if(data.length < 6){
+								    	
+								    		window.location.href = "/scedule/list/" + data ;
+								    	}
+								    	else{
+								    	
+								    		window.location.href = "/project/list/" + data ;
+								    	}
+								    		
 								    }
 									});
 								
@@ -100,8 +161,14 @@
 									 	message: "code : "+data,
 									  size: 'small',
 								    callback: function () {
-								    	/* window.location.href = "/scedule/list/" + data ; */
-								    	window.location.href = "/project/board";
+								    	if(data.length < 6){
+									    	
+								    		window.location.href = "/scedule/list/" + data ;
+								    	}
+								    	else{
+								    	
+								    		window.location.href = "/project/list/" + data ;
+								    	};
 								    }
 									});
 								

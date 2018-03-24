@@ -129,8 +129,12 @@ public class BoardBizImpl  implements BoardBiz{
 			sceduleOneLog = new ArrayList<String>();
 			
 			
-			oneDay = boardDao.selectOneDayWithInScedule(params);
-			// oneDay
+			if(params.get("code1") == null) {
+				oneDay = boardDao.selectOneDayWithInScedule(params);
+			}
+			else {
+				oneDay = boardDao.selectOneDayWithInSceduleBoardId(params);
+			}
 			
 			 if(oneDay == null) {
 				 logger.info("sceduleList : {} " , sceduleLogList );
@@ -158,6 +162,50 @@ public class BoardBizImpl  implements BoardBiz{
 			
 		}
 		return sceduleLogList;
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getProjectBoardList(Map<String, Object> params) {
+
+		return boardDao.getProjectBoardList(params);
+	}
+
+	@Override
+	public List<String> getSceduleListWithBoardId(String boardId) {
+		logger.info("******************* 일정불러오기 ****************");
+		List<String> sceduleList = new ArrayList<String>();
+		Map<String, Object> params = new HashMap<String, Object>();
+		String oneDay = null;
+		int i =0;
+		
+		while(true) {
+			
+			params.put("code1", boardId);
+			params.put("count", i);
+			logger.info("params : {}" , params);
+			
+			
+			oneDay = boardDao.selectOneDayWithInSceduleBoardId(params);
+			
+			 if(oneDay == null) {
+				 logger.info("sceduleList : {} " , sceduleList );
+				 break;
+			 }
+			 sceduleList.add(oneDay);
+			 i++;
+			 
+			
+			
+		}
+		
+		
+		return sceduleList;
+	}
+
+	@Override
+	public List<String> getApplicantInOneDay(Map<String, Object> params) {
+	
+		return boardDao.getApplicantInOneDay(params);
 	}
 
 

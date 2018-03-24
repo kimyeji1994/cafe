@@ -31,16 +31,16 @@
 	INSERT INTO boards(title, importance, start_date
 						, end_date, due_date, code, project)
 					VALUES(	#{title}, 0, STR_TO_DATE(#{startDate}  ,'%Y %m %d' )
-							, STR_TO_DATE(#{endDate}  ,'%Y %m %d' ),STR_TO_DATE(#{dueDate} ,'%Y %m %d' ), #{code}, 'easy')
+							, STR_TO_DATE(#{endDate}  ,'%Y %m %d' ),STR_TO_DATE(#{dueDate} ,'%Y %m %d' ), #{code}, #{grade})
 	
 	
 	</insert>
 	<select id="selectBoardId" parameterType="map"  resultType="_int">
 		
-		SELECT 	board_id		
+		SELECT 	max(board_id)		
 	    FROM 	boards
 		where code = #{code}
-	
+		group by code
 	</select>
 	
 	
@@ -60,11 +60,37 @@
 	
 	</select> 
 	
+	
+	
+	<select id="selectOneDayWithInSceduleBoardId" parameterType="map"  resultType="string">
+		
+		select DATE_FORMAT(a.oneday , '%Y/%m/%d') 
+		from
+		(
+			select adddate(start_date, #{count}) oneday, code  
+			from boards 
+			where board_id = #{code1}) A 
+ 		,boards B
+		where 1=1
+		and A.code = B.code
+		and a.oneday >= start_date
+		and a.oneday <![CDATA[ <=  ]]> end_date
+	
+	</select> 
+	
 	<select id="selectBoardInfoWithCode" parameterType="map"  resultType="map">
 		
 		SELECT board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, code, project
 		FROM boards
-		where code = #{code}
+		where 1=1
+		<choose>
+			<when test="code1 == null and code1 =''">
+				and code = #{code}
+			</when>
+			<otherwise>
+				where board_id = #{code1}
+			</otherwise>
+		</choose>
 	</select>
 	
 	<select id="selectSceduleInfo" parameterType="map"  resultType="map">
@@ -112,6 +138,25 @@
 		from dual
 	</select> 
 	
+	
+		
+	<select id="getProjectBoardList" parameterType="map"  resultType="map">
+		
+		SELECT board_id, title, importance, start_date, end_date, code, project, due_date
+		FROM boards
+		where code = #{code}
+			
+	</select> 
+	 <select id="getApplicantInOneDay"   parameterType="map"  resultType="string">
+ 
+		   select distinct a.name
+		   from user a , boards b , info c
+		   where b.board_id = c.board_id
+		   and c.phone = a.phone
+		   and b.board_id = #{boardId}
+		   and DATE_FORMAT(info_date , '%Y/%m/%d') = #{date}
+ 
+		 </select>
 	
 	
 
