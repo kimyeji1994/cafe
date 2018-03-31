@@ -41,9 +41,39 @@ public class UserBizImpl implements UserBiz{
 	}
 
 	@Override
-	public List<String> selectApplicantList(Map<String, Object> params) {
+	public List<Object> selectApplicantList(Map<String, Object> params) {
 		
 		return userDao.selectApplicantList(params);
+	}
+
+	@Override
+	public Map<String, Object> getManagerInfo(Map<String, Object> params) {
+	
+		return userDao.selectManagerInfo(params);
+	}
+
+	@Override
+	public boolean addCompulsoryPeople(Map<String, Object> params) {
+	
+		return userDao.addCompulsoryPeople(params);
+	}
+
+	@Override
+	public Map<String, Object> getCompulsoryPeople(Map<String, Object> params) {
+	
+		return userDao.selectCompulsoryPeople(params);
+	}
+
+	@Override
+	public List<Object> getCompulsoryPeoples(Map<String, Object> params) {
+	
+		return userDao.selectCompulsoryPeoples(params);
+	}
+
+	@Override
+	public boolean deleteCompulsory(Map<String, Object> params) {
+	
+		return userDao.deleteCompulsory(params);
 	}
 	
 }

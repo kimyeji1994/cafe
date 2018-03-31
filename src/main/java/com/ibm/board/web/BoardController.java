@@ -110,6 +110,7 @@ public class BoardController {
 		userVo.setPhone(params.get("phone").toString());
 		HttpSession session = request.getSession();
 		session.setAttribute("_USER_", userVo);
+		session.setAttribute("_DATE_", null);
 		logger.info("***********Log In************");
 		logger.info("userVo {}" ,userVo);
 		 PrintWriter write;
@@ -135,6 +136,7 @@ public class BoardController {
 		String boardId = request.getParameter("board");
 		logger.info("boardId : " + boardId); // 차이
 		logger.info("code : " + code); // 차이
+		List<Object> sceduleLists = new ArrayList<Object>();
 		List<String> sceduleList = null;
 		params.put("code1", boardId);	
 		params.put("code", code);
@@ -150,11 +152,20 @@ public class BoardController {
 		else {
 		
 			sceduleList = boardService.getSceduleList(code);
-		
-			
+
 		}	
 		
-		view.addObject("sceduleList", sceduleList);
+	
+		for(int i=0; i < sceduleList.size(); i++) {
+			List<String> oneScedule = new ArrayList<String>();
+			oneScedule.add( sceduleList.get(i));
+			logger.info( "sceduleList.get(i) : {} ", sceduleList.get(i)); // 차이
+			oneScedule.add(sceduleList.get(i).replace("/", "") );
+			sceduleLists.add(oneScedule);
+		}
+		logger.info( "sceduleLists : {}", sceduleLists); // 차이
+		
+		view.addObject("sceduleList", sceduleLists);
 	
 		
 	
@@ -171,7 +182,7 @@ public class BoardController {
 		//참석자 정보 가져오기 
 		logger.info("**********참석자 정보 **********");
 		logger.info("params : {}" , params);
-		List<String> applicantList = boardService.getapplicantList(params);
+		List<Object> applicantList = boardService.getapplicantList(params);
 		logger.info("applicantList : {} " , applicantList);
 		view.addObject("applicantList", applicantList);
 		
@@ -180,7 +191,7 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		HashMap<String, Object> onedayParams  = (HashMap<String, Object>) session.getAttribute("_DATE_");
 		logger.info("onedayParams : {} " , onedayParams);
-		List<String> applicantInOneDay = null;
+		List<Object> applicantInOneDay = null;
 		if(onedayParams != null) {
 			view.addObject("oneday", onedayParams.get("date"));
 			applicantInOneDay = boardService.getApplicantInOneDay(onedayParams); 
@@ -188,6 +199,31 @@ public class BoardController {
 		}
 		
 		view.addObject("applicantInOneDay", applicantInOneDay);
+		
+		
+		
+		//유저 클릭 정보 가져오기 
+		UserVo userVo = (UserVo) session.getAttribute("_USER_");
+		String phone = userVo.getPhone();
+		params.put("phone", phone);
+		List<String> userLog = boardService.getLogInfowithPhone(params);
+		logger.info("userLog : {} " , userLog);
+		view.addObject("userLog", userLog);
+		
+		
+		//방장정보 가져오기 
+		Map<String, Object> managerInfo = boardService.getManagerInfo(params);
+		logger.info("managerInfo : {} " , managerInfo);
+		view.addObject("managerInfo", managerInfo);
+		
+		
+		//중요인물정보 가져오기 
+		List<Object> compulsoryPeoples = boardService.getCompulsoryPeoples(params);
+		logger.info("compulsoryPeoples : {} " , compulsoryPeoples);
+		view.addObject("compulsoryPeoples", compulsoryPeoples);
+		
+		
+		
 		view.setViewName("board/listScedule");
 		
 		return view;
@@ -218,6 +254,7 @@ public class BoardController {
 		 userVo.setPhone(params.get("phone").toString());
 		HttpSession session = request.getSession();
 		session.setAttribute("_USER_", userVo);
+		session.setAttribute("_DATE_", null);
 		logger.info("***********Log In*************");
 		logger.info("userVo {}" ,userVo);
 		 
@@ -289,5 +326,55 @@ public class BoardController {
 		
 		return "board/listProject";
 	}
+	
+	@RequestMapping(value ="/project/addCompulsory", method=RequestMethod.POST)
+	public void addCompulsoryPeople(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ) {
+		
+			logger.info("params : {}" , params);
+		
+		Map<String , Object> isAlreadyCom = boardService.getCompulsoryPeople(params);
+		
+		
+	    if(isAlreadyCom == null) {
+	    	boolean isSuccessCom =	boardService.addCompulsoryPeople(params);
+	    	logger.info("isSuccessCom : " + isSuccessCom);
+	    }
+	       
+		
+		
+		
+		
+	}
+	
+	@RequestMapping(value ="/project/deleteCompulsory", method=RequestMethod.POST)
+	public void deleteCompulsory(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ) {
+		
+		logger.info("params : {}" , params);
+	
+	Map<String , Object> isAlreadyCom = boardService.getCompulsoryPeople(params);
+	
+	
+    if(isAlreadyCom != null) {
+    	boolean isSuccessDeleCom =	boardService.deleteCompulsory(params);
+    	logger.info("isSuccessDeleCom : " + isSuccessDeleCom);
+    }
+       
+		
+		
+		
+		
+	}
+	
+	@RequestMapping(value ="/project/viewScedule", method=RequestMethod.POST)
+	public void viewScedule(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
+		HashMap<String, Object> rtnMap = new HashMap<String, Object>() ;
+		rtnMap.put("date" , params.get("date"));
+		rtnMap.put("boardId" , params.get("boardId"));
+		
+		session.setAttribute("_DATE_", rtnMap);
+		
+	}
+	
+	
 	
 }

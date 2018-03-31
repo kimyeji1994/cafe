@@ -80,15 +80,16 @@
 	
 	<select id="selectBoardInfoWithCode" parameterType="map"  resultType="map">
 		
-		SELECT board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, code, project
-		FROM boards
+		SELECT a.board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, a.code, ifnull(code_name , project ) project 
+		FROM boards a , codet b
 		where 1=1
+		and a.code = b.code
 		<choose>
 			<when test="code1 == null and code1 =''">
-				and code = #{code}
+				and a.code = #{code}
 			</when>
 			<otherwise>
-				where board_id = #{code1}
+				and board_id = #{code1}
 			</otherwise>
 		</choose>
 	</select>
@@ -147,14 +148,26 @@
 		where code = #{code}
 			
 	</select> 
-	 <select id="getApplicantInOneDay"   parameterType="map"  resultType="string">
+	 <select id="getApplicantInOneDay"   parameterType="map"  resultType="map">
  
-		   select distinct a.name
+		   select distinct a.name , a.phone
 		   from user a , boards b , info c
 		   where b.board_id = c.board_id
 		   and c.phone = a.phone
 		   and b.board_id = #{boardId}
 		   and DATE_FORMAT(info_date , '%Y/%m/%d') = #{date}
+ 
+		 </select>
+		 
+		 
+		 <select id="getLogInfowithPhone"   parameterType="map"  resultType="string">
+ 
+		   select distinct DATE_FORMAT(info_date , '%Y%m%d')
+		   from  info 
+		   where 1=1
+		   and phone = #{phone}
+		   and board_id = #{boardInfo.board_id}
+		
  
 		 </select>
 	

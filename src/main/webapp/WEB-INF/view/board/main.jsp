@@ -17,6 +17,7 @@ request.setCharacterEncoding("UTF-8");
     <meta name="author" content="">
 
     <title>Schedule</title>
+    <title>Scodule</title>
    
     <!-- Bootstrap core CSS -->
     <link href=" <c:url value="/static/vendor/bootstrap/css/bootstrap.min.css"/> " rel="stylesheet">
@@ -35,7 +36,19 @@ request.setCharacterEncoding("UTF-8");
     	}
     
     </style>
-
+	<style>
+	.mb-3 , .mb-5 {
+	text-align: center;
+	}
+	.input-group {
+	text-align: center;
+	
+	}
+	.marR {
+	  margin-left: 25%;
+	}
+	
+	</style>
   </head>
 
   <body>
@@ -44,7 +57,9 @@ request.setCharacterEncoding("UTF-8");
 
     <div class="masthead">
     <div class="masthead-bg"></div>
+   
       <div class="container h-100">
+     
         <div class="row h-100">
           <div class="col-12 my-auto">
             <div class="masthead-content text-white py-5 py-md-0">
@@ -52,12 +67,9 @@ request.setCharacterEncoding("UTF-8");
               <p class="mb-5">The simple way to decide on dates</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->
-		<!-- <a href="<c:url value="/project/join" />" data-toggle="modal">	<button class="btn btn-secondary" type="button"> &nbsp;Join&nbsp;&nbsp;  </button> </a> -->						
-					<!-- 			<button class="btn btn-secondary" type="button" onclick="myFunction()"> &nbsp;Join&nbsp;&nbsp;  </button> -->
-								<button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#modalJoin"> &nbsp;Join&nbsp;&nbsp;  </button>
+				<button class="btn btn-secondary marR" type="button" data-toggle="modal" data-target="#modalJoin"> &nbsp;Join&nbsp;&nbsp;  </button>
                 <div class="input-group-append">
-								<button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#modalCreate" style='margin-left: 15px; border-radius: 3px;'>Create</button>
-							<!--   &emsp; <button class="btn btn-secondary" type="button" onclick="myFunction2()">Create</button> -->
+				<button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#modalCreate" style='margin-left: 15px; border-radius: 3px;'>Create</button>
                 </div>
                 
               </div>

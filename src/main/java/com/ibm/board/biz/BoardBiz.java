@@ -28,7 +28,9 @@ public interface BoardBiz {
 
 	List<String> getSceduleListWithBoardId(String boardId);
 
-	List<String> getApplicantInOneDay(Map<String, Object> params);
+	List<Object> getApplicantInOneDay(Map<String, Object> params);
+
+	List<String> getLogInfowithPhone(Map<String, Object> params);
 
 	
 	

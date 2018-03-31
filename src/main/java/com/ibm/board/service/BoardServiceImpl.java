@@ -163,8 +163,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<String> getapplicantList(Map<String, Object> params) {
-		List<String> applicantList = userBiz.selectApplicantList(params);
+	public List<Object> getapplicantList(Map<String, Object> params) {
+		List<Object> applicantList = userBiz.selectApplicantList(params);
 		return applicantList;
 	}
 
@@ -263,9 +263,45 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<String> getApplicantInOneDay(Map<String, Object> params) {
+	public List<Object> getApplicantInOneDay(Map<String, Object> params) {
 	
 		return boardBiz.getApplicantInOneDay(params);
+	}
+
+	@Override
+	public List<String> getLogInfowithPhone(Map<String, Object> params) {
+		
+		return boardBiz.getLogInfowithPhone(params);
+	}
+
+	@Override
+	public Map<String, Object> getManagerInfo(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return userBiz.getManagerInfo(params);
+	}
+
+	@Override
+	public boolean addCompulsoryPeople(Map<String, Object> params) {
+		
+		return userBiz.addCompulsoryPeople(params);
+	}
+
+	@Override
+	public Map<String, Object> getCompulsoryPeople(Map<String, Object> params) {
+		
+		return userBiz.getCompulsoryPeople(params);
+	}
+
+	@Override
+	public List<Object> getCompulsoryPeoples(Map<String, Object> params) {
+		
+		return userBiz.getCompulsoryPeoples(params);
+	}
+
+	@Override
+	public boolean deleteCompulsory(Map<String, Object> params) {
+		
+		return userBiz.deleteCompulsory(params);
 	}
 	
 	

@@ -47,20 +47,22 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     </script>
 <body class="w3-light-grey">
 
-<!-- Page Container -->
+    <img src="/static/img/13.png" style="width:100%;" >
+<!-- 
+
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-  <!-- The Grid -->
+  The Grid
   <div class="w3-row-padding">
   
-    <!-- Left Column -->
+    Left Column
     <div class="w3-third">
     
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container">
-          <!-- <img src="/w3images/avatar_hat.jpg" style="width:100%" alt="Avatar"> -->
+          <img src="/w3images/avatar_hat.jpg" style="width:100%" alt="Avatar">
           <div class="w3-display-bottomleft w3-container w3-text-black">
-         <!--    <h2>Jane Doe</h2> -->
+            <h2>Jane Doe</h2>
           </div>
         </div>
         <div class="w3-container">
@@ -108,14 +110,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </div>
       </div><br>
 
-    <!-- End Left Column -->
+    End Left Column
     </div>
 
-    <!-- Right Column -->
+    Right Column
     <div class="w3-twothird">
     
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <!-- <div id="curve_chart" style="width: 900px; height: 500px"></div> -->
+        <div id="curve_chart" style="width: 900px; height: 500px"></div>
       </div>
 
       <div class="w3-container w3-card w3-white">
@@ -139,13 +141,13 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </div>
       </div>
 
-    <!-- End Right Column -->
+    End Right Column
     </div>
     
-  <!-- End Grid -->
+  End Grid
   </div>
   
-  <!-- End Page Container -->
+  End Page Container
 </div>
 
 <footer class="w3-container w3-teal w3-center w3-margin-top">
@@ -158,6 +160,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <i class="fa fa-linkedin w3-hover-opacity"></i>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
-
+ -->
 </body>
 </html>
