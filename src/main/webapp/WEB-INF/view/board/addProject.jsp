@@ -288,7 +288,94 @@
 				    	
 				};
 
+	function excelUploadCall(){
+		$('#fileUpload').val('');
+		$('#fileUpload').click();
+	}
 	
+	function excelUpload(){
+		var ext = '';
+		
+		if($('#fileUpload').val() != ''){
+			ext = $('#fileUpload').val().split('.').pop().toLowerCase();
+			
+			if($.inArray(ext, ['xlsx', 'xlsm', 'xlsb', 'xls', 'xltx', 'xltxm', 'xlt']) == -1){
+				$('#excelMsg').show();
+				return false;
+			} else {
+				$('#excelMsg').hide();
+				$('#modalCall').click();
+			}
+
+			var formData = new FormData($('#frm')[0]);
+			
+			$.ajax({
+				processData: false,
+				contentType: false,
+				url: '/excel/excelUpload',
+				type: 'POST',
+				data: formData,
+				success: function(result){
+					var getUsers = result.userList;
+					
+					$('#result').empty();
+					
+					for(var i = 0; i < getUsers.length ; i++){
+						var userInfo = getUsers[i].name + ' : ' + getUsers[i].phone;
+						
+						$('#result').append('<div id="user_"' + i + '>' + userInfo + '</div>');
+					}
+				}
+			});
+			
+		}
+	}
+	
+	function userSave(){
+		var formData = new FormData($('#frm')[0]);
+		
+		$.ajax({
+			processData: false,
+			contentType: false,
+			url: '/user/excelUpload',
+			type: 'POST',
+			data: formData,
+			success: function(result){
+				var message = "";
+				
+				if(result == 0){
+					message = "Failed to upload users!";
+				} else {
+					message = "Successfully uploaded users!";
+				}
+				$("#saveResult").html(message);
+				$("#saveModalCall").click();
+			}
+		});
+	}
+	
+	function excelDown(){
+		$('#frm_importance').val($("#importance > li[class='active'] > a").html());
+		$('#frm_name').val($('#name').val());
+		$('#frm_project').val($('#project').val());
+		$('#frm_title').val($('#title').val());
+		$('#frm_startDate').val($('#startDate').val());
+		$('#frm_endDate').val($('#endDate').val());
+		$('#frm_dueDate').val($('#dueDate').val());
+		
+		var formData = $('#projectFrm').serialize();
+		
+		console.log(formData);
+		
+		$.ajax({
+			url: '/excel/userExcelDownload',
+			type: 'POST',
+			data: formData,
+			success: function(result){
+				console.log(result);
+			}
+		});
+	}
 	</script>
 
 	<style>
@@ -305,7 +392,7 @@
 	<div class="col-sm-4 col-sm-offset-4">
 	<!-- <form id="writeForm"> -->	
 	<br/>
-	  <ul class="nav nav-tabs" style="margin-bottom:20px;">
+	  <ul id="importance" class="nav nav-tabs" style="margin-bottom:20px;">
 	    <li class="active"><a data-toggle="tab" href="#writeDiv">Easy</a></li>
 	    <li><a data-toggle="tab" href="#writeDiv2">Complex</a></li>
 	  </ul>
@@ -364,10 +451,12 @@
 								<span class="glyphicon glyphicon-calendar"></span></span>
 								<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
 						</div>
-						<div class="form-group required text-right">		
+						<div class="form-group required text-right">
 							<button type="button" class="btn btn-default btn-sm" id="save" onClick="formCheck();">Save</button>		
 						</div>
 				</form>	
+				
+
 			</div>
 				
 	  	<div class="tab-pane fade"id="writeDiv2">
@@ -435,9 +524,72 @@
 								<span class="glyphicon glyphicon-calendar"></span></span>
 								<input type="text" class="form-control" id="dueDate2" name="dueDate" placeholder="Due Date" /> 
 						</div>
-						<div class="form-group required text-right">		
+						<div class="form-group required text-right">
 							<button type="button" class="btn btn-default btn-sm" id="save2" onClick="formCheck2();">Save</button>		
 						</div>
+				</form>
+			</div>
+			
+			<!-- User upload Modal -->
+			<div class="modal fade" id="myModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			        <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title text-center">User List</h4>
+			        </div>
+			        <div class="modal-body">
+			        	<div id="result">
+			        	</div>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal" id="userSave" onClick="userSave();">Save</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+  
+  			<!-- User save Modal -->
+			<div class="modal fade" id="saveModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			      
+			        <div class="modal-body">
+			        	<div id="saveResult" class="text-center">
+			        	</div>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+			        </div>
+			        
+			      </div>
+			    </div>
+			</div>
+			
+			<div class="input-group input-group-newsletter">
+				<div class="row">
+					<div id="excelMsg" class="col-xs-12 text-center small" style="display:none; color:#ff6666;">* Please upload *.xls file!</div>
+				</div>
+				<div class="form-group required text-center">
+					<button type="button" class="btn btn-default btn-sm" id="excelUp" onClick="excelUploadCall(); return false;">User Upload</button>		
+					<button type="button" class="btn btn-default btn-sm" id="excelDown" onClick="excelDown(); return false;">Excel Download</button>		
+				</div>
+				
+				<input type="hidden" id="modalCall" data-toggle="modal" data-target="#myModal" />
+				<input type="hidden" id="saveModalCall" data-toggle="modal" data-target="#saveModal" />
+				<form id="frm" name="frm" method="POST" enctype="multipart/form-data">
+					<input type="file" id="fileUpload" name="fileUpload" onchange="excelUpload();" style="display:none"/>
+				</form>
+
+				<form id="projectFrm" name="projectFrm" method="POST">
+					<input type="hidden" id="frm_importance" name="importance" />
+					<input type="hidden" id="frm_phone" name="phone" />
+					<input type="hidden" id="frm_name" name="name" />
+					<input type="hidden" id="frm_project" name="project" />
+					<input type="hidden" id="frm_title" name="title" />
+					<input type="hidden" id="frm_startDate" name="startDate" />
+					<input type="hidden" id="frm_endDate" name="endDate" />
+					<input type="hidden" id="dfrm_ueDate" name="dueDate" />
 				</form>
 			</div>
 		</div>
