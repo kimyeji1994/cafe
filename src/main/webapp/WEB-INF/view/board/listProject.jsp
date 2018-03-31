@@ -31,6 +31,36 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href=" <c:url value="/static/vendor/bootstrap/css/bootstrap.min.css"/> " rel="stylesheet">
+<!-- datepicker -->
+<script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+<%-- <!-- Bootstrap core JavaScript -->
+<script src="<c:url value="/static/vendor/jquery/jquery.min.js"/>"></script>
+<script src="<c:url value="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
+
+<!-- Plugin JavaScript -->
+<script src="<c:url value="/static/vendor/vide/jquery.vide.min.js"/>"></script>
+ --%>
+<script type='text/javascript'>
+$(document).ready(function () {
+	
+	$('#dpDOB').datepicker({
+		autoclose: true, 
+		format: 'yyyy-mm-dd'	   	
+	});
+	$('#dpDOB2').datepicker({
+		autoclose: true, 
+		format: 'yyyy-mm-dd'	   	
+	});
+	$('#dpDOB3').datepicker({
+		autoclose: true, 
+		format: 'yyyy-mm-dd'	   	
+	});
+});
+</script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </style>
@@ -80,25 +110,50 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       </div>
       <br>
       
-
-      
       <!-- Interests --> 
       <div class="w3-card w3-round w3-white ">
         <div class="w3-container">
-          <p>Interests</p>
-          <p>
-            <span class="w3-tag w3-small w3-theme-d5">News</span>
-            <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
-            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
-            <span class="w3-tag w3-small w3-theme-d2">Games</span>
-            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
-            <span class="w3-tag w3-small w3-theme">Games</span>
-            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
-            <span class="w3-tag w3-small w3-theme-l2">Food</span>
-            <span class="w3-tag w3-small w3-theme-l3">Design</span>
-            <span class="w3-tag w3-small w3-theme-l4">Art</span>
-            <span class="w3-tag w3-small w3-theme-l5">Photos</span>
-          </p>
+				  		<form id="writeForm">
+							   	<div class="col-xs-12">
+										<div id="titleMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
+									</div>
+							   	<div class="form-group input-group">
+						      	<div class="input-group-prepend">
+									    <span class="input-group-text" style="background: #fff;"><i class="fa fa-pencil"></i></span>
+									  </div>	
+										<input type="text" class="form-control" id="title" name="title" placeholder="Title">
+							   	</div>
+			
+									<div class="col-xs-12">
+										<div id="startDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
+									</div>
+									<div class="form-group date input-append date" id="dpDOB">
+	      						<span class="input-group-addon"></span>
+										<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" /> 
+									</div>
+									
+									<div class="col-xs-12">
+										<div id="endDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
+									</div>
+									<div class="form-group date input-append date" id="dpDOB2">
+	      						<span class="input-group-addon"></span>
+										<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
+									</div>
+									
+									<div class="col-xs-12">
+										<div id="dueDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
+									</div>
+									<div class="form-group date input-append date" id="dpDOB3">
+	      						<span class="input-group-addon"></span>
+										<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
+									</div>
+	<!-- 									<div class="form-group required text-right">		
+											<button type="button" class="btn btn-default btn-sm" id="save" onClick="formCheck();">Save</button>		
+										</div> -->
+									<div class="form-group required">
+										<button type="button" class="btn btn-lg btn-primary btn-block btn-signin" id="save" onClick="formCheck();" >Save</button>
+						    	</div>
+								</form>	
         </div>
       </div>
       <br>
@@ -115,7 +170,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <span class="w3-right w3-opacity">1 min</span>
         <h4>${boardInfo.title}</h4><br>
         <hr class="w3-clear">
-        
 
           <div class="w3-row-padding" style="margin:0 -16px">
             <div class="w3-half">
@@ -127,13 +181,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                <p><i class="fa fa-calendar fa-fw w3-margin-right w3-text-theme"></i>${boardInfo.due_date}</p>
           </div>
         </div>
-        <a href="/scedule/list/${boardInfo.code}?board=${boardInfo.board_id}"><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  JOIN</button></a> 
-     
+        <div class="container" align="center">
+       		 <a href="/scedule/list/${boardInfo.code}?board=${boardInfo.board_id}"><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  JOIN</button></a> 
+     		</div>
       </div>
       
       </c:forEach>
-      
-    
       
     <!-- End Middle Column -->
     </div>
@@ -142,61 +195,44 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     <div class="w3-col m2">
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
-          <p><button class="w3-button w3-block w3-theme-l4">Project User Upload</button></p>
-            <ul class="w3-ul w3-card-4">
-          <c:forEach items = "${userList}"  var = "userList" varStatus="status">
-            
-          <c:if test = '${status.count % 3 == 1 }'>  
-           
-             <li class="w3-bar">
-   				
-	      		<div class="w3-bar-item">
-	      		<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style=" height : 45px;"><br/><br/>
-	       			 <span class="w3-large">${userList.name}</span><br/>
-       			  <span class="w3-Small">${userList.phone}</span>
-      			</div>
-    		</li>
-    	
-    		
- 
-          </c:if>
-          
-             <c:if test = '${status.count % 3 == 2 }'>  
-                 <li class="w3-bar">
-     
-          <img src="/static/img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
-      <div class="w3-bar-item">
-        <span class="w3-large">${userList.name}</span><br/>
-       			  <span class="w3-Small">${userList.phone}</span>
+          <!-- <p><button class="w3-button w3-block w3-theme-l4">Project User Upload</button></p> -->
+	        <div class="form-group required text-center">
+						<button type="button" class="w3-button w3-block w3-theme-l4" id="excelUp" onClick="excelUploadCall(); return false;">Project User Upload</button>		
+<!-- 						<button type="button" class="btn btn-default btn-sm" id="excelDown" onClick="excelDown(); return false;">Excel Download</button>		 -->
+					</div>
+
+         <table style="height: 100px;">
+         <tbody>
+
+         <c:forEach items = "${userList}"  var = "userList" varStatus="status">
+			       	<tr>
+							<td>
+							<c:if test = '${status.count % 3 == 1 }'>
+								<img src="/static/img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+							</c:if>
+							<c:if test = '${status.count % 3 == 2 }'>
+								<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+							</c:if>
+							<c:if test = '${status.count % 3 == 0 }'>
+								<img src="/static/img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+							</c:if>
+							
+							</td>
+							</tr>
+					    <tr>
+					      <td class="align-middle">${userList.name}</td>
+					    </tr>
+					    <tr>
+					    	<td class="align-middle">${userList.phone}</td>
+					    </tr>
        
-      </div>
-    </li>
-            </c:if>
-            
-             <c:if test = '${status.count % 3 == 0 }'>  
-                 <li class="w3-bar">
-     			 <img src="/static/img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
-      				<div class="w3-bar-item">
-        			 <span class="w3-large">${userList.name}</span><br/>
-       			  <span class="w3-Small">${userList.phone}</span><br/>
-      				</div>
-      				
-    </li>
-            </c:if>
-     
-         </c:forEach>
-         </ul>
-          
-          
+          </c:forEach>
+          </tbody>
+          </table>   
           
         </div>
       </div>
       <br>
-      
-    
-
-      
- 
       
     <!-- End Right Column -->
     </div>
@@ -206,11 +242,161 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   
 <!-- End Page Container -->
 </div>
+			<!-- User upload Modal -->
+			<div class="modal fade" id="myModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			        <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title text-center">User List</h4>
+			        </div>
+			        <div class="modal-body">
+			        	<div id="result">
+			        	</div>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal" id="userSave" onClick="userSave();">Save</button>
+			        </div>
+			      </div>
+			    </div>
+			</div>
+  
+  			<!-- User save Modal -->
+			<div class="modal fade" id="saveModal" role="dialog">
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			      
+			        <div class="modal-body">
+			        	<div id="saveResult" class="text-center">
+			        	</div>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+			        </div>
+			        
+			      </div>
+			    </div>
+			</div>
+			
+			<div class="input-group input-group-newsletter">
+				<div class="row">
+					<div id="excelMsg" class="col-xs-12 text-center small" style="display:none; color:#ff6666;">* Please upload *.xls file!</div>
+				</div>
+<!-- 				<div class="form-group required text-center">
+					<button type="button" class="btn btn-default btn-sm" id="excelUp" onClick="excelUploadCall(); return false;">User Upload</button>		
+					<button type="button" class="btn btn-default btn-sm" id="excelDown" onClick="excelDown(); return false;">Excel Download</button>		
+				</div> -->
+				
+				<input type="hidden" id="modalCall" data-toggle="modal" data-target="#myModal" />
+				<input type="hidden" id="saveModalCall" data-toggle="modal" data-target="#saveModal" />
+				<form id="frm" name="frm" method="POST" enctype="multipart/form-data">
+					<input type="file" id="fileUpload" name="fileUpload" onchange="excelUpload();" style="display:none"/>
+				</form>
+
+				<form id="projectFrm" name="projectFrm" method="POST">
+					<input type="hidden" id="frm_importance" name="importance" />
+					<input type="hidden" id="frm_phone" name="phone" />
+					<input type="hidden" id="frm_name" name="name" />
+					<input type="hidden" id="frm_project" name="project" />
+					<input type="hidden" id="frm_title" name="title" />
+					<input type="hidden" id="frm_startDate" name="startDate" />
+					<input type="hidden" id="frm_endDate" name="endDate" />
+					<input type="hidden" id="dfrm_ueDate" name="dueDate" />
+				</form>
+			</div>
 <br>
 
 
 <script>
 
+function excelUploadCall(){
+	$('#fileUpload').val('');
+	$('#fileUpload').click();
+}
+
+function excelUpload(){
+	var ext = '';
+	
+	if($('#fileUpload').val() != ''){
+		ext = $('#fileUpload').val().split('.').pop().toLowerCase();
+		
+		if($.inArray(ext, ['xlsx', 'xlsm', 'xlsb', 'xls', 'xltx', 'xltxm', 'xlt']) == -1){
+			$('#excelMsg').show();
+			return false;
+		} else {
+			$('#excelMsg').hide();
+			$('#modalCall').click();
+		}
+
+		var formData = new FormData($('#frm')[0]);
+		
+		$.ajax({
+			processData: false,
+			contentType: false,
+			url: '/excel/excelUpload',
+			type: 'POST',
+			data: formData,
+			success: function(result){
+				var getUsers = result.userList;
+				
+				$('#result').empty();
+				
+				for(var i = 0; i < getUsers.length ; i++){
+					var userInfo = getUsers[i].name + ' : ' + getUsers[i].phone;
+					
+					$('#result').append('<div id="user_"' + i + '>' + userInfo + '</div>');
+				}
+			}
+		});
+		
+	}
+}
+
+function userSave(){
+	var formData = new FormData($('#frm')[0]);
+	
+	$.ajax({
+		processData: false,
+		contentType: false,
+		url: '/user/excelUpload',
+		type: 'POST',
+		data: formData,
+		success: function(result){
+			var message = "";
+			
+			if(result == 0){
+				message = "Failed to upload users!";
+			} else {
+				message = "Successfully uploaded users!";
+			}
+			$("#saveResult").html(message);
+			$("#saveModalCall").click();
+		}
+	});
+}
+
+function excelDown(){
+	$('#frm_importance').val($("#importance > li[class='active'] > a").html());
+	$('#frm_name').val($('#name').val());
+	$('#frm_project').val($('#project').val());
+	$('#frm_title').val($('#title').val());
+	$('#frm_startDate').val($('#startDate').val());
+	$('#frm_endDate').val($('#endDate').val());
+	$('#frm_dueDate').val($('#dueDate').val());
+	
+	var formData = $('#projectFrm').serialize();
+	
+	console.log(formData);
+	
+	$.ajax({
+		url: '/excel/userExcelDownload',
+		type: 'POST',
+		data: formData,
+		success: function(result){
+			console.log(result);
+		}
+	});
+}
 </script>
 
 </body>
