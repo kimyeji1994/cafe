@@ -29,7 +29,7 @@ request.setCharacterEncoding("UTF-8");
 
     <!-- Custom styles for this template -->
     <link href="<c:url value="/static/css/coming-soon.min.css"/> " rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!--   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
     <style>
     	#joinText{
     		font-weight: bold;
@@ -47,6 +47,7 @@ request.setCharacterEncoding("UTF-8");
 	.marR {
 	  margin-left: 25%;
 	}
+
 	
 	</style>
   </head>
@@ -63,7 +64,7 @@ request.setCharacterEncoding("UTF-8");
         <div class="row h-100">
           <div class="col-12 my-auto">
             <div class="masthead-content text-white py-5 py-md-0">
-              <h1 class="mb-3">Get Together With Code</h1>
+              <h1 class="mb-3 b3">Get Together With Code</h1>
               <p class="mb-5">The simple way to decide on dates</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->

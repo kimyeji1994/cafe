@@ -43,4 +43,8 @@ public interface BoardService {
 
 	List<HashMap<String, Object>> getProjectUserList(Map<String, Object> params);
 
+	List<Object> getRecommandList(Map<String, Object> params);
+
+	Map<String, Object> getProjectCodewithPhone(Map<String, Object> params);
+
 }

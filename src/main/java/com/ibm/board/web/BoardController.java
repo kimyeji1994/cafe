@@ -256,7 +256,7 @@ public class BoardController {
 		session.setAttribute("_USER_", userVo);
 		session.setAttribute("_DATE_", null);
 		logger.info("***********Log In*************");
-		logger.info("userVo {}" ,userVo);
+		logger.info("userVo {}" ,userVo.toString());
 		 
 		 PrintWriter write;
 		 if(code != null) {
@@ -394,6 +394,45 @@ public class BoardController {
 		return "";
 		
 	}
+	
+	
+	
+	@RequestMapping(value ="/project/viewRecommand", method=RequestMethod.GET)
+	public String viewRecommand(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
+		logger.info("********Recommand********");
+		UserVo user =  (UserVo) session.getAttribute("_USER_");
+		logger.info("params {}" , params);
+		params.put("code1", String.valueOf( params.get("boardId") ));
+		
+		List<Object> recommandList = boardService.getRecommandList(params);
+		map.addAttribute("recommandList", recommandList );
+		
+		
+		
+		
+		return "board/recommend";
+		
+	}
+	
+	@RequestMapping(value ="/project/getCode", method=RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> getProjectCodewithPhone(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
+		
+		Map<String, Object> rtnMap = null;
+		
+		
+		rtnMap = boardService.getProjectCodewithPhone(params);
+		
+		return ResponseEntity.ok(rtnMap);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

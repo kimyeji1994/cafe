@@ -161,9 +161,7 @@
 		   and DATE_FORMAT(info_date , '%Y/%m/%d') = #{date}
  
 		 </select>
-		 
-		 
-		 <select id="getLogInfowithPhone"   parameterType="map"  resultType="string">
+		  <select id="getLogInfowithPhone"   parameterType="map"  resultType="string">
  
 		   select distinct DATE_FORMAT(info_date , '%Y%m%d')
 		   from  info 
@@ -173,6 +171,40 @@
 		
  
 		 </select>
+		 
+	<select id="selectOneDayLogCountINRecommand"   parameterType="map"  resultType="string">
+ 
+		select count(info_id)
+		from info 
+		where board_id = #{code1}
+		and   DATE_FORMAT(info_date , '%Y/%m/%d')   = #{oneDay}
+ 
+   </select>
+		 
+		 
+		 	
+	<select id="selectCompulsoryCount" parameterType="map"  resultType="string">
+		
+		select count(compulsory_id)
+		from compulsory a , info b
+		where b.board_id = #{code1}
+		and a.phone = b.phone
+	    and   DATE_FORMAT(info_date , '%Y/%m/%d')   = #{oneDay}
+		
+	
+	</select> 
+	
+
+	
+			 	
+	<select id="getProjectCodewithPhone" parameterType="map"  resultType="map">
+		
+	select name , code
+	from user
+	where phone = #{phone}
+	
+	</select> 
+	
 	
 	
 

@@ -309,6 +309,18 @@ public class BoardServiceImpl implements BoardService {
 	
 		return userBiz.getProjectUserList(params);
 	}
+
+	@Override
+	public List<Object> getRecommandList(Map<String, Object> params) {
+	
+		return boardBiz.getRecommandList(params);
+	}
+
+	@Override
+	public Map<String, Object> getProjectCodewithPhone(Map<String, Object> params) {
+	
+		return boardBiz.getProjectCodewithPhone(params);
+	}
 	
 	
 	

@@ -215,6 +215,72 @@ public class BoardBizImpl  implements BoardBiz{
 		return boardDao.getLogInfowithPhone(params);
 	}
 
+	@Override
+	public List<Object> getRecommandList(Map<String, Object> params) {
+		List<Object> sceduleLogList = new ArrayList<Object>();
+		ArrayList<String> sceduleOneLog = new ArrayList<String>();
+		
+		String oneDay = null;
+		String logCount = null;
+		int i =0;
+		
+		sceduleOneLog.add( "Date" );
+		sceduleOneLog.add("Applicants");
+		sceduleOneLog.add("Compulsory");
+		sceduleLogList.add(0, sceduleOneLog ); 
+	
+		while(true) {
+			
+			params.put("count", i);
+		
+			
+			sceduleOneLog = new ArrayList<String>();
+			
+			
+			if(params.get("code1") == null) {
+				oneDay = boardDao.selectOneDayWithInScedule(params);
+			}
+			else {
+				oneDay = boardDao.selectOneDayWithInSceduleBoardId(params);
+			}
+			
+			 if(oneDay == null) {
+				 logger.info("sceduleList : {} " , sceduleLogList );
+				 break;
+			 }
+			params.put("oneDay", oneDay);
+			
+			logger.info("params : {}" , params);
+			logCount = boardDao.selectOneDayLogCountINRecommand(params);
+			String dayFormat = boardDao.selectDayFormat(params);
+			String compulsoryCount = boardDao.selectCompulsoryCount(params);
+		
+			 if(logCount == null) {
+				 logCount = "0";
+			 }
+			 sceduleOneLog.add( dayFormat);
+			 sceduleOneLog.add( logCount);
+			 sceduleOneLog.add( compulsoryCount);
+			
+			 
+			 sceduleLogList.add(i + 1 , sceduleOneLog);
+		
+			 i++;
+			 
+			
+			
+		}
+		return sceduleLogList;
+	}
+
+	@Override
+	public Map<String, Object> getProjectCodewithPhone(Map<String, Object> params) {
+	
+		return boardDao.getProjectCodewithPhone(params);
+	}
+
+	
+
 
 		
 	

@@ -39,6 +39,12 @@ public interface BoardDao {
 	public List<Object> getApplicantInOneDay(Map<String, Object> params);
 
 	public List<String> getLogInfowithPhone(Map<String, Object> params);
+
+	public String selectOneDayLogCountINRecommand(Map<String, Object> params);
+
+	public String selectCompulsoryCount(Map<String, Object> params);
+
+	public Map<String, Object> getProjectCodewithPhone(Map<String, Object> params);
 	
 	
 }

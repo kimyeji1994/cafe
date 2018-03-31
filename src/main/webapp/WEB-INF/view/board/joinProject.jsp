@@ -45,13 +45,57 @@ $(document).ready(function(){
 				$("#joinForm").serialize(),
 				function(data) {
 					if (data != "fail") {
-						window.location.href = "/scedule/list/" + data ;
-					} else if (data == "fail") {
+						if(data.length < 6){
+					    	
+				    		window.location.href = "/scedule/list/" + data ;
+				    	}
+				    	else{
+				    	
+				    		window.location.href = "/project/list/" + data ;
+				    	}
+				    }
+						
+						
+				
+					else if (data == "fail") {
 						alert("No Available Code");
 						location.reload();
 					}
 			});
 		});
+
+ 
+ 
+ 
+ $("#joinPhone").change(function(){
+	 
+	if( $("#joinPhone").val().length > 10 ){
+		alert($("#joinPhone").val());
+	
+	
+
+		$.get(
+				"<c:url value="/project/getCode" />" ,
+				{     "phone" : $("#joinPhone").val()  },
+				function(data) {
+					if (data != null) {
+						$("#joinName").val(data.name); 
+						$("#joinCode").val(data.code); 
+						
+					} else if (data == null) {
+				
+					}
+			}); 
+		
+	}
+	
+	
+	
+	 
  });
+ 
+});
+ 
+ 
  </script>
 </html>

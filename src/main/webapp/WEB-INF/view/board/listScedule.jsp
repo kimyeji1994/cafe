@@ -180,6 +180,13 @@ function addComment(){
 	
 }
 
+function addRecommand(){
+	var boardId = $("#boardId").val();
+	window.location.href = "/project/viewRecommand?boardId=" + boardId ;
+
+
+}
+
 
 
   
@@ -226,10 +233,11 @@ function drawChart() {
   chart.draw(data, options);
 }
 
-<c:forEach items="${userLog}"  var ="userLog" varStatus="status">
 
-console.log("${userLog}");
-</c:forEach>
+
+
+
+
 
 $().ready(function(){
 var userLog ="";	
@@ -265,9 +273,12 @@ var userLog ="";
         </div>
         <div class="w3-container">
           <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.title}</p>
-          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.project} (code : ${boardInfo.code})</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.project} </p>
        	 <p><i class="fa fa-user fa-fw w3-margin-right w3-large w3-text-teal"></i>${managerInfo.name}</p>
           <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>${managerInfo.phone}</p>
+           <p><i class="fa fa-lock fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.code}</p>
+          
+          
           <hr>
 	
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Click Your Available Dates</b></p>
@@ -315,6 +326,7 @@ var userLog ="";
       <div class="w3-container w3-card w3-white w3-margin-bottom">
            <h2 class="w3-text-grey w3-padding-16" id="miseon"><i class="fa fa-calendar fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Current Status</h2>
          <p onclick="addComment()">comment</p>
+           <p onclick="addRecommand()">recommand</p>
         <div id="curve_chart" style="width: 100%; height: 550px"></div>
       </div>
 
