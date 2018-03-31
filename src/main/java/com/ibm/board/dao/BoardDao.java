@@ -31,6 +31,12 @@ public interface BoardDao {
 	public String selectOneDayLogCount(Map<String, Object> params);
 
 	public String selectDayFormat(Map<String, Object> params);
+
+	public List<HashMap<String, Object>> getProjectBoardList(Map<String, Object> params);
+
+	public String selectOneDayWithInSceduleBoardId(Map<String, Object> params);
+
+	public List<String> getApplicantInOneDay(Map<String, Object> params);
 	
 	
 }

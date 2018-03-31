@@ -40,11 +40,21 @@ display: inline-block;
     font: 14px/100% Arial, Helvetica, sans-serif;
     padding: .5em 2em .55em;
     text-shadow: 0 1px 1px rgba(0,0,0,.3);
-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
     color: #fae7e9;
-    border: solid 1px #b73948;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f16c7c), to(#bf404f));
+    border: solid 1px #757575;
+    background: -webkit-gradient(linear, left top, left bottom, from(#757575), to(#757575));
 }
+.textMid{
+   
+ margin-left: 20%;
+
+
+
+
+}
+
+
 </style>
 <title>Insert title here</title>
 <script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
@@ -64,9 +74,8 @@ function sceduleClick(date) {
 			{ "date" : String(date)   , "boardId" : boardId  },
 			function(data) {
 				if (data != "FAIL") {
-					alert("code : "+data)
-				
 					//window.location.href = "/scedule/list/" + data ;
+
 					location.reload();
 				} else if (data == "FAIL") {
 					location.reload();
@@ -74,9 +83,10 @@ function sceduleClick(date) {
 		}); 
 	
 	
+	
   }
 
-google.charts.load('current', {'packages':['corechart']});
+google.charts.load('current', {'packages':['corechart','bar']});
 google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
@@ -90,10 +100,13 @@ function drawChart() {
 	 if(${ status.count } == 1 ){
 		 oneSceduleLog.push("${sceduleLogList[0]}");
 		 oneSceduleLog.push("${sceduleLogList[1]}"); 
+		 oneSceduleLog.push({ role: 'style' }); 
+		 
 	 }
 	 else{
 		 oneSceduleLog.push("${sceduleLogList[0]}");
 		 oneSceduleLog.push(${sceduleLogList[1]}); 
+		 oneSceduleLog.push("#ED785D"); 
 	 }
 	 console.log(oneSceduleLog);
 		
@@ -110,7 +123,7 @@ function drawChart() {
     legend: { position: 'bottom' }
   };
 
-  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+  var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart'));
 
   chart.draw(data, options);
 }
@@ -131,7 +144,7 @@ function drawChart() {
     
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container">
-          <img src="/static/img/sceduler.jpg" style="width:100%" alt="Avatar">
+          <img src="/static/img/sceduler.jpeg" style="width:100%; height: 380px" alt="Avatar">
           <div class="w3-display-bottomleft w3-container w3-text-black">
            <h2>${boardInfo.title}</h2> 
           </div>
@@ -143,8 +156,8 @@ function drawChart() {
           <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>010-6534-3426</p>
           <hr>
 	
-          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Click Scedules</b></p>
-         <table>
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Click Your Available Dates</b></p>
+         <table class="textMid">
 	
 
 			<c:forEach items = "${sceduleList}"  var = "scedules">
@@ -152,7 +165,7 @@ function drawChart() {
 				
 				
 				
-				<td><i class="fa fa-calendar fa-fw w3-margin-right"></i><input type="button" class="rosy" id ="${scedules}" value="${scedules}" onClick="sceduleClick('${scedules}')"></td>
+				<td > <i class="fa fa-calendar fa-fw w3-margin-right"></i><input type="button" class="rosy" id ="${scedules}" value="${scedules}" onClick="sceduleClick('${scedules}')"></td>
 					
 				</tr>
 			</c:forEach>
@@ -203,8 +216,10 @@ function drawChart() {
         </div>
         <div class="w3-container">
           <h5 class="w3-opacity"><b><i class="fa fa-users fa-fw w3-margin-right"></i>Participants</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013</h6>
-          <p><i class="fa fa-user fa-fw w3-margin-right"></i>yeji</p>
+          <h6 class="w3-text-teal" id = "thatDay"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${oneday}</h6>
+          <c:forEach items = "${applicantInOneDay}"  var = "applicantInOneDay">
+          <b class="w3-margin-right"><i class="fa fa-user fa-fw appli"></i>${applicantInOneDay}</b>    
+         </c:forEach>
           <hr>
         </div>
         <div class="w3-container">

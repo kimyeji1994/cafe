@@ -121,13 +121,23 @@
 							"<c:url value="/project/write" />",
 							$("#writeForm").serialize(),
 							function(data) {
+				
 								if (data != "FAIL") {
 								
 									bootbox.alert({
 									 	message: "code : "+data,
 									  size: 'small',
 								    callback: function () {
-								    	window.location.href = "/scedule/list/" + data ;
+								    	alert(data.length);
+								    	if(data.length < 6){
+								    	
+								    		window.location.href = "/scedule/list/" + data ;
+								    	}
+								    	else{
+								    	
+								    		window.location.href = "/project/list/" + data ;
+								    	}
+								    		
 								    }
 									});
 								
@@ -151,7 +161,14 @@
 									 	message: "code : "+data,
 									  size: 'small',
 								    callback: function () {
-								    	window.location.href = "/scedule/list/" + data ;
+								    	if(data.length < 6){
+									    	
+								    		window.location.href = "/scedule/list/" + data ;
+								    	}
+								    	else{
+								    	
+								    		window.location.href = "/project/list/" + data ;
+								    	};
 								    }
 									});
 								

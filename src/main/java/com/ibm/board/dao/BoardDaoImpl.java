@@ -86,6 +86,24 @@ public class BoardDaoImpl  extends SqlSessionDaoSupport implements BoardDao{
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("BoardDao.selectDayFormat", params);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> getProjectBoardList(Map<String, Object> params) {
+	
+		return getSqlSession().selectList("BoardDao.getProjectBoardList", params);
+	}
+
+	@Override
+	public String selectOneDayWithInSceduleBoardId(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("BoardDao.selectOneDayWithInSceduleBoardId", params);
+	}
+
+	@Override
+	public List<String> getApplicantInOneDay(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("BoardDao.getApplicantInOneDay", params);
+	}
 	
 	
 	
