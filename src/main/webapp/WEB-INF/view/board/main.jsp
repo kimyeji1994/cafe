@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%
+// 인코딩
+request.setCharacterEncoding("UTF-8");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
 
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <title>Schedule</title>
     <title>Scodule</title>
    
     <!-- Bootstrap core CSS -->
@@ -23,6 +29,13 @@
 
     <!-- Custom styles for this template -->
     <link href="<c:url value="/static/css/coming-soon.min.css"/> " rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+    	#joinText{
+    		font-weight: bold;
+    	}
+    
+    </style>
 	<style>
 	.mb-3 , .mb-5 {
 	text-align: center;
@@ -54,9 +67,9 @@
               <p class="mb-5">The simple way to decide on dates</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->
-				<button class="btn btn-secondary marR" type="button" data-toggle="modal" data-target="#myModal"> &nbsp;Join&nbsp;&nbsp;  </button> 
+				<button class="btn btn-secondary marR" type="button" data-toggle="modal" data-target="#modalJoin"> &nbsp;Join&nbsp;&nbsp;  </button>
                 <div class="input-group-append">
-                &emsp;<a href="<c:url value="/project/write" />" >  <button class="btn btn-secondary" type="button">Create</button> </a>
+				<button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#modalCreate" style='margin-left: 15px; border-radius: 3px;'>Create</button>
                 </div>
                 
               </div>
@@ -85,47 +98,6 @@
         </li>
       </ul>
     </div>
-    
-    
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-	        <h4 class="modal-title">Join</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          
-          <form id="writeForm">
-						<div class="form-group input-group">
-						      	<!-- <div class="col-xs-3"> -->
-					  <!-- 	<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span> -->
-					  	<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
-						</div>
-						<div class="form-group input-group">
-				      		<!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
-				      <input type="text" class="form-control" id="name" name="name" placeholder="User Name">
-				   	</div>
-						<div class="form-group input-group">
-				      		<!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
-				      <input type="text" class="form-control" id="code" name="code" placeholder="Code Number">
-				   	</div>
-<!-- 	
-						이름 : <input type ="text" id="name"  name="name"><br/>
-						코드 : <input type ="text" id="code" name ="code"><br/>
- -->						
-<!-- 						<input type="button" id="joinButt" value="join">
- -->						
-						
-					</form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" id="joinButt" value="join">Join</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="<c:url value="/static/vendor/jquery/jquery.min.js"/>"></script>
@@ -137,77 +109,10 @@
     <!-- Custom scripts for this template -->
     <script src="<c:url value="/static/js/coming-soon.min.js"/>"></script>
 
- 
-    <script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
-    <script type="text/javascript">
-		$().ready(function(){
-				$("#joinButt").click( function() {
-					
-					$.post(
-						"<c:url value="/project/join" />",
-						$("#writeForm").serialize(),
-						function(data) {
-							if (data != "fail") {
-								window.location.href = "/scedule/list/" + data ;
-							} else if (data == "fail") {
-								alert("No Available Code");
-								location.reload();
-							}
-					});
-				});
-		 });
-		</script>
-
+	<!-- Modal -->
+	<jsp:include page="joinProject.jsp"></jsp:include>
+	<jsp:include page="addProject.jsp"></jsp:include>
 
 
  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
-<!DOCTYPE html >
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Scedule</title>
-<script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
-<script type="text/javascript">
-
-$().ready(function(){
-	
-	$("#join").click(function(){
-	
-		
-	});
-	
-	$("#create").click(function(){
-	
-		
-		
-	});
-	
-});
-
-
-
-</script>
-</head>
-
-
-
-<body> --%>
-
-
-
-<!-- </body>
-</html> -->

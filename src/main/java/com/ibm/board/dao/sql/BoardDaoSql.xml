@@ -6,7 +6,7 @@
 	<select id="getDailyPartsByDLID" parameterType="string"  resultType="string">
 		
 		SELECT  title
-	    FROM 	BOARD
+	    FROM 	boards
 		
 	
 	</select>
@@ -46,7 +46,7 @@
 	
 	<select id="selectOneDayWithInScedule" parameterType="map"  resultType="string">
 		
-		select DATE_FORMAT(a.oneday , '%Y/%m/%d') 
+		select DATE_FORMAT(A.oneday , '%Y/%m/%d') 
 		from
 		(
 			select adddate(start_date, #{count}) oneday, code  
@@ -55,8 +55,8 @@
  		,boards B
 		where 1=1
 		and A.code = B.code
-		and a.oneday >= start_date
-		and a.oneday <![CDATA[ <=  ]]> end_date
+		and A.oneday >= start_date
+		and A.oneday <![CDATA[ <=  ]]> end_date
 	
 	</select> 
 	
@@ -64,7 +64,7 @@
 	
 	<select id="selectOneDayWithInSceduleBoardId" parameterType="map"  resultType="string">
 		
-		select DATE_FORMAT(a.oneday , '%Y/%m/%d')
+		select DATE_FORMAT(A.oneday , '%Y/%m/%d') 
 		from
 		(
 			select adddate(start_date, #{count}) oneday, code  
@@ -73,8 +73,8 @@
  		,boards B
 		where 1=1
 		and A.code = B.code
-		and a.oneday >= start_date
-		and a.oneday <![CDATA[ <=  ]]> end_date
+		and A.oneday >= start_date
+		and A.oneday <![CDATA[ <=  ]]> end_date
 	
 	</select> 
 	
