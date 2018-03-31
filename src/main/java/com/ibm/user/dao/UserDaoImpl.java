@@ -38,9 +38,39 @@ public class UserDaoImpl  extends SqlSessionDaoSupport implements UserDao{
 	}
 
 	@Override
-	public List<String> selectApplicantList(Map<String, Object> params) {
+	public List<Object> selectApplicantList(Map<String, Object> params) {
 		
 		return getSqlSession().selectList("UserDao.selectApplicantList", params);
+	}
+
+	@Override
+	public Map<String, Object> selectManagerInfo(Map<String, Object> params) {
+	
+		return getSqlSession().selectOne("UserDao.selectManagerInfo", params);
+	}
+
+	@Override
+	public boolean addCompulsoryPeople(Map<String, Object> params) {
+	
+		return getSqlSession().insert("UserDao.addCompulsoryPeople", params) > 0;
+	}
+
+	@Override
+	public Map<String, Object> selectCompulsoryPeople(Map<String, Object> params) {
+		
+		return getSqlSession().selectOne("UserDao.selectCompulsoryPeople", params);
+	}
+
+	@Override
+	public List<Object> selectCompulsoryPeoples(Map<String, Object> params) {
+	
+		return getSqlSession().selectList("UserDao.selectCompulsoryPeoples", params);
+	}
+
+	@Override
+	public boolean deleteCompulsory(Map<String, Object> params) {
+	
+		return getSqlSession().delete("UserDao.deleteCompulsory" , params) > 0;
 	}
 	
 	

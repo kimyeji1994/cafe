@@ -36,7 +36,9 @@ public interface BoardDao {
 
 	public String selectOneDayWithInSceduleBoardId(Map<String, Object> params);
 
-	public List<String> getApplicantInOneDay(Map<String, Object> params);
+	public List<Object> getApplicantInOneDay(Map<String, Object> params);
+
+	public List<String> getLogInfowithPhone(Map<String, Object> params);
 	
 	
 }

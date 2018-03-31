@@ -19,7 +19,7 @@ public interface BoardService {
 
 	List<ArrayList<String>> getsceduleLogList(Map<String, Object> params);
 
-	List<String> getapplicantList(Map<String, Object> params);
+	List<Object> getapplicantList(Map<String, Object> params);
 
 	String writeDiffProject(Map<String, Object> params);
 
@@ -27,6 +27,18 @@ public interface BoardService {
 
 	List<String> getSceduleListWithBoardId(String boardId);
 
-	List<String> getApplicantInOneDay(Map<String, Object> params);
+	List<Object> getApplicantInOneDay(Map<String, Object> params);
+
+	List<String> getLogInfowithPhone(Map<String, Object> params);
+
+	Map<String, Object> getManagerInfo(Map<String, Object> params);
+
+	boolean addCompulsoryPeople(Map<String, Object> params);
+
+	Map<String, Object> getCompulsoryPeople(Map<String, Object> params);
+
+	List<Object> getCompulsoryPeoples(Map<String, Object> params);
+
+	boolean deleteCompulsory(Map<String, Object> params);
 
 }

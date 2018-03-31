@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scedule</title>
+    <title>Scodule</title>
    
     <!-- Bootstrap core CSS -->
     <link href=" <c:url value="/static/vendor/bootstrap/css/bootstrap.min.css"/> " rel="stylesheet">
@@ -23,7 +23,19 @@
 
     <!-- Custom styles for this template -->
     <link href="<c:url value="/static/css/coming-soon.min.css"/> " rel="stylesheet">
-
+	<style>
+	.mb-3 , .mb-5 {
+	text-align: center;
+	}
+	.input-group {
+	text-align: center;
+	
+	}
+	.marR {
+	  margin-left: 25%;
+	}
+	
+	</style>
   </head>
 
   <body>
@@ -32,7 +44,9 @@
 
     <div class="masthead">
     <div class="masthead-bg"></div>
+   
       <div class="container h-100">
+     
         <div class="row h-100">
           <div class="col-12 my-auto">
             <div class="masthead-content text-white py-5 py-md-0">
@@ -40,7 +54,7 @@
               <p class="mb-5">The simple way to decide on dates</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->
-				<button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#myModal"> &nbsp;Join&nbsp;&nbsp;  </button> 
+				<button class="btn btn-secondary marR" type="button" data-toggle="modal" data-target="#myModal"> &nbsp;Join&nbsp;&nbsp;  </button> 
                 <div class="input-group-append">
                 &emsp;<a href="<c:url value="/project/write" />" >  <button class="btn btn-secondary" type="button">Create</button> </a>
                 </div>

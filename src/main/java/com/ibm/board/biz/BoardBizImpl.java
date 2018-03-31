@@ -185,7 +185,7 @@ public class BoardBizImpl  implements BoardBiz{
 			logger.info("params : {}" , params);
 			
 			
-			oneDay = boardDao.selectOneDayWithInSceduleBoardId(params);
+			oneDay =  boardDao.selectOneDayWithInSceduleBoardId(params);
 			
 			 if(oneDay == null) {
 				 logger.info("sceduleList : {} " , sceduleList );
@@ -203,9 +203,16 @@ public class BoardBizImpl  implements BoardBiz{
 	}
 
 	@Override
-	public List<String> getApplicantInOneDay(Map<String, Object> params) {
+	public List<Object> getApplicantInOneDay(Map<String, Object> params) {
 	
 		return boardDao.getApplicantInOneDay(params);
+	}
+
+	@Override
+	public List<String> getLogInfowithPhone(Map<String, Object> params) {
+
+		
+		return boardDao.getLogInfowithPhone(params);
 	}
 
 

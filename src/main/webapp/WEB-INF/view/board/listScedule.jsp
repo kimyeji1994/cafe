@@ -54,6 +54,37 @@ display: inline-block;
 
 }
 
+.body{
+height : 1000px;
+
+}
+.w3-bar  {
+display : inline-block;
+width : 32%;
+margin : 0px;
+}
+
+.w3-ul li {
+    padding: 0px 0px;
+    border-bottom: 0.3px solid #ddd;
+    border-left: 0.3px solid #ddd;
+}
+.w3-margin-lefts {
+	    margin-left: 8px!important;
+}
+.xbutt {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+
+}
+
+.w3-margin-leftt {
+	 margin-left: 35px!important;
+}
+
+
 
 </style>
 <title>Insert title here</title>
@@ -85,6 +116,57 @@ function sceduleClick(date) {
 	
 	
   }
+function appliClick(phone) {
+	alert(phone);
+	var boardId = $("#boardId").val();
+	$.post(
+			"<c:url value="/project/addCompulsory" />",
+			{ "phone" : String(phone)   , "boardId" : boardId  },
+			function(data) {
+				if (data != "FAIL") {
+					location.reload();
+				} else if (data == "FAIL") {
+					location.reload();
+				}
+		}); 
+	
+}
+
+function deleteCompulsory(phone) {
+	alert(phone);
+	var boardId = $("#boardId").val();
+	$.post(
+			"<c:url value="/project/deleteCompulsory" />",
+			{ "phone" : String(phone)   , "boardId" : boardId  },
+			function(data) {
+				if (data != "FAIL") {
+					location.reload();
+				} else if (data == "FAIL") {
+					location.reload();
+				}
+		}); 
+	
+}
+
+function viewScedule(date) {
+	alert(date);
+	var boardId = $("#boardId").val();
+	$.post(
+			"<c:url value="/project/viewScedule" />",
+			{ "date" : String(date)   , "boardId" : boardId  },
+			function(data) {
+				if (data != "FAIL") {
+					location.reload();
+				} else if (data == "FAIL") {
+					location.reload();
+				}
+		}); 
+	
+}
+
+
+
+  
 
 google.charts.load('current', {'packages':['corechart','bar']});
 google.charts.setOnLoadCallback(drawChart);
@@ -128,6 +210,22 @@ function drawChart() {
   chart.draw(data, options);
 }
 
+<c:forEach items="${userLog}"  var ="userLog" varStatus="status">
+
+console.log("${userLog}");
+</c:forEach>
+
+$().ready(function(){
+var userLog ="";	
+	<c:forEach items="${userLog}"  var ="userLog" varStatus="status">
+
+		userLog ="#"+"${userLog}";
+		$(userLog).css('background',  '#3F5E9F');	
+	</c:forEach>
+	
+	
+});
+
 
 </script>
 </head>
@@ -151,21 +249,20 @@ function drawChart() {
         </div>
         <div class="w3-container">
           <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.title}</p>
-          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Coway, Global Project</p>
-        <!--   <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>ex@mail.com</p> -->
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>010-6534-3426</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.project} (code : ${boardInfo.code})</p>
+       	 <p><i class="fa fa-user fa-fw w3-margin-right w3-large w3-text-teal"></i>${managerInfo.name}</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>${managerInfo.phone}</p>
           <hr>
 	
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Click Your Available Dates</b></p>
          <table class="textMid">
 	
-
 			<c:forEach items = "${sceduleList}"  var = "scedules">
 				<tr>
 				
 				
 				
-				<td > <i class="fa fa-calendar fa-fw w3-margin-right"></i><input type="button" class="rosy" id ="${scedules}" value="${scedules}" onClick="sceduleClick('${scedules}')"></td>
+				<td > <input type="button" class="rosy" id ="${scedules[1]}" value="${scedules[0]}" onClick="sceduleClick('${scedules[0]}')"><i class="fa fa-users fa-fw w3-margin-lefts" onClick="viewScedule('${scedules[0]}')"></i></td>
 					
 				</tr>
 			</c:forEach>
@@ -200,7 +297,7 @@ function drawChart() {
     <div class="w3-twothird">
 
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-           <h2 class="w3-text-grey w3-padding-16" id="miseon"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Scedules</h2>
+           <h2 class="w3-text-grey w3-padding-16" id="miseon"><i class="fa fa-calendar fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Current Status</h2>
         <div id="curve_chart" style="width: 100%; height: 550px"></div>
       </div>
 
@@ -209,23 +306,156 @@ function drawChart() {
         <div class="w3-container">
           <h5 class="w3-opacity"><b><i class="fa fa-users fa-fw w3-margin-right"></i>Full Participants</b></h5>
           <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${boardInfo.start_date}  ~ ${boardInfo.end_date}</h6>
-          <c:forEach items = "${applicantList}"  var = "applicantList">
-          <b class="w3-margin-right"><i class="fa fa-user fa-fw appli"></i>${applicantList}</b>    
+            <ul class="w3-ul w3-card-4">
+          <c:forEach items = "${applicantList}"  var = "applicantList" varStatus="status">
+        
+          <c:if test = '${status.count % 3 == 1 }'>  
+           
+             <li class="w3-bar" onClick = "appliClick('${applicantList.phone}')" >
+                   
+   				<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+	      		<div class="w3-bar-item">
+	       			 <span class="w3-large">${applicantList.name}</span><br/>
+	       			 <span >${applicantList.phone}</span>
+       
+      			</div>
+    		</li>
+    		
+ 
+          </c:if>
+          
+             <c:if test = '${status.count % 3 == 2 }'>  
+               <li class="w3-bar"  onClick = "appliClick('${applicantList.phone}')">
+          
+          <img src="/static/img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+      		<div class="w3-bar-item" >
+       		 <span class="w3-large">${applicantList.name}</span><br/>
+        	<span >${applicantList.phone}</span>
+       
+      </div>
+    </li>
+            </c:if>
+            
+             <c:if test = '${status.count % 3 == 0 }'>  
+                 <li class="w3-bar"  onClick = "appliClick('${applicantList.phone}')">
+                    
+     			 <img src="/static/img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+      				<div class="w3-bar-item ">
+        		   <span class="w3-large">${applicantList.name}</span><br/>
+        			<span >${applicantList.phone}</span><br/>
+       
+      				</div>
+    </li>
+            </c:if>
+    
+    
          </c:forEach>
+               </ul>
           <hr>
         </div>
         <div class="w3-container">
           <h5 class="w3-opacity"><b><i class="fa fa-users fa-fw w3-margin-right"></i>Participants</b></h5>
           <h6 class="w3-text-teal" id = "thatDay"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${oneday}</h6>
-          <c:forEach items = "${applicantInOneDay}"  var = "applicantInOneDay">
-          <b class="w3-margin-right"><i class="fa fa-user fa-fw appli"></i>${applicantInOneDay}</b>    
+          <ul class="w3-ul w3-card-4">
+          <c:forEach items = "${applicantInOneDay}"  var = "applicantInOneDay" varStatus="status">
+            
+          <c:if test = '${status.count % 3 == 1 }'>  
+           
+             <li class="w3-bar">
+   				
+	      		<div class="w3-bar-item">
+	      		<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+	       			 <span class="w3-large">${applicantInOneDay.name}</span><br/>
+       			  <span class="w3-Small">${applicantInOneDay.phone}</span>
+      			</div>
+    		</li>
+    	
+    		
+ 
+          </c:if>
+          
+             <c:if test = '${status.count % 3 == 2 }'>  
+                 <li class="w3-bar">
+     
+          <img src="/static/img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+      <div class="w3-bar-item">
+        <span class="w3-large">${applicantInOneDay.name}</span><br/>
+       			  <span class="w3-Small">${applicantInOneDay.phone}</span>
+       
+      </div>
+    </li>
+            </c:if>
+            
+             <c:if test = '${status.count % 3 == 0 }'>  
+                 <li class="w3-bar">
+     			 <img src="/static/img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+      				<div class="w3-bar-item">
+        			 <span class="w3-large">${applicantInOneDay.name}</span><br/>
+       			  <span class="w3-Small">${applicantInOneDay.phone}</span><br/>
+      				</div>
+      				
+    </li>
+            </c:if>
+     
          </c:forEach>
+         </ul>
           <hr>
         </div>
         <div class="w3-container">
           <h5 class="w3-opacity"><b><i class="fa fa-users fa-fw w3-margin-right"></i>Compulsory</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
-        <p><i class="fa fa-user fa-fw w3-margin-right"></i>yeji</p>
+          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${boardInfo.start_date}  ~ ${boardInfo.end_date}</h6>
+		
+          <ul class="w3-ul w3-card-4">
+          <c:forEach items = "${compulsoryPeoples}"  var = "compulsoryPeoples" varStatus="status">
+            
+          <c:if test = '${status.count % 3 == 1 }'>  
+           
+             <li class="w3-bar">
+   				<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+	      		<div class="w3-bar-item">
+	   
+	       			 <span class="w3-large">${compulsoryPeoples.name}</span>
+	       			 	<i class="fa fa-close fa-fw w3-margin-leftt" onclick="deleteCompulsory('${compulsoryPeoples.phone}')"></i><br/>
+       			  <span class="w3-Small">${compulsoryPeoples.phone}</span>
+      			</div>
+      			  
+    		</li>
+    	
+    		
+ 
+          </c:if>
+          
+             <c:if test = '${status.count % 3 == 2 }'>  
+                 <li class="w3-bar">
+     
+          <img src="/static/img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+      <div class="w3-bar-item">
+     
+        <span class="w3-large">${compulsoryPeoples.name}</span> 
+      	<i class="fa fa-close fa-fw w3-margin-leftt" onclick="deleteCompulsory('${compulsoryPeoples.phone}')"></i><br/>
+       			  <span class="w3-Small">${compulsoryPeoples.phone}</span>
+       
+      </div>
+         
+    </li>
+            </c:if>
+            
+             <c:if test = '${status.count % 3 == 0 }'>  
+                 <li class="w3-bar">
+     			 <img src="/static/img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+      				<div class="w3-bar-item">
+      				
+        			 <span class="w3-large">${compulsoryPeoples.name}</span>
+        			 	<i class="fa fa-close fa-fw w3-margin-leftt" onclick="deleteCompulsory('${compulsoryPeoples.phone}')"></i><br/>
+       			  <span class="w3-Small">${compulsoryPeoples.phone}</span><br/>
+      				</div>
+      				  
+    </li>
+            </c:if>
+     
+         </c:forEach>
+         </ul>
+           <hr>
         </div>
       </div>
 

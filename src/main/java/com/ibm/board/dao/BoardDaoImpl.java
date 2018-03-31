@@ -1,6 +1,7 @@
 package com.ibm.board.dao;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,9 +101,15 @@ public class BoardDaoImpl  extends SqlSessionDaoSupport implements BoardDao{
 	}
 
 	@Override
-	public List<String> getApplicantInOneDay(Map<String, Object> params) {
+	public List<Object> getApplicantInOneDay(Map<String, Object> params) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectList("BoardDao.getApplicantInOneDay", params);
+	}
+
+	@Override
+	public List<String> getLogInfowithPhone(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("BoardDao.getLogInfowithPhone", params);
 	}
 	
 	
