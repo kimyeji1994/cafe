@@ -1,5 +1,6 @@
 package com.ibm.user.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,8 @@ public interface UserDao {
 	List<Object> selectCompulsoryPeoples(Map<String, Object> params);
 
 	boolean deleteCompulsory(Map<String, Object> params);
+
+	List<HashMap<String, Object>> getProjectUserList(Map<String, Object> params);
 
 	
 

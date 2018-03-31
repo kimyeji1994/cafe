@@ -41,4 +41,6 @@ public interface BoardService {
 
 	boolean deleteCompulsory(Map<String, Object> params);
 
+	List<HashMap<String, Object>> getProjectUserList(Map<String, Object> params);
+
 }

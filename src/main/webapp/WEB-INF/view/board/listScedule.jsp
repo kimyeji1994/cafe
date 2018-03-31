@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <!DOCTYPE html >
 <html>
 <head>
@@ -165,6 +165,22 @@ function viewScedule(date) {
 }
 
 
+function addComment(){
+	var boardId = $("#boardId").val();
+	$.get(
+			"<c:url value="/project/addComment" />" ,
+			{     "boardId" : boardId  },
+			function(data) {
+				if (data != "FAIL") {
+					location.reload();
+				} else if (data == "FAIL") {
+					location.reload();
+				}
+		}); 
+	
+}
+
+
 
   
 
@@ -298,6 +314,7 @@ var userLog ="";
 
       <div class="w3-container w3-card w3-white w3-margin-bottom">
            <h2 class="w3-text-grey w3-padding-16" id="miseon"><i class="fa fa-calendar fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Current Status</h2>
+         <p onclick="addComment()">comment</p>
         <div id="curve_chart" style="width: 100%; height: 550px"></div>
       </div>
 

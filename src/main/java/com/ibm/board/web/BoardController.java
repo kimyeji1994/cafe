@@ -314,10 +314,18 @@ public class BoardController {
 	
 	@RequestMapping(value ="/project/list/{code}", method=RequestMethod.GET)
 	public String projectListView(@RequestParam Map<String , Object> params, ModelMap map, @PathVariable String code) {
-		map.addAttribute("projectInfo", "");
+		
 		
 		
 		params.put("code", code);
+		logger.info("params : {}" , params);
+
+		
+		//user 정보 
+		List<HashMap<String, Object>> userList = boardService.getProjectUserList(params);
+		map.addAttribute("userList", userList );
+		
+		//프로젝트 정보
 		List<HashMap<String, Object>> boardList = boardService.getProjectBoardList(params);
 		map.addAttribute("boardInfo", boardList );
 		
@@ -372,6 +380,18 @@ public class BoardController {
 		rtnMap.put("boardId" , params.get("boardId"));
 		
 		session.setAttribute("_DATE_", rtnMap);
+		
+	}
+	
+	
+	@RequestMapping(value ="/project/addComment", method=RequestMethod.GET)
+	public String addComment(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
+		logger.info("********comment********");
+		UserVo user =  (UserVo) session.getAttribute("_USER_");
+		logger.info("params {}" , params);
+		//Boolean isSuccessComment = boardService.addComment(params);
+		
+		return "";
 		
 	}
 	

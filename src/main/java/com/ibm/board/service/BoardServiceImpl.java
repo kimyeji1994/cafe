@@ -303,6 +303,12 @@ public class BoardServiceImpl implements BoardService {
 		
 		return userBiz.deleteCompulsory(params);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> getProjectUserList(Map<String, Object> params) {
+	
+		return userBiz.getProjectUserList(params);
+	}
 	
 	
 	
