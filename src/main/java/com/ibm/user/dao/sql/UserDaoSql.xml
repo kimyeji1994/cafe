@@ -54,6 +54,20 @@
  </select>
  
  
+ 
+ 
+  <select id="getProjectUserList"   parameterType="map"  resultType="map">
+ 
+   select distinct a.name, a.phone
+   from user a , boards b , info c
+   where b.board_id = c.board_id
+   and c.phone = a.phone
+   and b.code = #{code}
+ 
+ 
+ </select>
+ 
+ 
  	 <select id="selectManagerInfo"   parameterType="map"  resultType="map">
  
 		   select distinct a.phone , b.name

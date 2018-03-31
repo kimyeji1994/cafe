@@ -1,5 +1,6 @@
 package com.ibm.user.biz;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,6 +75,12 @@ public class UserBizImpl implements UserBiz{
 	public boolean deleteCompulsory(Map<String, Object> params) {
 	
 		return userDao.deleteCompulsory(params);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getProjectUserList(Map<String, Object> params) {
+
+		return userDao.getProjectUserList(params);
 	}
 	
 }

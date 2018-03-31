@@ -1,5 +1,6 @@
 package com.ibm.user.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +72,12 @@ public class UserDaoImpl  extends SqlSessionDaoSupport implements UserDao{
 	public boolean deleteCompulsory(Map<String, Object> params) {
 	
 		return getSqlSession().delete("UserDao.deleteCompulsory" , params) > 0;
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getProjectUserList(Map<String, Object> params) {
+
+		return getSqlSession().selectList("UserDao.getProjectUserList" , params);
 	}
 	
 	

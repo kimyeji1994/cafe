@@ -1,5 +1,6 @@
 package com.ibm.user.biz;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,5 +25,7 @@ public interface UserBiz {
 	List<Object> getCompulsoryPeoples(Map<String, Object> params);
 
 	boolean deleteCompulsory(Map<String, Object> params);
+
+	List<HashMap<String, Object>> getProjectUserList(Map<String, Object> params);
 
 }

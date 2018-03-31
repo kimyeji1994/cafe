@@ -143,9 +143,12 @@
 		
 	<select id="getProjectBoardList" parameterType="map"  resultType="map">
 		
-		SELECT board_id, title, importance, start_date, end_date, code, project, due_date
-		FROM boards
-		where code = #{code}
+		SELECT a.board_id, a.title, a.importance, DATE_FORMAT(start_date , '%Y/%m/%d') start_date,DATE_FORMAT(end_date , '%Y/%m/%d') end_date, a.code, d.code_name,  project, DATE_FORMAT(due_date , '%Y/%m/%d') due_date , c.phone , c.name
+		FROM boards a, manager b, user c , codet d
+		where a.code = #{code}
+		and a.board_id = b.board_id 
+		and b.phone = c.phone
+		and a.code = d.code
 			
 	</select> 
 	 <select id="getApplicantInOneDay"   parameterType="map"  resultType="map">
