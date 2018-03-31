@@ -352,8 +352,8 @@
 				  <ul class="nav nav-tabs" style="margin-bottom:20px;">
 <!-- 				    <li class="active"><a data-toggle="tab" href="#writeDiv">Easy</a></li>
 				    <li><a data-toggle="tab" href="#writeDiv2">Complex</a></li> -->
-				    <li class="nav-item"><a data-toggle="tab" href="#writeDiv" class="nav-link small text-uppercase active">Easy</a></li>
-				    <li class="nav-item"><a data-toggle="tab" href="#writeDiv2" class="nav-link small text-uppercase">Complex</a></li>
+				    <li class="nav-item"><a data-toggle="tab" href="#writeDiv" class="nav-link small text-uppercase active">Quick</a></li>
+				    <li class="nav-item"><a data-toggle="tab" href="#writeDiv2" class="nav-link small text-uppercase">Project</a></li>
 				  </ul>
 					<div class="tab-content">
 				  	<div class="tab-pane fade active show" id="writeDiv">
