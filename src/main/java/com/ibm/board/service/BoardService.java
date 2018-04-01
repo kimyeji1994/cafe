@@ -49,4 +49,6 @@ public interface BoardService {
 
 	Boolean addBoardInProject(Map<String, Object> params);
 
+	String getVoterInBoardId(Map<String, Object> params);
+
 }

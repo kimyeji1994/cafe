@@ -85,6 +85,12 @@ public class UserDaoImpl  extends SqlSessionDaoSupport implements UserDao{
 	
 		return  getSqlSession().insert("UserDao.getProjectUserList" , params) > 0;
 	}
+
+	@Override
+	public String getVoterInBoardId(Map<String, Object> params) {
+	
+		return getSqlSession().selectOne("UserDao.getVoterInBoardId" , params );
+	}
 	
 	
 	

@@ -353,6 +353,12 @@ public class BoardServiceImpl implements BoardService {
 		
 		return isInsertManager;
 	}
+
+	@Override
+	public String getVoterInBoardId(Map<String, Object> params) {
+		
+		return userBiz.getVoterInBoardId(params);
+	}
 	
 	
 	
