@@ -418,14 +418,12 @@ public class BoardController {
 	
 	@RequestMapping(value ="/project/addComment", method=RequestMethod.POST)
 	public ModelAndView addComment(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
-		logger.info("********comment********");
 		ModelAndView mav = new ModelAndView();
 		
 		UserVo user =  (UserVo) session.getAttribute("_USER_");
 		String newMsg = (String) params.get("msg");
 		String phone = user.getPhone();
 		String boardId = (String) params.get("boardId");
-		logger.info("params {}" , params);
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ibm.board.biz.BoardBiz;
+import com.ibm.board.dao.BoardDao;
 import com.ibm.board.web.BoardController;
 import com.ibm.user.biz.UserBiz;
 
@@ -18,6 +19,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	BoardBiz boardBiz;
 	UserBiz userBiz;
+	BoardDao boardDao;
 	
 	private Logger logger = LoggerFactory.getLogger(BoardController.class);
 
@@ -27,6 +29,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	public void setUserBiz(UserBiz userBiz) {
 		this.userBiz = userBiz;
+	}
+	
+	public void setBoardDao(BoardDao boardDao) {
+		this.boardDao = boardDao;
 	}
 
 	@Override
@@ -359,7 +365,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int addComment(Map<String, Object> paramMap) {
-		return boardBiz.addComment(paramMap);
+		return boardDao.addComment(paramMap);
 	}
 
 	@Override

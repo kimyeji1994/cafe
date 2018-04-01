@@ -14,7 +14,8 @@
 
 <bean id ="boardServiceImpl" class="com.ibm.board.service.BoardServiceImpl">
 	<property name="boardBiz" ref="boardBizImpl"></property>
-	<property name="userBiz" ref="userBizImpl"></property> 
+	<property name="userBiz" ref="userBizImpl"></property>
+	<property name="boardDao" ref="boardDaoImpl"></property>
 </bean>
 
 </beans>

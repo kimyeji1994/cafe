@@ -9,19 +9,20 @@
 
 
 <!-- connection을 대체할 bean -->
-<bean id ="dataSource"
+<!-- <bean id ="dataSource"
 	  class = "org.apache.commons.dbcp.BasicDataSource">
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 	  <property name="url" value="jdbc:mysql://localhost:3306/ibm?useSSL=false"></property>
 	  <property name="username" value="root"></property>
 	  <property name="password" value=""></property>
-</bean>  <!-- <bean id ="dataSource"
+</bean> -->
+<bean id ="dataSource"
 	  class = "org.apache.commons.dbcp.BasicDataSource">
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 	  <property name="url" value="jdbc:mysql://au-cdbr-sl-syd-01.cleardb.net/ibmx_970d00c255e06ff?user=b25c9b94b1adcd&amp;password=6eda66e2&amp;useUnicode=true&amp;characterEncoding=UTF-8"></property>
 	  <property name="username" value="b25c9b94b1adcd"></property>
 	  <property name="password" value="6eda66e2"></property>
-</bean> -->
+</bean>
 <!-- <bean id ="dataSource" class = "org.apache.commons.dbcp.BasicDataSource">
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 	  <property name="url" value="jdbc:mysql://ibmcafe.c6odn9i2cybz.ap-northeast-2.rds.amazonaws.com/ibmcafe?user=ibmcafe&amp;password=qwer1234&amp;useUnicode=true&amp;characterEncoding=UTF-8"></property>

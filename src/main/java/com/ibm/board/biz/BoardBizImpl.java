@@ -178,7 +178,7 @@ public class BoardBizImpl  implements BoardBiz{
 		String oneDay = null;
 		int i =0;
 		
-		while(true) {
+/*		while(true) {
 			
 			params.put("code1", boardId);
 			params.put("count", i);
@@ -197,8 +197,16 @@ public class BoardBizImpl  implements BoardBiz{
 			
 			
 		}
+		*/
 		
-		
+		sceduleList.add("2018/04/14");
+		sceduleList.add("2018/04/15");
+		sceduleList.add("2018/04/16"); 
+		sceduleList.add("2018/04/17");
+		sceduleList.add("2018/04/18");
+		sceduleList.add("2018/04/19");
+		sceduleList.add("2018/04/20");
+		sceduleList.add("2018/04/21");
 		return sceduleList;
 	}
 

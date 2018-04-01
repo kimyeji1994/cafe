@@ -84,7 +84,7 @@
 		,  DATEDIFF(now() , due_date) dday
 		FROM boards a , codet b
 		where 1=1
-		and a.code = b.code
+		and a.code = b.code COLLATE utf8_unicode_ci
 		<choose>
 			<when test="code1 != null and code1 !=''">
 				and board_id = #{code1}
@@ -148,8 +148,8 @@
 		FROM boards a, manager b, user c , codet d
 		where a.code = #{code}
 		and a.board_id = b.board_id 
-		and b.phone = c.phone
-		and a.code = d.code
+		and b.phone = c.phone COLLATE utf8_unicode_ci
+		and a.code = d.code COLLATE utf8_unicode_ci
 			
 	</select> 
 	 <select id="getApplicantInOneDay"   parameterType="map"  resultType="map">
@@ -208,7 +208,7 @@
 	</select> 
 	
 	<insert id="addComment" parameterType="map">
-		INSERT INTO ibm.comment
+		INSERT INTO comment
 		(comment, board_id, phone)
 		VALUES(#{newMsg}, #{boardId}, #{phone})
 	</insert>

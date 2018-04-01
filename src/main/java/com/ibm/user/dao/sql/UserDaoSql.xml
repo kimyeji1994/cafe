@@ -98,7 +98,7 @@
 			</otherwise>
 		</choose>
 		
-		   and a.phone = b.phone
+		   and a.phone = b.phone COLLATE utf8_unicode_ci
 		
  
 	</select>

@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
 <!-- 	<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
  -->  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+	
+	<script type="text/javascript" src="<c:url value="/static/js/spin.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/static/js/spinnerJS.js"/>"></script>
 	<script type='text/javascript'>
 	
   //플러그인 간의 충돌을 제거  
@@ -52,19 +55,20 @@
 		});
 	});
 		 		function saveClick() {
-					
+		 			showSpinner(true);
 					$.post(
 							
 							"<c:url value="/project/write" />",
 							$("#writeForm").serialize(),
 							function(data) {
-				
 								if (data != "FAIL") {
-								
+									showSpinner(false);
 									bootbox.alert({
 									 	message: "code : "+data,
 									  size: 'small',
 								    callback: function () {
+											showSpinner(true);
+										
 								    	if(data.length < 6){
 								    	
 								    		window.location.href = "/scedule/list/" + data ;
@@ -85,18 +89,19 @@
 						});
 				};
 		 		function saveClick2() {
-					
+		 			showSpinner(true);
 					$.post(
 							
 							"<c:url value="/project/write" />",
 							$("#writeForm2").serialize(),
 							function(data) {
 								if (data != "FAIL") {
-								
+									showSpinner(false);
 									bootbox.alert({
 									 	message: "code : "+data,
 									  size: 'small',
 								    callback: function () {
+											showSpinner(true);
 								    	if(data.length < 6){
 									    	
 								    		window.location.href = "/scedule/list/" + data ;

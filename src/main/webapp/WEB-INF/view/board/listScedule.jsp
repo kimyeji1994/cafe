@@ -4,8 +4,6 @@
 <!DOCTYPE html >
 <html>
 <head>
-<!-- bootbox -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <!-- Bootstrap core CSS -->
 <link href=" <c:url value="/static/vendor/bootstrap/css/bootstrap.min.css"/> " rel="stylesheet">
 
@@ -18,7 +16,8 @@
 
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-
+<!-- bootbox -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <script type="text/javascript" src="<c:url value="/static/js/spin.js"/>"></script>
 
 <style>

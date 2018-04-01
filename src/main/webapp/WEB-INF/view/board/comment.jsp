@@ -16,6 +16,9 @@
 <script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
 
+<script type="text/javascript" src="<c:url value="/static/js/spin.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/static/js/spinnerJS.js"/>"></script>
+
 <style type="text/css">
 	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 </style>
@@ -34,6 +37,8 @@
 			return;
 		}
 		
+		showSpinner(true);
+		
 		$.ajax({
 			url: '/project/addComment',
 			type: 'POST',
@@ -44,6 +49,8 @@
 				$('#myMsg').val('');
 				$('#submit').css('color', '#ffffff');
 				chatScrollBar();
+				
+				showSpinner(false);
 			}
 		})
 	}

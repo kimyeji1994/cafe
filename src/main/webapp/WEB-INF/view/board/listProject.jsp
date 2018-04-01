@@ -18,6 +18,10 @@
 <!-- datepicker -->
 <script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
+
+<script type="text/javascript" src="<c:url value="/static/js/spin.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/static/js/spinnerJS.js"/>"></script>
+
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
 <%-- <!-- Bootstrap core JavaScript -->
 <script src="<c:url value="/static/vendor/jquery/jquery.min.js"/>"></script>
@@ -190,6 +194,12 @@ function excelDown(){
 	});
 }
 
+function showJoin(code, board_id){
+	showSpinner(true);
+	
+	location.href = "/scedule/list/" + code + "?board=" + board_id;
+};
+
 </script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
@@ -341,7 +351,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           </div>
         </div>
         <div class="container" align="center">
-       		 <a href="/scedule/list/${boardInfo.code}?board=${boardInfo.board_id}"><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  JOIN</button></a> 
+       		 <a onClick="showJoin('${boardInfo.code}', '${boardInfo.board_id}'); return false;"><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> JOIN</button></a> 
      		</div>
       </div>
       
