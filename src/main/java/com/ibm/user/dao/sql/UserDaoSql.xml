@@ -125,7 +125,7 @@
 				 	 
 	 	 </delete>
 	 	 
-	 	 	<insert id="insertManager" parameterType="map" >
+	 	 	<insert id="insertCodePeople" parameterType="map" >
 			INSERT INTO codepeople(phone, code)
 			VALUES(#{phone}, #{code})
 
