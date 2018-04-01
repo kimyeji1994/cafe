@@ -86,12 +86,12 @@ margin : 0px;
 
 .w3-theme-d4 {
     color: #fff !important;
-    background-color: #3a4b53 !important;
+    background-color: #3F5E9F!important;
 }
 
 .w3-theme-d2 {
     color: #fff !important;
-    background-color: #4d636f !important;
+    background-color:#3F5E9F!important;
 }
 
 
