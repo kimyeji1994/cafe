@@ -54,12 +54,14 @@ $(document).ready(function(){
 				"<c:url value="/project/getCode" />" ,
 				{     "phone" : $("#joinPhone").val()  },
 				function(data) {
-					if (data != null) {
+					console.log(data);
+				
+					if (data.code != null) {
 						$("#joinName").val(data.name); 
 						$("#joinCode").val(data.code); 
 						
-					} else if (data == null) {
-				
+					} else if (data.code == null) {
+						
 					}
 					
 					showSpinner(false);

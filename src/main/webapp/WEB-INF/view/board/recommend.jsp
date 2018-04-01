@@ -20,6 +20,10 @@
     background-color:#3F5E9F!important;
 }
 
+.w3-margin-tops {
+margin-top: 5%
+}
+
 </style>
 <script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

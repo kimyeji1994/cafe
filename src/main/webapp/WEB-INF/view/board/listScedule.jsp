@@ -168,13 +168,6 @@ function sceduleClick(date) {
 		}); 
   }
 function appliClick(phone) {
-	alert(phone);
-/* 	
-	bootbox.alert({
-	 	message: "code : ",
-	  size: 'small',
-    callback: function () {}
-	}); */
 
 	var boardId = $("#boardId").val();
 	$.post(
@@ -192,7 +185,6 @@ function appliClick(phone) {
 }
 
 function deleteCompulsory(phone) {
-	alert(phone);
 	var boardId = $("#boardId").val();
 	$.post(
 			"<c:url value="/project/deleteCompulsory" />",
@@ -208,7 +200,7 @@ function deleteCompulsory(phone) {
 }
 
 function viewScedule(date) {
-	alert(date);
+/* 	alert(date); */
 	var boardId = $("#boardId").val();
 	$.post(
 			"<c:url value="/project/viewScedule" />",
@@ -494,8 +486,9 @@ window.onload = function(){
            
              <li class="w3-bar">
    				
-	      		<div class="w3-bar-item">
+	      	
 	      		<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+	       		<div class="w3-bar-item">
 	       			 <span class="w3-large">${applicantInOneDay.name}</span><br/>
        			  <span class="w3-Small">${applicantInOneDay.phone}</span>
       			</div>
@@ -542,8 +535,9 @@ window.onload = function(){
           <c:if test = '${status.count % 3 == 1 }'>  
            
              <li class="w3-bar">
+             <div class="w3-bar-item">
    				<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
-	      		<div class="w3-bar-item">
+	      		
 	   
 	       			 <span class="w3-large">${compulsoryPeoples.name}</span>
 	       			 	<i class="fa fa-close fa-fw w3-margin-leftt" onclick="deleteCompulsory('${compulsoryPeoples.phone}')"></i><br/>
@@ -551,7 +545,7 @@ window.onload = function(){
       			</div>
       			  
     		</li>
-    	
+    
     		
  
           </c:if>

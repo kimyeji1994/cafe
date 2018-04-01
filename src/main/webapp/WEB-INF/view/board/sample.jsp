@@ -69,7 +69,7 @@ width: 100%;
         <div class="w3-container">
           <h3>Jin Mu</h3>
           <p class="w3-opacity">Developer</p>
-          <p>Hi, My Name is Jinmu. Nice to Meet You!</p>
+          <p>Hi, My Name is Jinmu. Nice to Meet You! Enjoy Scodule</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -81,7 +81,7 @@ width: 100%;
         <div class="w3-container">
           <h3>Yoo Jin</h3>
           <p class="w3-opacity">Consultant</p>
-          <p>Hi, I am Yoo Jin. See you soon!</p>
+          <p>Hi, I am Yoo Jin. See you soon! Patience is a virtue.</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -93,7 +93,7 @@ width: 100%;
         <div class="w3-container">
           <h3>Ye Ji</h3>
           <p class="w3-opacity">Developer</p>
-          <p>Hi, I'm Yeji. I'm happy to meet you.</p>
+          <p>Hi, I'm Yeji. I'm happy to meet you. Lovers are fools.</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -110,7 +110,7 @@ width: 100%;
         <div class="w3-container">
           <h3>Do Kyung</h3>
           <p class="w3-opacity">Developer</p>
-          <p>Hello. My name is Do Kyung. I don't like something boring! I wanna do something exciting.</p>
+          <p>Hello. My name is Do Kyung. I don't like something boring! </p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -134,7 +134,7 @@ width: 100%;
         <div class="w3-container">
           <h3>Sung Min</h3>
           <p class="w3-opacity">Consultant</p>
-          <p>Hello. I'm Sung Min. Enjoy this time!</p>
+          <p>Hello. I'm Sung Min. Enjoy this time! Union is strength.</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -152,7 +152,7 @@ width: 100%;
         <div class="w3-container">
           <h3>Ja Yong</h3>
           <p class="w3-opacity">Developer</p>
-          <p>Hi, I am Ja Yong. I like talking a lot.</p>
+          <p>Hi, I am Ja Yong. I like talking a lot. Don't cry before you are hurt.</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -172,11 +172,11 @@ width: 100%;
 
     <div class="w3-third w3-margin-bottom">
       <div class="w3-card-4">
-        <img src="/w3images/team3.jpg" alt="Jane" style="width:100%">
+        <img src="/static/img/ibm9.png" alt="Jane" style="width:100%">
         <div class="w3-container">
           <h3>IBM</h3>
           <p class="w3-opacity">Our Company</p>
-          <p>We love IBM!</p>
+          <p>We love IBM! Office changes manners. We Like it</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>

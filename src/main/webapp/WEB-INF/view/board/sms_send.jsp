@@ -102,7 +102,7 @@
 
 
 .w3-margin-tops {
-	margin-top: 5%
+	margin-top: 10%
 }
 </style>
 	
@@ -122,7 +122,7 @@
 </div>
 
 
-	<div class="modal fade w3-margin-tops" id="myModal" role="dialog">
+	<div class="modal fade w3-margin-tops " id="myModal" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -137,7 +137,7 @@
 	</div>
 
 	<input type="hidden" id="modalCall" data-toggle="modal" data-target="#myModal" />
-	<div class="container">
+	<div class="container w3-margin-tops">
 		<div class="col-sm-4 col-sm-offset-4">
 			<br /><br />
 		    <form id="frm" name="frm">
