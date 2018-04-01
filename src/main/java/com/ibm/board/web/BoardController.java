@@ -218,10 +218,10 @@ public class BoardController {
 		view.addObject("userLog", userLog);
 		
 		
-		// 방장정보 가져오기 
+	/*	// 방장정보 가져오기 
 		Map<String, Object> managerInfo = boardService.getManagerInfo(params);
 		logger.info("managerInfo : {} " , managerInfo);
-		view.addObject("managerInfo", managerInfo);
+		view.addObject("managerInfo", managerInfo);*/
 		
 		
 		// 중요 인물 정보 가져오기 

@@ -80,19 +80,23 @@
 	
 	<select id="selectBoardInfoWithCode" parameterType="map"  resultType="map">
 		
-		SELECT a.board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, a.code, ifnull(code_name , project ) project 
-		,  DATEDIFF(now() , due_date) dday
-		FROM boards a , codet b
+		SELECT a.board_id, a.title, a.importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, a.code, ifnull(code_name , project ) project 
+		,  DATEDIFF(now() , due_date) dday , d.name, d.phone
+		FROM boards a , codet b ,manager c, user d
 		where 1=1
 		and a.code = b.code COLLATE utf8_unicode_ci
+		and c.board_id = a.board_id COLLATE utf8_unicode_ci
+		and c.phone = d.phone COLLATE utf8_unicode_ci
 		<choose>
 			<when test="code1 != null and code1 !=''">
-				and board_id = #{code1}
+				and a.board_id = #{code1}
 			</when>
 			<otherwise>
 				and a.code = #{code}
 			</otherwise>
 		</choose>
+		
+		
 	</select>
 	
 	<select id="selectSceduleInfo" parameterType="map"  resultType="map">
