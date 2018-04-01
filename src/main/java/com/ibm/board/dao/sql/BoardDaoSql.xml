@@ -208,7 +208,7 @@
 	</select> 
 	
 	<insert id="addComment" parameterType="map">
-		INSERT INTO ibm.comment
+		INSERT INTO comment
 		(comment, board_id, phone)
 		VALUES(#{newMsg}, #{boardId}, #{phone})
 	</insert>

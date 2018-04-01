@@ -5,10 +5,11 @@
 <html>
 <head>
 <link rel="stylesheet" href="/static/css/join.css">
+<script type="text/javascript" src="<c:url value="/static/js/spin.js"/>"></script>
 </head>
 <body>
  <!-- Modal -->
-           
+
 <form id="joinForm"action="#">
 	<div class="modal" id="modalJoin" role="dialog">
     <div class="modal-dialog modal-sm">
@@ -79,14 +80,42 @@
 				}
 		)};	
  
- 
+var spinner
+
 $(document).ready(function(){ 
  $("#joinPhone").change(function(){
 	 
 	if( $("#joinPhone").val().length > 10 ){
-/* 		alert($("#joinPhone").val()); */
+		/* 	alert($("#joinPhone").val()); */
 	
-	
+		var spinner;
+
+		jQuery(function(){
+		    spinner = new Spinner().spin().el;
+		    jQuery(document.body).append(spinner);
+		    
+		    var spinerTextFontSize = 14;
+		    var spinerTextPadding = 10;
+		    var spinerTextWidth = 200;
+		    var spinerTextBorderWidth = 2;
+		    var spinerTextMarginTop = (((spinerTextFontSize + (spinerTextBorderWidth * 2) + (spinerTextPadding * 2)) / 2) * -1);
+		    var spinnerMarginLeft = (spinerTextWidth/2);
+		 
+		    $(spinner).append('<div class="spinerText"></div>');
+		    $(".spinerText").css("width",spinerTextWidth + "px");
+		    $(".spinerText").css("font-size",spinerTextFontSize + "px");
+		    $(".spinerText").css("line-height",spinerTextFontSize + "px");
+		    $(".spinerText").css("margin-top",spinerTextMarginTop + "px");
+		    $(".spinerText").css("padding",spinerTextPadding + "px");
+		    $(".spinerText").css("font-weight","bold");
+		    $(".spinerText").css("display","table");
+		    $(".spinerTextDiv").css("display","table-cell");
+		    $(".spinerTextDiv").css("text-align","center");
+		    $(".spinerTextDiv").css("vertical-align","middle");
+		 
+		    $(spinner).css('margin-left','-' + spinnerMarginLeft + 'px');
+		    $(spinner).css('margin', 'auto');
+		});
 
 		$.get(
 				"<c:url value="/project/getCode" />" ,
@@ -99,7 +128,9 @@ $(document).ready(function(){
 					} else if (data == null) {
 				
 					}
-			}); 
+			$(spinner).empty();
+			}
+		); 
 	}
  });
 });

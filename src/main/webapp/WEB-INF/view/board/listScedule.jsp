@@ -6,8 +6,6 @@
 <head>
 <!-- bootbox -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-<!-- Bootstrap core CSS -->
-<link href=" <c:url value="/static/vendor/bootstrap/css/bootstrap.min.css"/> " rel="stylesheet">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -347,21 +345,24 @@ jQuery(function(){
     $(".spinerText").css("margin-top",spinerTextMarginTop + "px");
     $(".spinerText").css("padding",spinerTextPadding + "px");
     $(".spinerText").css("font-weight","bold");
-    $(".spinerText").css("display","table");
+    $(".spinerText").css("display","table"); //'margin', 'auto')
     $(".spinerTextDiv").css("display","table-cell");
     $(".spinerTextDiv").css("text-align","center");
     $(".spinerTextDiv").css("vertical-align","middle");
- 
+    
     $(spinner).css('margin-left','-' + spinnerMarginLeft + 'px');
+    $(spinner).css('margin', 'auto');
 });
 
 window.onload = function(){
 	$(spinner).empty();
+	$('#spinnerShadow').css('opacity', '1');
 }
 </script>
 </head>
-<body class="w3-light-grey">
-
+<body class="w3-light-grey" style="z-index: 100000">
+	<div id="spinnerShadow" style="z-index:1000000; height:100000px; opacity: 0.3; filter: Alpha(opacity=50);">
+	
 <!-- Page Container -->
 <!-- Navbar -->
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
@@ -634,7 +635,7 @@ window.onload = function(){
   <i class="fa fa-linkedin w3-hover-opacity"></i>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">IBM</a></p>
 </footer>
-
+</div>
 </body>
 
 </html>
