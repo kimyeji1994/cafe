@@ -4,6 +4,11 @@
 <!DOCTYPE html >
 <html>
 <head>
+<!-- bootbox -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<!-- Bootstrap core CSS -->
+<link href=" <c:url value="/static/vendor/bootstrap/css/bootstrap.min.css"/> " rel="stylesheet">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -161,14 +166,19 @@ function sceduleClick(date) {
 					location.reload();
 				}
 		}); 
-	
-	
-	
   }
 function appliClick(phone) {
 	alert(phone);
+/* 	
+	bootbox.alert({
+	 	message: "code : ",
+	  size: 'small',
+    callback: function () {}
+	}); */
+
 	var boardId = $("#boardId").val();
 	$.post(
+			
 			"<c:url value="/project/addCompulsory" />",
 			{ "phone" : String(phone)   , "boardId" : boardId  },
 			function(data) {
@@ -461,41 +471,37 @@ window.onload = function(){
         
           <c:if test = '${status.count % 3 == 1 }'>  
            
-             <li class="w3-bar" onClick = "appliClick('${applicantList.phone}')" >
+          <li class="w3-bar" onClick = "appliClick('${applicantList.phone}')" >
                    
-   				<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+   					<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
 	      		<div class="w3-bar-item">
 	       			 <span class="w3-large">${applicantList.name}</span><br/>
 	       			 <span >${applicantList.phone}</span>
-       
       			</div>
-    		</li>
-    		
+    			</li>
  
           </c:if>
           
-             <c:if test = '${status.count % 3 == 2 }'>  
-               <li class="w3-bar"  onClick = "appliClick('${applicantList.phone}')">
+          <c:if test = '${status.count % 3 == 2 }'>  
+          <li class="w3-bar"  onClick = "appliClick('${applicantList.phone}')">
           
           <img src="/static/img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
       		<div class="w3-bar-item" >
        		 <span class="w3-large">${applicantList.name}</span><br/>
         	<span >${applicantList.phone}</span>
-       
-      </div>
-    </li>
-            </c:if>
+    		  </div>
+   				</li>
+          </c:if>
             
-             <c:if test = '${status.count % 3 == 0 }'>  
-                 <li class="w3-bar"  onClick = "appliClick('${applicantList.phone}')">
+           <c:if test = '${status.count % 3 == 0 }'>  
+           <li class="w3-bar"  onClick = "appliClick('${applicantList.phone}')">
                     
-     			 <img src="/static/img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+     				  <img src="/static/img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
       				<div class="w3-bar-item ">
-        		   <span class="w3-large">${applicantList.name}</span><br/>
-        			<span >${applicantList.phone}</span><br/>
-       
+        		 	  <span class="w3-large">${applicantList.name}</span><br/>
+        				<span >${applicantList.phone}</span><br/>
       				</div>
-    </li>
+    				</li>
             </c:if>
     
     

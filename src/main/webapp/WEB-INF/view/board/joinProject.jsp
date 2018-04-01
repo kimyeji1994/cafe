@@ -34,14 +34,7 @@
 							<div id="joinCodeMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out the code!</div>
 						</div>				
 						<div class="form-group">		
-							<div class="input-group">
-								<input type="text" class="form-control" id="joinCode" name="code" placeholder="Invite Code">
-	              <span class="input-group-btn"  style="background: #fff;">
-	                <button class="btn" style="background: #fff;" type="button" data-toggle="modal" data-target="#codeModal">
-	                	<i class="fa fa-search"></i>
-	                </button>
-	              </span>						
-							</div>
+							<input type="text" class="form-control" id="joinCode" name="code" placeholder="Invite Code">
 						</div>
 						<div class="form-group">
 							<button id="joinButt" class="btn btn-lg btn-primary btn-block btn-signin" type="button" value="join" onClick="joinFormCheck();">Join</button>
