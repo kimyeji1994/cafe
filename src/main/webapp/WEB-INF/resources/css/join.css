@@ -51,3 +51,20 @@
 .btn.btn-signin:focus {
     background-color: rgba(2, 32, 69, 0.8);
 }
+.btn.btn-code {
+    /*background-color: #4d90fe; */
+    background-color: rgba(0, 0, 0, 0.28);
+    /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+    padding: 0px;
+    font-weight: 500;
+    font-size: 14px;
+    height: 36px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    -o-transition: all 0.218s;
+    -moz-transition: all 0.218s;
+    -webkit-transition: all 0.218s;
+    transition: all 0.218s;
+}

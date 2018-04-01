@@ -113,6 +113,7 @@ request.setCharacterEncoding("UTF-8");
 	<!-- Modal -->
 	<jsp:include page="joinProject.jsp"></jsp:include>
 	<jsp:include page="addProject.jsp"></jsp:include>
+	<jsp:include page="listCode.jsp"></jsp:include>
 
 
  </body>

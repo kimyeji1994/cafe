@@ -42,8 +42,50 @@ $(document).ready(function () {
 		format: 'yyyy-mm-dd'	   	
 	});
 });
-
+//validation check
 function formCheck() {
+    // 사용하기 쉽도록 변수를 선언하여 담아주고,
+    
+    var title = $("#title").val();
+    if (title == null || title == "") { // null인지 비교한 뒤
+    $("#title").focus(); // 해당태그에 포커스를 준뒤")
+    $("#titleMsg").show();
+    }else{
+    	$("#titleMsg").hide();
+    };
+    
+    var startDate = $("#startDate").val();
+    if (startDate == null || startDate == "") { // null인지 비교한 뒤
+    $("#startDtMsg").show();
+    }else{
+    	$("#startDtMsg").hide();
+    };
+    
+    var endDate = $("#endDate").val();
+    if (endDate == null || endDate == "") { // null인지 비교한 뒤
+    $("#endDtMsg").show();
+    }else{
+    	$("#endDtMsg").hide();
+    };
+
+    var dueDate = $("#dueDate").val();
+    if (dueDate == null || dueDate == "") { // null인지 비교한 뒤
+    $("#dueDtMsg").show();
+    }else{
+    	$("#dueDtMsg").hide();
+    };
+    
+    if($("#titleMsg").css("display") == "block" || $("#startDtMsg").css("display") == "block" || $("#endDtMsg").css("display") == "block" || $("#dueDtMsg").css("display") == "block"){
+
+    	//하나라도 빈칸이 있는 것 이기 때문에 return false로 vali check!!!
+    	return false;
+    }else{
+    	saveClick();
+    }
+    	
+};
+
+function saveClick() {
 	
 	$.post(
 			"<c:url value="/project/addBoard" />",
@@ -55,7 +97,6 @@ function formCheck() {
 					location.reload();
 				}
 		}); 
-	
 	
 }
 </script>
