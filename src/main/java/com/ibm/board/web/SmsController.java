@@ -34,6 +34,7 @@ public class SmsController {
 			String user_id = "dokyung30"; // SMS아이디
 			String secure = "af02cdf2222972b9edc82a8d9de0ac3c";//인증키
 			String msg = nullcheck((String)paramMap.get("msg"), "");
+			String rphone = nullcheck((String)paramMap.get("rphone"), "");
 			String sphone1 = nullcheck((String)paramMap.get("sphone1"), "");
 			String sphone2 = nullcheck((String)paramMap.get("sphone2"), "");
 			String sphone3 = nullcheck((String)paramMap.get("sphone3"), "");
@@ -54,7 +55,7 @@ public class SmsController {
 			String smsType = nullcheck((String)paramMap.get("smsType"), "");
 
 			// TODO: 해당 프로젝트에서 문자를 받을 사람들의 PHONE DB에서 select
-			List<String> rphoneTmpList = new ArrayList<String>();
+/*			List<String> rphoneTmpList = new ArrayList<String>();
 			
 			List<String> rphoneList = new ArrayList<String>();
 			
@@ -68,7 +69,7 @@ public class SmsController {
 				rphoneList.add(phone);
 			}
 
-			for (String rphone : rphoneList) {
+			for (String rphone : rphoneList) {*/
 				String[] host_info = sms_url.split("/");
 				String host = host_info[2];
 				String path = "/" + host_info[3];
@@ -179,7 +180,7 @@ public class SmsController {
 					//out.println(alert);
 				} 
 			}
-		}
+		//}
 			
 		return alert;
 	}
