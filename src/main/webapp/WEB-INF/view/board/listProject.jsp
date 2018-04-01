@@ -1,30 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-<%-- <!DOCTYPE html >
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<c:forEach items = "${boardInfo}"  var = "boardInfo">
-	<tr>
-		<td><a href="/scedule/list/${boardInfo.code}?board=${boardInfo.board_id}">${boardInfo.board_id}</a></td><br/>
-					
-	</tr>		
-</c:forEach>
 
-
-
-
-</body>
-</html> --%>
 
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Scodule</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -60,6 +42,22 @@ $(document).ready(function () {
 		format: 'yyyy-mm-dd'	   	
 	});
 });
+
+function formCheck() {
+	
+	$.post(
+			"<c:url value="/project/addBoard" />",
+			$("#writeForm").serialize(),
+			function(data) {
+				if (data != "FAIL") {
+					location.reload();
+				} else if (data == "FAIL") {
+					location.reload();
+				}
+		}); 
+	
+	
+}
 </script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
@@ -69,17 +67,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <!-- Navbar -->
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Scodule</a>
 
-  <div class="w3-dropdown-hover w3-hide-small">
- 
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-      <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-      <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-    </div>
-  </div>
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Scodule</a>
+
+
  
  </div>
 </div>
@@ -105,7 +96,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
          <p class="w3-center">  <img src="/static/img/sceduler.jpeg" style="width:100%; height: 380px" alt="Avatar"></p>
          <hr>
          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> ${boardInfo[0].code_name}</p>
-          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> ${boardInfo[0].code}</p>
+          <p><i class="fa fa-lock fa-fw w3-margin-right w3-text-theme"></i> ${boardInfo[0].code}</p>
         </div>
       </div>
       <br>
@@ -150,6 +141,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	<!-- 									<div class="form-group required text-right">		
 											<button type="button" class="btn btn-default btn-sm" id="save" onClick="formCheck();">Save</button>		
 										</div> -->
+									<input type="hidden" id="codeParam" name="code" value="${boardInfo[0].code}">
 									<div class="form-group required">
 										<button type="button" class="btn btn-lg btn-primary btn-block btn-signin" id="save" onClick="formCheck();" >Save</button>
 						    	</div>
@@ -208,10 +200,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 			       	<tr>
 							<td>
 							<c:if test = '${status.count % 3 == 1 }'>
-								<img src="/static/img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+								<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
 							</c:if>
 							<c:if test = '${status.count % 3 == 2 }'>
-								<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+								<img src="/static/img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
 							</c:if>
 							<c:if test = '${status.count % 3 == 0 }'>
 								<img src="/static/img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">

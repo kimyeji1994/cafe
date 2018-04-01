@@ -321,6 +321,29 @@ public class BoardServiceImpl implements BoardService {
 	
 		return boardBiz.getProjectCodewithPhone(params);
 	}
+
+	@Override
+	public Boolean addBoardInProject(Map<String, Object> params) {
+		
+		logger.info("****board 추가****");
+		Boolean isAddBoard = boardBiz.insertBoard(params); 
+		
+		
+		int boardId = boardBiz.getBoardId(params);
+		
+		params.put("boardId", boardId);
+		logger.info("boardId : " + boardId);
+		
+		//manager
+		
+		boolean isInsertManager = userBiz.insertManager(params);
+		logger.info("isInsertManager : " + isInsertManager );
+		
+		
+		
+		
+		return isInsertManager;
+	}
 	
 	
 	

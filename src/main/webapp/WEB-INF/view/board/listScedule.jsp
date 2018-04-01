@@ -84,8 +84,26 @@ margin : 0px;
 	 margin-left: 35px!important;
 }
 
+.w3-theme-d4 {
+    color: #fff !important;
+    background-color: #3a4b53 !important;
+}
+
+.w3-theme-d2 {
+    color: #fff !important;
+    background-color: #4d636f !important;
+}
 
 
+.w3-bars {
+width: 100%;
+    overflow: hidden;
+
+}
+
+.w3-margin-tops {
+margin-top: 5%
+}
 </style>
 <title>Insert title here</title>
 <script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
@@ -256,10 +274,23 @@ var userLog ="";
 <body class="w3-light-grey">
 
 <!-- Page Container -->
+<!-- Navbar -->
+
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
+  <div class="w3-top">
+ <div class="w3-bars w3-theme-d2 w3-left-align w3-large">
+
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Scodule</a>
+
+ </div>
+</div>
+</div>
+
+
   <!-- The Grid -->
-  <div class="w3-row-padding">
+  <div class="w3-row-padding w3-margin-tops" >
+
   
     <!-- Left Column -->
     <div class="w3-third">
@@ -304,14 +335,14 @@ var userLog ="";
 			          <br>
 
           <p class="w3-large w3-text-theme"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Progress</b></p>
-          <p>DeadLine</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+          <div class="w3-half">
+          <p>DeadLine : D - ${boardInfo.dday}</p>
+         
+           
           </div>
+          <div class="w3-half">
           <p>Voter</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-teal" style="height:24px;width:55%"></div>
-          </div>
+         </div>
           
           <br>
         </div>

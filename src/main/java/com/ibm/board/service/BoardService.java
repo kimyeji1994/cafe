@@ -47,4 +47,6 @@ public interface BoardService {
 
 	Map<String, Object> getProjectCodewithPhone(Map<String, Object> params);
 
+	Boolean addBoardInProject(Map<String, Object> params);
+
 }

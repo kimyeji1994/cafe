@@ -67,12 +67,12 @@
 		select DATE_FORMAT(A.oneday , '%Y/%m/%d') 
 		from
 		(
-			select adddate(start_date, #{count}) oneday, code  
+			select adddate(start_date, #{count}) oneday, board_id  
 			from boards 
 			where board_id = #{code1}) A 
  		,boards B
 		where 1=1
-		and A.code = B.code
+		and A.board_id = B.board_id
 		and A.oneday >= start_date
 		and A.oneday <![CDATA[ <=  ]]> end_date
 	
@@ -81,11 +81,12 @@
 	<select id="selectBoardInfoWithCode" parameterType="map"  resultType="map">
 		
 		SELECT a.board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, a.code, ifnull(code_name , project ) project 
+		,  DATEDIFF(due_date , now()) dday
 		FROM boards a , codet b
 		where 1=1
 		and a.code = b.code
 		<choose>
-			<when test="code1 == null and code1 =''">
+			<when test="code1 == null and code1 ==''">
 				and a.code = #{code}
 			</when>
 			<otherwise>
@@ -189,6 +190,7 @@
 		from compulsory a , info b
 		where b.board_id = #{code1}
 		and a.phone = b.phone
+		and a.board_id = b.board_id
 	    and   DATE_FORMAT(info_date , '%Y/%m/%d')   = #{oneDay}
 		
 	

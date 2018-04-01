@@ -176,6 +176,7 @@ public class BoardController {
 		
 		params.put("boardInfo", boardInfo);
 		//도표 정보 가져오기 
+		logger.info("**********도표 정보 **********");
 		List<ArrayList<String>> sceduleLogList = boardService.getsceduleLogList(params);
 		view.addObject("sceduleLogList", sceduleLogList);
 		
@@ -221,6 +222,9 @@ public class BoardController {
 		List<Object> compulsoryPeoples = boardService.getCompulsoryPeoples(params);
 		logger.info("compulsoryPeoples : {} " , compulsoryPeoples);
 		view.addObject("compulsoryPeoples", compulsoryPeoples);
+		
+		
+		
 		
 		
 		
@@ -426,7 +430,45 @@ public class BoardController {
 		
 	}
 	
+
+	@RequestMapping(value ="/project/addBoard", method=RequestMethod.POST)
+	public void addBoardInProject(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ) throws ParseException {
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
+		
+		String end = (String)params.get("endDate");
+		Date endDateD =dateFormat.parse(end);
+		String endDateS = dateFormat2.format(endDateD);
+
+		params.put("endDate", endDateS);
+		
+		String start = (String) params.get("startDate");
+		Date startDateD =dateFormat.parse(start);
+		String startDateS = dateFormat2.format(startDateD);
 	
+		params.put("startDate", startDateS);
+
+		String due = (String) params.get("dueDate");
+		Date dueDateD =dateFormat.parse(due);
+		String dueDateS = dateFormat2.format(dueDateD);
+		System.out.println("dueDate : " + dueDateS);		
+		params.put("dueDate", dueDateS);
+
+		
+		logger.info("params {}" ,params);
+		UserVo userVo= (UserVo) session.getAttribute("_USER_");
+	    params.put("phone", userVo.getPhone() );
+	    params.put("grade", "diff" );
+		logger.info("params : {}" , params);
+		
+		Boolean isAddBoardInProject = boardService.addBoardInProject(params);
+	
+		
+		
+		
+		
+	}
 	
 	
 	

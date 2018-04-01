@@ -31,12 +31,12 @@
 	  <property name="maxActive" value="2"></property>
 </bean> -->
 
-<!--   <bean id="dataSource-log4jdbc" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+   <bean id="dataSource-log4jdbc" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
         <property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/ibm?useSSL=falsep" />
         <property name="username" value="root" />
         <property name="password" value="" />
-    </bean> -->
+    </bean>
 
 
 
