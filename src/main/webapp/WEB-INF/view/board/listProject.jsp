@@ -123,6 +123,8 @@ function excelUpload(){
 
 		var formData = new FormData($('#frm')[0]);
 		
+		showSpinner(true);
+		
 		$.ajax({
 			processData: false,
 			contentType: false,
@@ -130,14 +132,18 @@ function excelUpload(){
 			type: 'POST',
 			data: formData,
 			success: function(result){
+				showSpinner(false);
+				
 				var getUsers = result.userList;
 				
 				$('#result').empty();
 				
+				$('#result').append('<hr>');
+				
 				for(var i = 0; i < getUsers.length ; i++){
 					var userInfo = getUsers[i].name + ' : ' + getUsers[i].phone;
 					
-					$('#result').append('<div id="user_' + i + '">' + userInfo + '</div>');
+					$('#result').append('<div id="user_' + i + '" class="excelUser">' + userInfo + '</div>');
 				}
 				
 				$('#result').append('<br/><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom" id="userSave" onClick="userSave();">Save</button>');
@@ -232,6 +238,26 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     background-color:#3F5E9F!important;
 }
 
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+	
+.w3-theme-d4 {
+   color: #fff !important;
+   background-color: #3F5E9F!important;
+}
+.excelUser {
+	font-family: Nanum Gothic;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
+	background-color: #fff;
+}
+.imprt-usr {
+	font-size: 12px;
+	color: #736F6E;
+}
+.user-img {
+	margin-bottom: 10px;
+}
 </style>
 <body class="w3-theme-l5">
 
@@ -296,7 +322,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 							</div>
 							<div class="form-group date input-append date" id="dpDOB">
 	    						<span class="input-group-addon"></span>
-								<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" /> 
+								<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" readOnly="true" /> 
 							</div>
 							
 							<div class="col-xs-12">
@@ -304,7 +330,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 							</div>
 							<div class="form-group date input-append date" id="dpDOB2">
 	    						<span class="input-group-addon"></span>
-								<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
+								<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" readOnly="true" /> 
 							</div>
 							
 							<div class="col-xs-12">
@@ -312,7 +338,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 							</div>
 							<div class="form-group date input-append date" id="dpDOB3">
 	    						<span class="input-group-addon"></span>
-								<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
+								<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" readOnly="true" /> 
 							</div>
 	<!-- 									<div class="form-group required text-right">		
 											<button type="button" class="btn btn-default btn-sm" id="save" onClick="formCheck();">Save</button>		
@@ -350,6 +376,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                <p><i class="fa fa-calendar fa-fw w3-margin-right w3-text-theme"></i>${boardInfo.due_date}</p>
           </div>
         </div>
+        <br>
+        <br>
         <div class="container" align="center">
        		 <a onClick="showJoin('${boardInfo.code}', '${boardInfo.board_id}'); return false;"><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> JOIN</button></a> 
      		</div>
@@ -367,14 +395,33 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           <!-- <p><button class="w3-button w3-block w3-theme-l4">Project User Upload</button></p> -->
 	        <div class="form-group required text-center">
 	        <div class="container" style="padding-top:15px;">
-					<button type="button" class="w3-button w3-block w3-theme-l4" id="excelUp" onClick="excelUploadCall(); return false;" style="background-color: rgb(77, 99, 111); color: #ffffff; font-size: 14px;"><i class="fa fa-table w3-margin-right"></i>Member Upload</button>
+					<button type="button" class="w3-button w3-block w3-theme-l4" id="excelUp" onClick="excelUploadCall(); return false;" style="background-color: rgb(77, 99, 111); color: #ffffff; font-size: 12px;"><i class="fa fa-table w3-margin-right"></i>Member Upload</button>
 <!-- 			<button type="button" class="btn btn-default btn-sm" id="excelDown" onClick="excelDown(); return false;">Excel Download</button>		 -->
 					</div>
 					</div>
 
+		<br/>
+		 <c:forEach items = "${userList}"  var = "userList" varStatus="status">
+		 	<div class="form-group required text-center">
+		 		<div class="container user-img">
+				<c:if test = '${status.count % 3 == 1 }'>
+					<img src="/static/img/img_avatar2.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+				</c:if>
+				<c:if test = '${status.count % 3 == 2 }'>
+					<img src="/static/img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+				</c:if>
+				<c:if test = '${status.count % 3 == 0 }'>
+					<img src="/static/img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:30%">
+				</c:if>
+				</div>
+				<b>${userList.name}</b>
+				<br/>
+				<div class="imprt-usr">${userList.phone}</div>
+			</div>
+          </c:forEach>
+        <%-- 
          <table style="height: 100px;">
          <tbody>
-
          <c:forEach items = "${userList}"  var = "userList" varStatus="status">
 			       	<tr>
 							<td>
@@ -391,16 +438,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 							</td>
 							</tr>
 					    <tr>
-					      <td class="align-middle">${userList.name}</td>
+					      <td class="align-middle"><b>${userList.name}</b></td>
 					    </tr>
 					    <tr>
-					    	<td class="align-middle">${userList.phone}</td>
+					    	<td class="align-middle" style="font-size:12px">${userList.phone}</td>
 					    </tr>
-       
           </c:forEach>
           </tbody>
-          </table>   
-          
+          </table>    --%>
         </div>
         <div class="w3-container">
         	<div id="result" class="small">

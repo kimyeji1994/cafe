@@ -4,8 +4,6 @@
 <!DOCTYPE html >
 <html>
 <head>
-<!-- Bootstrap core CSS -->
-<link href=" <c:url value="/static/vendor/bootstrap/css/bootstrap.min.css"/> " rel="stylesheet">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +18,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <script type="text/javascript" src="<c:url value="/static/js/spin.js"/>"></script>
 
+<script type="text/javascript" src="<c:url value="/static/js/spin.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/static/js/spinnerJS.js"/>"></script>
+	
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 .w3-text-teal, .w3-hover-text-teal:hover {
@@ -167,13 +168,6 @@ function sceduleClick(date) {
 		}); 
   }
 function appliClick(phone) {
-	alert(phone);
-/* 	
-	bootbox.alert({
-	 	message: "code : ",
-	  size: 'small',
-    callback: function () {}
-	}); */
 
 	var boardId = $("#boardId").val();
 	$.post(
@@ -191,7 +185,6 @@ function appliClick(phone) {
 }
 
 function deleteCompulsory(phone) {
-	alert(phone);
 	var boardId = $("#boardId").val();
 	$.post(
 			"<c:url value="/project/deleteCompulsory" />",
@@ -207,7 +200,7 @@ function deleteCompulsory(phone) {
 }
 
 function viewScedule(date) {
-	alert(date);
+/* 	alert(date); */
 	var boardId = $("#boardId").val();
 	$.post(
 			"<c:url value="/project/viewScedule" />",
@@ -325,37 +318,12 @@ function sendSMS(){
 	popUp(url, 500, 400, 'SMS','scroll', '');
 }
 
-
-var spinner;
-
-jQuery(function(){
-    spinner = new Spinner().spin().el;
-    jQuery(document.body).append(spinner);
-    
-    var spinerTextFontSize = 14;
-    var spinerTextPadding = 10;
-    var spinerTextWidth = 200;
-    var spinerTextBorderWidth = 2;
-    var spinerTextMarginTop = (((spinerTextFontSize + (spinerTextBorderWidth * 2) + (spinerTextPadding * 2)) / 2) * -1);
-    var spinnerMarginLeft = (spinerTextWidth/2);
- 
-    $(spinner).append('<div class="spinerText"></div>');
-    $(".spinerText").css("width",spinerTextWidth + "px");
-    $(".spinerText").css("font-size",spinerTextFontSize + "px");
-    $(".spinerText").css("line-height",spinerTextFontSize + "px");
-    $(".spinerText").css("margin-top",spinerTextMarginTop + "px");
-    $(".spinerText").css("padding",spinerTextPadding + "px");
-    $(".spinerText").css("font-weight","bold");
-    $(".spinerText").css("display","table");
-    $(".spinerTextDiv").css("display","table-cell");
-    $(".spinerTextDiv").css("text-align","center");
-    $(".spinerTextDiv").css("vertical-align","middle");
- 
-    $(spinner).css('margin-left','-' + spinnerMarginLeft + 'px');
+$(function(){
+	showSpinner(true);
 });
 
 window.onload = function(){
-	$(spinner).empty();
+	showSpinner(false);
 }
 </script>
 </head>
