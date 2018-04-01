@@ -42,9 +42,9 @@
 	
 	</insert> 
 	
- <select id="selectApplicantList"   parameterType="map"  resultType="string">
+ <select id="selectApplicantList"   parameterType="map"  resultType="map">
  
-   select distinct a.name
+   select distinct a.name, a.phone
    from user a , boards b , info c
    where b.board_id = c.board_id
    and c.phone = a.phone
@@ -52,5 +52,77 @@
  
  
  </select>
+ 
+ 
+ 
+ 
+  <select id="getProjectUserList"   parameterType="map"  resultType="map">
+ 
+   select distinct a.name, a.phone
+   from user a , boards b , info c
+   where b.board_id = c.board_id
+   and c.phone = a.phone
+   and b.code = #{code}
+ 
+ 
+ </select>
+ 
+ 
+ 	 <select id="selectManagerInfo"   parameterType="map"  resultType="map">
+ 
+		   select distinct a.phone , b.name
+		   from  manager a,  user b , boards c 
+		   where 1=1
+		   and a.board_id = c.board_id
+		   	<choose>
+			<when test="code1 == null and code1 =''">
+				and c.code = #{code} 
+			</when>
+			<otherwise>
+				and c.board_id = #{code1}
+			</otherwise>
+		</choose>
+		
+		   and a.phone = b.phone
+		
+ 
+	</select>
+	
+		<insert id="addCompulsoryPeople" parameterType="map" >
+		INSERT INTO ibm.compulsory
+		(phone, board_id)
+		VALUES(#{phone}, #{boardId});
+		</insert> 
+	
+	
+	 	 <select id="selectCompulsoryPeople"   parameterType="map"  resultType="map">
+	 	 SELECT compulsory_id, phone, board_id
+			FROM compulsory
+			where 1=1 
+			and board_id = #{boardId}
+			and phone = #{phone}
+	 	 
+	 	 
+	 	 
+	 	 </select>
+	 	 
+	 	 <select id="selectCompulsoryPeoples"   parameterType="map"  resultType="map">
+		 	 SELECT  a.phone, board_id , b.name 
+				FROM compulsory a ,  user b
+				where 1=1 
+				and board_id = #{boardInfo.board_id}
+				and a.phone = b.phone
+	 	 
+	 	 
+	 	 
+	 	 </select>
+	 	 <delete id="deleteCompulsory">
+	 	 	delete  from compulsory
+	 	 	where 1=1 
+			and board_id = #{boardId}
+			and phone = #{phone}
+	 	 
+				 	 
+	 	 </delete>
 
 </mapper>

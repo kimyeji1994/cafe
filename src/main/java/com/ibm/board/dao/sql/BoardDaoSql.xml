@@ -6,7 +6,7 @@
 	<select id="getDailyPartsByDLID" parameterType="string"  resultType="string">
 		
 		SELECT  title
-	    FROM 	BOARD
+	    FROM 	boards
 		
 	
 	</select>
@@ -46,7 +46,7 @@
 	
 	<select id="selectOneDayWithInScedule" parameterType="map"  resultType="string">
 		
-		select DATE_FORMAT(a.oneday , '%Y/%m/%d') 
+		select DATE_FORMAT(A.oneday , '%Y/%m/%d') 
 		from
 		(
 			select adddate(start_date, #{count}) oneday, code  
@@ -55,8 +55,8 @@
  		,boards B
 		where 1=1
 		and A.code = B.code
-		and a.oneday >= start_date
-		and a.oneday <![CDATA[ <=  ]]> end_date
+		and A.oneday >= start_date
+		and A.oneday <![CDATA[ <=  ]]> end_date
 	
 	</select> 
 	
@@ -64,31 +64,33 @@
 	
 	<select id="selectOneDayWithInSceduleBoardId" parameterType="map"  resultType="string">
 		
-		select DATE_FORMAT(a.oneday , '%Y/%m/%d') 
+		select DATE_FORMAT(A.oneday , '%Y/%m/%d') 
 		from
 		(
-			select adddate(start_date, #{count}) oneday, code  
+			select adddate(start_date, #{count}) oneday, board_id  
 			from boards 
 			where board_id = #{code1}) A 
  		,boards B
 		where 1=1
-		and A.code = B.code
-		and a.oneday >= start_date
-		and a.oneday <![CDATA[ <=  ]]> end_date
+		and A.board_id = B.board_id
+		and A.oneday >= start_date
+		and A.oneday <![CDATA[ <=  ]]> end_date
 	
 	</select> 
 	
 	<select id="selectBoardInfoWithCode" parameterType="map"  resultType="map">
 		
-		SELECT board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, code, project
-		FROM boards
+		SELECT a.board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, a.code, ifnull(code_name , project ) project 
+		,  DATEDIFF(due_date , now()) dday
+		FROM boards a , codet b
 		where 1=1
+		and a.code = b.code
 		<choose>
-			<when test="code1 == null and code1 =''">
-				and code = #{code}
+			<when test="code1 == null and code1 ==''">
+				and a.code = #{code}
 			</when>
 			<otherwise>
-				where board_id = #{code1}
+				and board_id = #{code1}
 			</otherwise>
 		</choose>
 	</select>
@@ -142,14 +144,17 @@
 		
 	<select id="getProjectBoardList" parameterType="map"  resultType="map">
 		
-		SELECT board_id, title, importance, start_date, end_date, code, project, due_date
-		FROM boards
-		where code = #{code}
+		SELECT a.board_id, a.title, a.importance, DATE_FORMAT(start_date , '%Y/%m/%d') start_date,DATE_FORMAT(end_date , '%Y/%m/%d') end_date, a.code, d.code_name,  project, DATE_FORMAT(due_date , '%Y/%m/%d') due_date , c.phone , c.name
+		FROM boards a, manager b, user c , codet d
+		where a.code = #{code}
+		and a.board_id = b.board_id 
+		and b.phone = c.phone
+		and a.code = d.code
 			
 	</select> 
-	 <select id="getApplicantInOneDay"   parameterType="map"  resultType="string">
+	 <select id="getApplicantInOneDay"   parameterType="map"  resultType="map">
  
-		   select distinct a.name
+		   select distinct a.name , a.phone
 		   from user a , boards b , info c
 		   where b.board_id = c.board_id
 		   and c.phone = a.phone
@@ -157,6 +162,51 @@
 		   and DATE_FORMAT(info_date , '%Y/%m/%d') = #{date}
  
 		 </select>
+		  <select id="getLogInfowithPhone"   parameterType="map"  resultType="string">
+ 
+		   select distinct DATE_FORMAT(info_date , '%Y%m%d')
+		   from  info 
+		   where 1=1
+		   and phone = #{phone}
+		   and board_id = #{boardInfo.board_id}
+		
+ 
+		 </select>
+		 
+	<select id="selectOneDayLogCountINRecommand"   parameterType="map"  resultType="string">
+ 
+		select count(info_id)
+		from info 
+		where board_id = #{code1}
+		and   DATE_FORMAT(info_date , '%Y/%m/%d')   = #{oneDay}
+ 
+   </select>
+		 
+		 
+		 	
+	<select id="selectCompulsoryCount" parameterType="map"  resultType="string">
+		
+		select count(compulsory_id)
+		from compulsory a , info b
+		where b.board_id = #{code1}
+		and a.phone = b.phone
+		and a.board_id = b.board_id
+	    and   DATE_FORMAT(info_date , '%Y/%m/%d')   = #{oneDay}
+		
+	
+	</select> 
+	
+
+	
+			 	
+	<select id="getProjectCodewithPhone" parameterType="map"  resultType="map">
+		
+	select name , code
+	from user
+	where phone = #{phone}
+	
+	</select> 
+	
 	
 	
 

@@ -7,28 +7,17 @@
 <html>
 <head>
 
-	<!-- input box style -->
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- 	<script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --> 	
- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	<!-- validation -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css">
-  
   <!-- bootbox -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-  
+
+<!--   <link rel="stylesheet" href="/static/css/add.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- datepicker -->
   <script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
-  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+<!-- 	<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+ -->  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
 	<script type='text/javascript'>
 	
   //플러그인 간의 충돌을 제거  
@@ -61,59 +50,7 @@
 			autoclose: true, 
 			format: 'yyyy-mm-dd'	   	
 		});
-
-/* 		$("#save").click( function() {
-			
-			$.post(
-					
-				if(formCheck()!=true){
-					alert("false");
-					return false;
-					
-				}else if{
-					"<c:url value="/project/write" />",
-					$("#writeForm").serialize(),
-					function(data) {
-						if (data != "FAIL") {
-						
-							bootbox.alert({
-							 	message: "code : "+data,
-							  size: 'small',
-						    callback: function () {
-						    	window.location.href = "/scedule/list/" + data ;
-						    }
-							});
-						
-						//alert("code : "+data)
-						
-					} else if (data == "FAIL") {
-						location.reload();
-					}
-				}
-			});
-		}); */
-
-/* 		$("#save2").click( function() {
-						
-			$.post(
-				"<c:url value="/project/write" />",
-				$("#writeForm2").serialize(),
-					function(data) {
-						if (data != "FAIL") {
-							bootbox.alert({
-							 	message: "code : "+data,
-							  size: 'small',
-						    callback: function () {
-						    	window.location.href = "/scedule/list/" + data ;
-						    }
-							});						
-						} else if (data == "FAIL") {
-								location.reload();
-						}
-				});
-			});
-*/
-	}); 
+	});
 		 		function saveClick() {
 					
 					$.post(
@@ -128,7 +65,6 @@
 									 	message: "code : "+data,
 									  size: 'small',
 								    callback: function () {
-								    	alert(data.length);
 								    	if(data.length < 6){
 								    	
 								    		window.location.href = "/scedule/list/" + data ;
@@ -179,14 +115,13 @@
 							}
 						});
 				};
- 
 
 				function formCheck() {
 				    // 사용하기 쉽도록 변수를 선언하여 담아주고,
 				    
 				    var phone = $("#phone").val();
 				    if (phone == null || phone == "" || phone.length<10) { // null인지 비교한 뒤
-				    		alert("phone length : "+phone.length);
+				    		alert(phone.length);
 				        $("#phone").focus(); // 해당태그에 포커스를 준뒤")
 				        $("#phoneMsg").show();
 				    }else{
@@ -395,156 +330,175 @@
 	}
 	</script>
 
-	<style>
+<!-- 	<style>
 	
 	a {
     color: #555 !important;
 	}
 	
-	</style>
+	</style> -->
 </head>
 
 <body>
-<div class="container">
-	<div class="col-sm-4 col-sm-offset-4">
+<div class="modal" id="modalCreate" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content" style='background: rgba(255,255,255,0.98);'>
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="container">
+<!-- 	<div class="col-sm-4 col-sm-offset-4"> -->
 	<!-- <form id="writeForm"> -->	
-	<br/>
-	  <ul id="importance" class="nav nav-tabs" style="margin-bottom:20px;">
-	    <li class="active"><a data-toggle="tab" href="#writeDiv">Easy</a></li>
-	    <li><a data-toggle="tab" href="#writeDiv2">Complex</a></li>
-	  </ul>
-		<div class="tab-content">
-	  	<div class="tab-pane fade in active" id="writeDiv">
-	  		<form action="" id="writeForm">
-	  							
-						<div class="row">
-							<div id="phoneMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please enter your phone number more than 10 digits.</div>
-						</div>
-						<div class="form-group input-group">
-						      	<!-- <div class="col-xs-3"> -->
-					      	<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-					   			<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
-						</div>
+					<br/>
+				  <ul class="nav nav-tabs" style="margin-bottom:20px;">
+<!-- 				    <li class="active"><a data-toggle="tab" href="#writeDiv">Easy</a></li>
+				    <li><a data-toggle="tab" href="#writeDiv2">Complex</a></li> -->
+				    <li class="nav-item"><a data-toggle="tab" href="#writeDiv" class="nav-link small text-uppercase active">Quick</a></li>
+				    <li class="nav-item"><a data-toggle="tab" href="#writeDiv2" class="nav-link small text-uppercase">Project</a></li>
+				  </ul>
+					<div class="tab-content">
+				  	<div class="tab-pane fade active show" id="writeDiv">
+				  		<form id="writeForm">
+			  					<div class="col-xs-12">
+										<div id="phoneMsg" class="text-right small" style="display:none; color:#ff6666;">* Please enter your phone number.</div>
+									</div>	
+									<div class="form-group input-group">
+						      	<div class="input-group-prepend">
+									    <span class="input-group-text" style="background: #fff;"><i class="fa fa-phone"></i></span>
+									  </div>
+						   			<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+									</div>
+									
+									<div class="col-xs-12">
+										<div id="userMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out user name!</div>
+									</div>
+									<div class="form-group input-group">
+						      	<div class="input-group-prepend">
+									    <span class="input-group-text" style="background: #fff;"><i class="fa fa-user"></i></span>
+									  </div>												
+							      <input type="text" class="form-control" id="name" name="name" placeholder="User Name">
+							   	</div>
+							   	
+							   	<div class="col-xs-12">
+										<div id="titleMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
+									</div>
+							   	<div class="form-group input-group">
+						      	<div class="input-group-prepend">
+									    <span class="input-group-text" style="background: #fff;"><i class="fa fa-pencil"></i></span>
+									  </div>	
+										<input type="text" class="form-control" id="title" name="title" placeholder="Title">
+							   	</div>
+			
+									<div class="col-xs-12">
+										<div id="startDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
+									</div>
+									<div class="form-group date input-append date" id="dpDOB">
+	      						<span class="input-group-addon"></span>
+										<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" /> 
+									</div>
+									
+									<div class="col-xs-12">
+										<div id="endDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
+									</div>
+									<div class="form-group date input-append date" id="dpDOB2">
+	      						<span class="input-group-addon"></span>
+										<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
+									</div>
+									
+									<div class="col-xs-12">
+										<div id="dueDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
+									</div>
+									<div class="form-group date input-append date" id="dpDOB3">
+	      						<span class="input-group-addon"></span>
+										<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
+									</div>
+	<!-- 									<div class="form-group required text-right">		
+											<button type="button" class="btn btn-default btn-sm" id="save" onClick="formCheck();">Save</button>		
+										</div> -->
+									<div class="form-group required">
+										<button type="button" class="btn btn-lg btn-primary btn-block btn-signin" id="save" onClick="formCheck();" >Save</button>
+						    	</div>
+								</form>	
+							</div>
 						
-						<div class="row">
-							<div id="userMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out user name!</div>
-						</div>
-						<div class="form-group input-group">
-				      		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				      		<input type="text" class="form-control" id="name" name="name" placeholder="User Name">
-				   	</div>
-				   	
-				   	<div class="row">
-							<div id="titleMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
-						</div>
-				   	<div class="form-group input-group">
-				      		<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-				      		<input type="text" class="form-control" id="title" name="title" placeholder="Title">
-				   	</div>
-
-						<div class="row">
-							<div id="startDtMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
-						</div>
-						<div class="form-group input-group date input-append date" id="dpDOB">
-								<span class="input-group-addon add-on">
-								<span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" /> 
-						</div>
-						
-						<div class="row">
-							<div id="endDtMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
-						</div>
-						<div class="form-group input-group date input-append date" id="dpDOB2">
-								<span class="input-group-addon add-on">
-								<span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
-						</div>
-						
-						<div class="row">
-							<div id="dueDtMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
-						</div>
-						<div class="form-group input-group date input-append date" id="dpDOB3">
-								<span class="input-group-addon add-on">
-								<span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
-						</div>
-						<div class="form-group required text-right">
-							<button type="button" class="btn btn-default btn-sm" id="save" onClick="formCheck();">Save</button>		
-						</div>
-				</form>	
+		  				<div class="tab-pane fade"id="writeDiv2">
+					  		<form id="writeForm2">
+									<div class="row">
+										<div id="phoneMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please enter your phone number more than 10 digits.</div>
+									</div>
 				
-
-			</div>
+									<div class="form-group input-group">
+							      <div class="input-group-prepend">
+									    <span class="input-group-text" style="background: #fff;"><i class="fa fa-phone"></i></span>
+									  </div>
+										<input type="text" class="form-control" id="phone2" name="phone" placeholder="Phone Number">
+									</div>
+									
+									<div class="col-xs-12">
+										<div id="userMsg2" class="text-right small" style="display:none; color:#ff6666;">* Please fill out user name!</div>
+									</div>
 				
-	  	<div class="tab-pane fade"id="writeDiv2">
-	  		<form id="writeForm2">
-						<div class="row">
-							<div id="phoneMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please enter your phone number more than 10 digits.</div>
+									<div class="form-group input-group">
+							      <div class="input-group-prepend">
+										   <span class="input-group-text" style="background: #fff;"><i class="fa fa-user"></i></span>
+										</div>	
+							      <input type="text" class="form-control" id="name2" name="name" placeholder="User Name">
+							   	</div>
+							   	<div class="col-xs-12">
+										<div id="projectMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out your project!</div>
+									</div>
+			
+							   	<div class="form-group input-group">
+							      <div class="input-group-prepend">
+										  <span class="input-group-text" style="background: #fff;"><i class="fa fa-file-powerpoint-o"></i></span>
+										</div>	
+							      <input type="text" class="form-control" id="project" name="project" placeholder="Project">
+							   	</div>
+				
+							   	<div class="col-xs-12">
+										<div id="titleMsg2" class="text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
+									</div>
+				
+							   	<div class="form-group input-group">
+							      <div class="input-group-prepend">
+										  <span class="input-group-text" style="background: #fff;"><i class="fa fa-pencil"></i></span>
+										</div>	
+							      <input type="text" class="form-control" id="title2" name="title" placeholder="Title">
+							   	</div>
+			
+									<div class="col-xs-12">
+										<div id="startDtMsg2" class="text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
+									</div>
+				
+									<div class="form-group date input-append date" id="dpDOB4">
+	      						<span class="input-group-addon"></span>
+										<input type="text" class="form-control" id="startDate2" name="startDate" placeholder="From Date" /> 
+									</div>
+									
+									<div class="col-xs-12">
+										<div id="endDtMsg2" class="text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
+									</div>
+				
+									<div class="form-group date input-append date" id="dpDOB5">
+	      						<span class="input-group-addon"></span>
+										<input type="text" class="form-control" id="endDate2" name="endDate" placeholder="To Date" /> 
+									</div>
+			
+									<div class="col-xs-12">
+										<div id="dueDtMsg2" class="text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
+									</div>
+			
+									<div class="form-group date input-append date" id="dpDOB6">
+	      						<span class="input-group-addon"></span>
+										<input type="text" class="form-control" id="dueDate2" name="dueDate" placeholder="Due Date" /> 
+									</div>
+									<div class="form-group">
+										<button id="save2" onClick="formCheck2();" class="btn btn-lg btn-primary btn-block btn-signin" type="button">Sign in</button>
+						    	</div>
+								</form>
+							</div>
 						</div>
-	
-						<div class="form-group input-group">
-						      	<!-- <div class="col-xs-3"> -->
-					      	<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-					   			<input type="text" class="form-control" id="phone2" name="phone" placeholder="Phone Number">
-						</div>
-						<div class="row">
-							<div id="userMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out user name!</div>
-						</div>
-	
-						<div class="form-group input-group">
-				      		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				      		<input type="text" class="form-control" id="name2" name="name" placeholder="User Name">
-				   	</div>
-				   	<div class="row">
-							<div id="projectMsg" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out your project!</div>
-						</div>
-
-				   	<div class="form-group input-group">
-				      		<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-				      		<input type="text" class="form-control" id="project" name="project" placeholder="Project">
-				   	</div>
-	
-				   	<div class="row">
-							<div id="titleMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
-						</div>
-	
-				   	<div class="form-group input-group">
-				      		<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-				      		<input type="text" class="form-control" id="title2" name="title" placeholder="Title">
-				   	</div>
-
-						<div class="row">
-							<div id="startDtMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
-						</div>
-	
-						<div class="form-group input-group date input-append date" id="dpDOB4">
-								<span class="input-group-addon add-on">
-								<span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" id="startDate2" name="startDate" placeholder="From Date" /> 
-						</div>
-						<div class="row">
-							<div id="endDtMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
-						</div>
-	
-						<div class="form-group input-group date input-append date" id="dpDOB5">
-								<span class="input-group-addon add-on">
-								<span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" id="endDate2" name="endDate" placeholder="To Date" /> 
-						</div>
-
-						<div class="row">
-							<div id="dueDtMsg2" class="col-xs-12 text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
-						</div>
-
-						<div class="form-group input-group date input-append date" id="dpDOB6">
-								<span class="input-group-addon add-on">
-								<span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" id="dueDate2" name="dueDate" placeholder="Due Date" /> 
-						</div>
-						<div class="form-group required text-right">
-							<button type="button" class="btn btn-default btn-sm" id="save2" onClick="formCheck2();">Save</button>		
-						</div>
-				</form>
+					</div>
+				</div>
 			</div>
 			
 			<!-- User upload Modal -->
@@ -611,6 +565,5 @@
 			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>

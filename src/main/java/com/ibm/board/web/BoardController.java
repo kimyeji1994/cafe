@@ -110,6 +110,7 @@ public class BoardController {
 		userVo.setPhone(params.get("phone").toString());
 		HttpSession session = request.getSession();
 		session.setAttribute("_USER_", userVo);
+		session.setAttribute("_DATE_", null);
 		logger.info("***********Log In************");
 		logger.info("userVo {}" ,userVo);
 		 PrintWriter write;
@@ -135,6 +136,7 @@ public class BoardController {
 		String boardId = request.getParameter("board");
 		logger.info("boardId : " + boardId); // 차이
 		logger.info("code : " + code); // 차이
+		List<Object> sceduleLists = new ArrayList<Object>();
 		List<String> sceduleList = null;
 		params.put("code1", boardId);	
 		params.put("code", code);
@@ -150,11 +152,20 @@ public class BoardController {
 		else {
 		
 			sceduleList = boardService.getSceduleList(code);
-		
-			
+
 		}	
 		
-		view.addObject("sceduleList", sceduleList);
+	
+		for(int i=0; i < sceduleList.size(); i++) {
+			List<String> oneScedule = new ArrayList<String>();
+			oneScedule.add( sceduleList.get(i));
+			logger.info( "sceduleList.get(i) : {} ", sceduleList.get(i)); // 차이
+			oneScedule.add(sceduleList.get(i).replace("/", "") );
+			sceduleLists.add(oneScedule);
+		}
+		logger.info( "sceduleLists : {}", sceduleLists); // 차이
+		
+		view.addObject("sceduleList", sceduleLists);
 	
 		
 	
@@ -165,13 +176,14 @@ public class BoardController {
 		
 		params.put("boardInfo", boardInfo);
 		//도표 정보 가져오기 
+		logger.info("**********도표 정보 **********");
 		List<ArrayList<String>> sceduleLogList = boardService.getsceduleLogList(params);
 		view.addObject("sceduleLogList", sceduleLogList);
 		
 		//참석자 정보 가져오기 
 		logger.info("**********참석자 정보 **********");
 		logger.info("params : {}" , params);
-		List<String> applicantList = boardService.getapplicantList(params);
+		List<Object> applicantList = boardService.getapplicantList(params);
 		logger.info("applicantList : {} " , applicantList);
 		view.addObject("applicantList", applicantList);
 		
@@ -180,7 +192,7 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		HashMap<String, Object> onedayParams  = (HashMap<String, Object>) session.getAttribute("_DATE_");
 		logger.info("onedayParams : {} " , onedayParams);
-		List<String> applicantInOneDay = null;
+		List<Object> applicantInOneDay = null;
 		if(onedayParams != null) {
 			view.addObject("oneday", onedayParams.get("date"));
 			applicantInOneDay = boardService.getApplicantInOneDay(onedayParams); 
@@ -188,6 +200,34 @@ public class BoardController {
 		}
 		
 		view.addObject("applicantInOneDay", applicantInOneDay);
+		
+		
+		
+		//유저 클릭 정보 가져오기 
+		UserVo userVo = (UserVo) session.getAttribute("_USER_");
+		String phone = userVo.getPhone();
+		params.put("phone", phone);
+		List<String> userLog = boardService.getLogInfowithPhone(params);
+		logger.info("userLog : {} " , userLog);
+		view.addObject("userLog", userLog);
+		
+		
+		//방장정보 가져오기 
+		Map<String, Object> managerInfo = boardService.getManagerInfo(params);
+		logger.info("managerInfo : {} " , managerInfo);
+		view.addObject("managerInfo", managerInfo);
+		
+		
+		//중요인물정보 가져오기 
+		List<Object> compulsoryPeoples = boardService.getCompulsoryPeoples(params);
+		logger.info("compulsoryPeoples : {} " , compulsoryPeoples);
+		view.addObject("compulsoryPeoples", compulsoryPeoples);
+		
+		
+		
+		
+		
+		
 		view.setViewName("board/listScedule");
 		
 		return view;
@@ -218,8 +258,9 @@ public class BoardController {
 		 userVo.setPhone(params.get("phone").toString());
 		HttpSession session = request.getSession();
 		session.setAttribute("_USER_", userVo);
+		session.setAttribute("_DATE_", null);
 		logger.info("***********Log In*************");
-		logger.info("userVo {}" ,userVo);
+		logger.info("userVo {}" ,userVo.toString());
 		 
 		 PrintWriter write;
 		 if(code != null) {
@@ -277,10 +318,18 @@ public class BoardController {
 	
 	@RequestMapping(value ="/project/list/{code}", method=RequestMethod.GET)
 	public String projectListView(@RequestParam Map<String , Object> params, ModelMap map, @PathVariable String code) {
-		map.addAttribute("projectInfo", "");
+		
 		
 		
 		params.put("code", code);
+		logger.info("params : {}" , params);
+
+		
+		//user 정보 
+		List<HashMap<String, Object>> userList = boardService.getProjectUserList(params);
+		map.addAttribute("userList", userList );
+		
+		//프로젝트 정보
 		List<HashMap<String, Object>> boardList = boardService.getProjectBoardList(params);
 		map.addAttribute("boardInfo", boardList );
 		
@@ -289,5 +338,144 @@ public class BoardController {
 		
 		return "board/listProject";
 	}
+	
+	@RequestMapping(value ="/project/addCompulsory", method=RequestMethod.POST)
+	public void addCompulsoryPeople(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ) {
+		
+			logger.info("params : {}" , params);
+		
+		Map<String , Object> isAlreadyCom = boardService.getCompulsoryPeople(params);
+		
+		
+	    if(isAlreadyCom == null) {
+	    	boolean isSuccessCom =	boardService.addCompulsoryPeople(params);
+	    	logger.info("isSuccessCom : " + isSuccessCom);
+	    }
+	       
+		
+		
+		
+		
+	}
+	
+	@RequestMapping(value ="/project/deleteCompulsory", method=RequestMethod.POST)
+	public void deleteCompulsory(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ) {
+		
+		logger.info("params : {}" , params);
+	
+	Map<String , Object> isAlreadyCom = boardService.getCompulsoryPeople(params);
+	
+	
+    if(isAlreadyCom != null) {
+    	boolean isSuccessDeleCom =	boardService.deleteCompulsory(params);
+    	logger.info("isSuccessDeleCom : " + isSuccessDeleCom);
+    }
+       
+		
+		
+		
+		
+	}
+	
+	@RequestMapping(value ="/project/viewScedule", method=RequestMethod.POST)
+	public void viewScedule(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
+		HashMap<String, Object> rtnMap = new HashMap<String, Object>() ;
+		rtnMap.put("date" , params.get("date"));
+		rtnMap.put("boardId" , params.get("boardId"));
+		
+		session.setAttribute("_DATE_", rtnMap);
+		
+	}
+	
+	
+	@RequestMapping(value ="/project/addComment", method=RequestMethod.GET)
+	public String addComment(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
+		logger.info("********comment********");
+		UserVo user =  (UserVo) session.getAttribute("_USER_");
+		logger.info("params {}" , params);
+		//Boolean isSuccessComment = boardService.addComment(params);
+		
+		return "";
+		
+	}
+	
+	
+	
+	@RequestMapping(value ="/project/viewRecommand", method=RequestMethod.GET)
+	public String viewRecommand(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
+		logger.info("********Recommand********");
+		UserVo user =  (UserVo) session.getAttribute("_USER_");
+		logger.info("params {}" , params);
+		params.put("code1", String.valueOf( params.get("boardId") ));
+		
+		List<Object> recommandList = boardService.getRecommandList(params);
+		map.addAttribute("recommandList", recommandList );
+		
+		
+		
+		
+		return "board/recommend";
+		
+	}
+	
+	@RequestMapping(value ="/project/getCode", method=RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> getProjectCodewithPhone(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
+		
+		Map<String, Object> rtnMap = null;
+		
+		
+		rtnMap = boardService.getProjectCodewithPhone(params);
+		
+		return ResponseEntity.ok(rtnMap);
+		
+	}
+	
+
+	@RequestMapping(value ="/project/addBoard", method=RequestMethod.POST)
+	public void addBoardInProject(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ) throws ParseException {
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
+		
+		String end = (String)params.get("endDate");
+		Date endDateD =dateFormat.parse(end);
+		String endDateS = dateFormat2.format(endDateD);
+
+		params.put("endDate", endDateS);
+		
+		String start = (String) params.get("startDate");
+		Date startDateD =dateFormat.parse(start);
+		String startDateS = dateFormat2.format(startDateD);
+	
+		params.put("startDate", startDateS);
+
+		String due = (String) params.get("dueDate");
+		Date dueDateD =dateFormat.parse(due);
+		String dueDateS = dateFormat2.format(dueDateD);
+		System.out.println("dueDate : " + dueDateS);		
+		params.put("dueDate", dueDateS);
+
+		
+		logger.info("params {}" ,params);
+		UserVo userVo= (UserVo) session.getAttribute("_USER_");
+	    params.put("phone", userVo.getPhone() );
+	    params.put("grade", "diff" );
+		logger.info("params : {}" , params);
+		
+		Boolean isAddBoardInProject = boardService.addBoardInProject(params);
+	
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
