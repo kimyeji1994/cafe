@@ -167,13 +167,6 @@ function sceduleClick(date) {
 		}); 
   }
 function appliClick(phone) {
-	alert(phone);
-/* 	
-	bootbox.alert({
-	 	message: "code : ",
-	  size: 'small',
-    callback: function () {}
-	}); */
 
 	var boardId = $("#boardId").val();
 	$.post(
@@ -191,7 +184,6 @@ function appliClick(phone) {
 }
 
 function deleteCompulsory(phone) {
-	alert(phone);
 	var boardId = $("#boardId").val();
 	$.post(
 			"<c:url value="/project/deleteCompulsory" />",
@@ -207,7 +199,7 @@ function deleteCompulsory(phone) {
 }
 
 function viewScedule(date) {
-	alert(date);
+/* 	alert(date); */
 	var boardId = $("#boardId").val();
 	$.post(
 			"<c:url value="/project/viewScedule" />",
