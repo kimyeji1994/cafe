@@ -104,7 +104,7 @@
 	</select>
 	
 		<insert id="addCompulsoryPeople" parameterType="map" >
-		INSERT INTO ibm.compulsory
+		INSERT INTO compulsory
 		(phone, board_id)
 		VALUES(#{phone}, #{boardId});
 		</insert> 

@@ -326,16 +326,30 @@
 										<div id="endDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
 									</div>
 									<div class="form-group date input-append date" id="dpDOB2">
-	      						<span class="input-group-addon"></span>
+									<div class="input-group">
+			              <span class="input-group-btn"  style="background: #fff;">
+			                <button disabled class="btn" style="background: #fff;" data-toggle="modal" data-target="#codeModal">
+			                	<i class="fa fa-calendar"></i>
+			                </button>
+			              </span>		
+									
+	      					<!-- 	<span class="input-group-addon"></span> -->
 										<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
+									</div>
 									</div>
 									
 									<div class="col-xs-12">
 										<div id="dueDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
 									</div>
 									<div class="form-group date input-append date" id="dpDOB3">
-	      						<span class="input-group-addon"></span>
+									<div class="input-group">
+			              <span class="input-group-btn"  style="background: #fff;">
+			                <button disabled class="btn" style="background: #fff;" data-toggle="modal" data-target="#codeModal">
+			                	<i class="fa fa-calendar"></i>
+			                </button>
+			              </span>											
 										<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
+									</div>
 									</div>
 	<!-- 									<div class="form-group required text-right">		
 											<button type="button" class="btn btn-default btn-sm" id="save" onClick="formCheck();">Save</button>		
@@ -396,8 +410,14 @@
 									</div>
 				
 									<div class="form-group date input-append date" id="dpDOB4">
-	      						<span class="input-group-addon"></span>
+									<div class="input-group">
+			              <span class="input-group-btn"  style="background: #fff;">
+			                <button disabled class="btn" style="background: #fff;" data-toggle="modal" data-target="#codeModal">
+			                	<i class="fa fa-calendar"></i>
+			                </button>
+			              </span>			      						
 										<input type="text" class="form-control" id="startDate2" name="startDate" placeholder="From Date" /> 
+									</div>
 									</div>
 									
 									<div class="col-xs-12">
@@ -405,8 +425,14 @@
 									</div>
 				
 									<div class="form-group date input-append date" id="dpDOB5">
-	      						<span class="input-group-addon"></span>
+									<div class="input-group">
+			              <span class="input-group-btn"  style="background: #fff;">
+			                <button disabled class="btn" style="background: #fff;" data-toggle="modal" data-target="#codeModal">
+			                	<i class="fa fa-calendar"></i>
+			                </button>
+			              </span>		
 										<input type="text" class="form-control" id="endDate2" name="endDate" placeholder="To Date" /> 
+									</div>
 									</div>
 			
 									<div class="col-xs-12">
@@ -414,8 +440,14 @@
 									</div>
 			
 									<div class="form-group date input-append date" id="dpDOB6">
-	      						<span class="input-group-addon"></span>
+									<div class="input-group">
+			              <span class="input-group-btn"  style="background: #fff;">
+			                <button disabled class="btn" style="background: #fff;" data-toggle="modal" data-target="#codeModal">
+			                	<i class="fa fa-calendar"></i>
+			                </button>
+			              </span>		
 										<input type="text" class="form-control" id="dueDate2" name="dueDate" placeholder="Due Date" /> 
+									</div>
 									</div>
 									<div class="form-group">
 										<button id="save2" onClick="formCheck2();" class="btn btn-lg btn-primary btn-block btn-signin" type="button">Save</button>
