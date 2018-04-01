@@ -125,6 +125,12 @@
 		color: #333;
 		background-color: #fff;
 	}
+	
+	
+	
+.w3-margin-tops {
+	margin-top: 10%
+}
 </style>
 
 </head>
@@ -142,7 +148,7 @@
  </div>
 </div>
 
-	<div class="container">
+	<div class="container w3-margin-tops">
 		<div class="col-sm-4 col-sm-offset-4">
 		   	<div id="chatroomBox" class="form-group required text-left" style="height:450px; background-color:#F2F4F4; overflow-y:scroll;">
 				<div id="chat" style="margin:20px 20px 0 20px;">
