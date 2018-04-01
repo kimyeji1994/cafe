@@ -21,6 +21,21 @@
 
 <style type="text/css">
 	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+	
+	.w3-theme-d4 {
+    color: #fff !important;
+    background-color: #3F5E9F!important;
+}
+
+.w3-theme-d2 {
+    color: #fff !important;
+    background-color:#3F5E9F!important;
+}
+
+
+.w3-margin-tops {
+	margin-top: 5%
+}
 </style>
 
 <script type="text/javascript">
@@ -115,6 +130,18 @@
 </head>
 
 <body>
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Scodule</a>
+ <a href="/samplePeople" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="Messages"><i class="fa fa-group"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="Account Settings"><i class="fa fa-film"></i></a>
+  <a href="/sample" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="News"><i class="fa fa-search"></i></a> 
+
+ 
+ </div>
+</div>
+
 	<div class="container">
 		<div class="col-sm-4 col-sm-offset-4">
 		   	<div id="chatroomBox" class="form-group required text-left" style="height:450px; background-color:#F2F4F4; overflow-y:scroll;">

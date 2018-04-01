@@ -69,7 +69,7 @@ width: 100%;
         <div class="w3-container">
           <h3>Jin Mu</h3>
           <p class="w3-opacity">Developer</p>
-          <p>Hi, My Name is Jinmu. Nice to Meet You  </p>
+          <p>Hi, My Name is Jinmu. Nice to Meet You!</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -81,7 +81,7 @@ width: 100%;
         <div class="w3-container">
           <h3>Yoo Jin</h3>
           <p class="w3-opacity">Consultant</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p>Hi, I am Yoo Jin. See you soon!</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -92,8 +92,8 @@ width: 100%;
        <img src="/static/img/ibm3.png"  alt="John" style="width:100%">
         <div class="w3-container">
           <h3>Ye Ji</h3>
-          <p class="w3-opacity">Consultant</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p class="w3-opacity">Developer</p>
+          <p>Hi, I'm Yeji. I'm happy to meet you.</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -109,8 +109,8 @@ width: 100%;
      <img src="/static/img/ibm4.png"  alt="John" style="width:100%">
         <div class="w3-container">
           <h3>Do Kyung</h3>
-          <p class="w3-opacity">CEO & Founder</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p class="w3-opacity">Developer</p>
+          <p>Hello. My name is Do Kyung. I don't like something boring! I wanna do something exciting.</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -122,7 +122,7 @@ width: 100%;
         <div class="w3-container">
           <h3>Amir Jung</h3>
           <p class="w3-opacity">Ux Designer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p>Hi. I'm Amir. I think I am the most pretty in the world!</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -133,8 +133,8 @@ width: 100%;
 <img src="/static/img/ibm6.png"  alt="John" style="width:100%">
         <div class="w3-container">
           <h3>Sung Min</h3>
-          <p class="w3-opacity">Designer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p class="w3-opacity">Consultant</p>
+          <p>Hello. I'm Sung Min. Enjoy this time!</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -151,8 +151,8 @@ width: 100%;
       <img src="/static/img/ibm7.png"  alt="John" style="width:100%">
         <div class="w3-container">
           <h3>Ja Yong</h3>
-          <p class="w3-opacity">CEO & Founder</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p class="w3-opacity">Developer</p>
+          <p>Hi, I am Ja Yong. I like talking a lot.</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -163,8 +163,8 @@ width: 100%;
         <img src="/static/img/ibm8.png" alt="Mike" style="width:100%">
         <div class="w3-container">
           <h3>Ji Yeong</h3>
-          <p class="w3-opacity">Art Director</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <p class="w3-opacity">Consultant</p>
+          <p>Hello. My name is Ji Yeong. I'm happy because I'm an IBMer.</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
@@ -174,9 +174,9 @@ width: 100%;
       <div class="w3-card-4">
         <img src="/w3images/team3.jpg" alt="Jane" style="width:100%">
         <div class="w3-container">
-          <h3>John Doe</h3>
-          <p class="w3-opacity">Designer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          <h3>IBM</h3>
+          <p class="w3-opacity">Our Company</p>
+          <p>We love IBM!</p>
           <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
         </div>
       </div>
