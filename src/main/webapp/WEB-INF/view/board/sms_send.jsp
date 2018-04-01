@@ -62,7 +62,7 @@
 		    	$("#msgError").hide();
 		    };
 		    
-/* 		    var phone = $("#phone").val();
+ 		    var phone = $("#phone").val();
 		    if (phone == null || phone == "" || phone.length <= 10) {
 		    	flag = 0;
 		        $("#phoneError").show();
@@ -74,7 +74,7 @@
 		    	}
 		    };
 		    
-		    $("#rphone").val(phone); */
+		    $("#rphone").val(phone);
 		}
 		
 		function init(){
@@ -114,7 +114,7 @@
 		        </div>
 						
 		        <div class="form-group required text-right">
-		        	<!-- <input type="text" name="rphone" placeholder="받는 사람 (010-1234-5678)"> -->
+		        	<input type="text" id="phone" name="rphone" class="form-control" placeholder="받는 사람 (010-1234-5678)">
 			        <input type="hidden" name="sphone1" value="010">
 			        <input type="hidden" name="sphone2" value="4029">
 			        <input type="hidden" name="sphone3" value="9030">
