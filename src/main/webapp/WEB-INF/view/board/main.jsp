@@ -68,9 +68,9 @@ request.setCharacterEncoding("UTF-8");
               <p class="mb-5">The simple way to decide on dates</p>
               <div class="input-group input-group-newsletter">
                 <!-- <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon"> -->
-				<button class="btn btn-secondary marR" type="button" data-toggle="modal" data-target="#modalJoin"> &nbsp;Join&nbsp;&nbsp;  </button>
+								<button class="btn btn-secondary marR" type="button" data-toggle="modal" data-target="#modalCreate" >Create</button>
                 <div class="input-group-append">
-				<button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#modalCreate" style='margin-left: 15px; border-radius: 3px;'>Create</button>
+								<button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#modalJoin" style='margin-left: 15px; border-radius: 3px;'> &nbsp;Join&nbsp;&nbsp;  </button>
                 </div>
                 
               </div>
