@@ -28,4 +28,6 @@ public interface UserBiz {
 
 	List<HashMap<String, Object>> getProjectUserList(Map<String, Object> params);
 
+	boolean insertCodePeople(Map<String, Object> params);
+
 }
