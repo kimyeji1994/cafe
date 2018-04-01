@@ -212,20 +212,23 @@ public class BoardController {
 		view.addObject("userLog", userLog);
 		
 		
-		//방장정보 가져오기 
+		// 방장정보 가져오기 
 		Map<String, Object> managerInfo = boardService.getManagerInfo(params);
 		logger.info("managerInfo : {} " , managerInfo);
 		view.addObject("managerInfo", managerInfo);
 		
 		
-		//중요인물정보 가져오기 
+		// 중요 인물 정보 가져오기 
 		List<Object> compulsoryPeoples = boardService.getCompulsoryPeoples(params);
 		logger.info("compulsoryPeoples : {} " , compulsoryPeoples);
 		view.addObject("compulsoryPeoples", compulsoryPeoples);
 		
 		
+		//
 		
-		
+		logger.info("********** voter ********* " );
+		String voter = boardService.getVoterInBoardId(params);
+		view.addObject("voter", voter);
 		
 		
 		view.setViewName("board/listScedule");

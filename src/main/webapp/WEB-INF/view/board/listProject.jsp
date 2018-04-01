@@ -99,6 +99,97 @@ function saveClick() {
 		}); 
 	
 }
+
+function excelUploadCall(){
+	$('#fileUpload').val('');
+	$('#fileUpload').click();
+}
+
+function excelUpload(){
+	var ext = '';
+	if($('#fileUpload').val() != ''){
+		
+		ext = $('#fileUpload').val().split('.').pop().toLowerCase();
+		
+		if($.inArray(ext, ['xlsx', 'xlsm', 'xlsb', 'xls', 'xltx', 'xltxm', 'xlt']) == -1){
+			$('#result').empty();
+			$('#result').append('<div id="excelMsg" class="col-xs-12 text-center small" style="color:#ff6666;">* Please upload *.xls file!</div>');
+			return false;
+		}
+
+		var formData = new FormData($('#frm')[0]);
+		
+		$.ajax({
+			processData: false,
+			contentType: false,
+			url: '/excel/excelUpload',
+			type: 'POST',
+			data: formData,
+			success: function(result){
+				var getUsers = result.userList;
+				
+				$('#result').empty();
+				
+				for(var i = 0; i < getUsers.length ; i++){
+					var userInfo = getUsers[i].name + ' : ' + getUsers[i].phone;
+					
+					$('#result').append('<div id="user_' + i + '">' + userInfo + '</div>');
+				}
+				
+				$('#result').append('<br/><button type="button" class="w3-button w3-theme-d1 w3-margin-bottom" id="userSave" onClick="userSave();">Save</button>');
+			}
+		});
+		
+	}
+}
+
+function userSave(){
+	var formData = new FormData($('#frm')[0]);
+	
+	$.ajax({
+		processData: false,
+		contentType: false,
+		url: "/user/excelUpload",
+		type: 'POST',
+		data: formData,
+		success: function(result){
+			var message = "";
+			
+			if(result == 0){
+				message = "Failed to upload users!";
+			} else {
+				message = "Successfully uploaded users!";
+				$("#result").empty('');
+			}
+			alert(message);
+			$("#result").empty('');
+		}
+	});
+}
+
+function excelDown(){
+	$('#frm_importance').val($("#importance > li[class='active'] > a").html());
+	$('#frm_name').val($('#name').val());
+	$('#frm_project').val($('#project').val());
+	$('#frm_title').val($('#title').val());
+	$('#frm_startDate').val($('#startDate').val());
+	$('#frm_endDate').val($('#endDate').val());
+	$('#frm_dueDate').val($('#dueDate').val());
+	
+	var formData = $('#projectFrm').serialize();
+	
+	console.log(formData);
+	
+	$.ajax({
+		url: '/excel/userExcelDownload',
+		type: 'POST',
+		data: formData,
+		success: function(result){
+			console.log(result);
+		}
+	});
+}
+
 </script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
@@ -230,9 +321,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-container">
           <!-- <p><button class="w3-button w3-block w3-theme-l4">Project User Upload</button></p> -->
 	        <div class="form-group required text-center">
-						<button type="button" class="w3-button w3-block w3-theme-l4" id="excelUp" onClick="excelUploadCall(); return false;">Project User Upload</button>		
-<!-- 						<button type="button" class="btn btn-default btn-sm" id="excelDown" onClick="excelDown(); return false;">Excel Download</button>		 -->
-					</div>
+				<button type="button" class="w3-button w3-block w3-theme-l4" id="excelUp" onClick="excelUploadCall(); return false;">Project User Upload</button>		
+<!-- 			<button type="button" class="btn btn-default btn-sm" id="excelDown" onClick="excelDown(); return false;">Excel Download</button>		 -->
+			</div>
 
          <table style="height: 100px;">
          <tbody>
@@ -264,6 +355,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           </table>   
           
         </div>
+        <div class="w3-container">
+        	<div id="result" class="small">
+        	</div>
+        </div>
       </div>
       <br>
       
@@ -276,7 +371,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <!-- End Page Container -->
 </div>
 			<!-- User upload Modal -->
-			<div class="modal fade" id="myModal" role="dialog">
+<!-- 			<div class="modal fade" id="myModal" role="dialog">
 			    <div class="modal-dialog modal-sm">
 			      <div class="modal-content">
 			        <div class="modal-header">
@@ -292,7 +387,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 			        </div>
 			      </div>
 			    </div>
-			</div>
+			</div> -->
   
   			<!-- User save Modal -->
 			<div class="modal fade" id="saveModal" role="dialog">
@@ -312,9 +407,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 			</div>
 			
 			<div class="input-group input-group-newsletter">
-				<div class="row">
-					<div id="excelMsg" class="col-xs-12 text-center small" style="display:none; color:#ff6666;">* Please upload *.xls file!</div>
-				</div>
 <!-- 				<div class="form-group required text-center">
 					<button type="button" class="btn btn-default btn-sm" id="excelUp" onClick="excelUploadCall(); return false;">User Upload</button>		
 					<button type="button" class="btn btn-default btn-sm" id="excelDown" onClick="excelDown(); return false;">Excel Download</button>		
@@ -338,99 +430,5 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 				</form>
 			</div>
 <br>
-
-
-<script>
-
-function excelUploadCall(){
-	$('#fileUpload').val('');
-	$('#fileUpload').click();
-}
-
-function excelUpload(){
-	var ext = '';
-	
-	if($('#fileUpload').val() != ''){
-		ext = $('#fileUpload').val().split('.').pop().toLowerCase();
-		
-		if($.inArray(ext, ['xlsx', 'xlsm', 'xlsb', 'xls', 'xltx', 'xltxm', 'xlt']) == -1){
-			$('#excelMsg').show();
-			return false;
-		} else {
-			$('#excelMsg').hide();
-			$('#modalCall').click();
-		}
-
-		var formData = new FormData($('#frm')[0]);
-		
-		$.ajax({
-			processData: false,
-			contentType: false,
-			url: '/excel/excelUpload',
-			type: 'POST',
-			data: formData,
-			success: function(result){
-				var getUsers = result.userList;
-				
-				$('#result').empty();
-				
-				for(var i = 0; i < getUsers.length ; i++){
-					var userInfo = getUsers[i].name + ' : ' + getUsers[i].phone;
-					
-					$('#result').append('<div id="user_"' + i + '>' + userInfo + '</div>');
-				}
-			}
-		});
-		
-	}
-}
-
-function userSave(){
-	var formData = new FormData($('#frm')[0]);
-	
-	$.ajax({
-		processData: false,
-		contentType: false,
-		url: '/user/excelUpload',
-		type: 'POST',
-		data: formData,
-		success: function(result){
-			var message = "";
-			
-			if(result == 0){
-				message = "Failed to upload users!";
-			} else {
-				message = "Successfully uploaded users!";
-			}
-			$("#saveResult").html(message);
-			$("#saveModalCall").click();
-		}
-	});
-}
-
-function excelDown(){
-	$('#frm_importance').val($("#importance > li[class='active'] > a").html());
-	$('#frm_name').val($('#name').val());
-	$('#frm_project').val($('#project').val());
-	$('#frm_title').val($('#title').val());
-	$('#frm_startDate').val($('#startDate').val());
-	$('#frm_endDate').val($('#endDate').val());
-	$('#frm_dueDate').val($('#dueDate').val());
-	
-	var formData = $('#projectFrm').serialize();
-	
-	console.log(formData);
-	
-	$.ajax({
-		url: '/excel/userExcelDownload',
-		type: 'POST',
-		data: formData,
-		success: function(result){
-			console.log(result);
-		}
-	});
-}
-</script>
-
 </body>
 </html> 

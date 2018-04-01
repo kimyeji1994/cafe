@@ -30,6 +30,8 @@ public interface UserDao {
 
 	boolean insertCodePeople(Map<String, Object> params);
 
+	String getVoterInBoardId(Map<String, Object> params);
+
 	
 
 }

@@ -56,14 +56,29 @@
  
  
  
-  <select id="getProjectUserList"   parameterType="map"  resultType="map">
  
-   select distinct a.name, a.phone
+  <select id="getVoterInBoardId"   parameterType="map"  resultType="string">
+ 
+ 
+  select count(1)
+   from (
+      select distinct a.phone 
    from user a , boards b , info c
    where b.board_id = c.board_id
    and c.phone = a.phone
-   and b.code = #{code}
+   and b.board_id = #{boardInfo.board_id} ) a
+ </select>
  
+ 
+ 
+ 
+  <select id="getProjectUserList"   parameterType="map"  resultType="map">
+ 
+   select distinct b.phone, b.name
+   from codepeople a , user b
+   where 1=1
+   and a.phone = b.phone
+   and a.code = #{code}
  
  </select>
  

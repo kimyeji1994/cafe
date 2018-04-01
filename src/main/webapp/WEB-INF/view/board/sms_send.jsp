@@ -114,6 +114,7 @@
 		        </div>
 						
 		        <div class="form-group required text-right">
+		        	<!-- <input type="text" name="rphone" placeholder="받는 사람 (010-1234-5678)"> -->
 			        <input type="hidden" name="sphone1" value="010">
 			        <input type="hidden" name="sphone2" value="4029">
 			        <input type="hidden" name="sphone3" value="9030">

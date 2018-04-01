@@ -30,4 +30,6 @@ public interface UserBiz {
 
 	boolean insertCodePeople(Map<String, Object> params);
 
+	String getVoterInBoardId(Map<String, Object> params);
+
 }

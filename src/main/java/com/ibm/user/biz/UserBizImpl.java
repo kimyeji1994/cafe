@@ -88,5 +88,11 @@ public class UserBizImpl implements UserBiz{
 	
 		return userDao.insertCodePeople(params);
 	}
+
+	@Override
+	public String getVoterInBoardId(Map<String, Object> params) {
+		
+		return userDao.getVoterInBoardId(params);
+	}
 	
 }
