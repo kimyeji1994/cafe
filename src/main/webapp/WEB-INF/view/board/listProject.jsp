@@ -193,6 +193,25 @@ function excelDown(){
 </script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+.btn.btn-a {
+    /*background-color: #4d90fe; */
+    background-color: rgb(77, 99, 111);
+    color: #ffffff;
+    
+}
+.btn.btn-a:hover,
+.btn.btn-a:active,
+.btn.btn-a:focus {
+    background-color: rgba(77, 99, 111,0.70);
+}
+.container.box {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    padding-top: 15px;
+    margin-left: auto;
+}
 </style>
 <body class="w3-theme-l5">
 
@@ -224,7 +243,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
+        <div class="container" style="padding-top:15px;">
          <h4 class="w3-center">Our Project</h4>
+         </div>
          <p class="w3-center">  <img src="/static/img/sceduler.jpeg" style="width:100%; height: 380px" alt="Avatar"></p>
          <hr>
          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> ${boardInfo[0].code_name}</p>
@@ -236,48 +257,50 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       <!-- Interests --> 
       <div class="w3-card w3-round w3-white ">
         <div class="w3-container">
-				  		<form id="writeForm">
-							   	<div class="col-xs-12">
-										<div id="titleMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
-									</div>
-							   	<div class="form-group input-group">
-						      	<div class="input-group-prepend">
-									    <span class="input-group-text" style="background: #fff;"><i class="fa fa-pencil"></i></span>
-									  </div>	
-										<input type="text" class="form-control" id="title" name="title" placeholder="Title">
-							   	</div>
-			
-									<div class="col-xs-12">
-										<div id="startDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
-									</div>
-									<div class="form-group date input-append date" id="dpDOB">
-	      						<span class="input-group-addon"></span>
-										<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" /> 
-									</div>
-									
-									<div class="col-xs-12">
-										<div id="endDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
-									</div>
-									<div class="form-group date input-append date" id="dpDOB2">
-	      						<span class="input-group-addon"></span>
-										<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
-									</div>
-									
-									<div class="col-xs-12">
-										<div id="dueDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
-									</div>
-									<div class="form-group date input-append date" id="dpDOB3">
-	      						<span class="input-group-addon"></span>
-										<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
-									</div>
+		  		<form id="writeForm">
+		  			<div class="container box">
+					   	<div class="col-xs-12">
+								<div id="titleMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
+							</div>
+					   	<div class="form-group input-group">
+				      	<div class="input-group-prepend">
+							    <span class="input-group-text" style="background: #fff;"><i class="fa fa-pencil"></i></span>
+							  </div>	
+								<input type="text" class="form-control" id="title" name="title" placeholder="Title">
+					   	</div>
+	
+							<div class="col-xs-12">
+								<div id="startDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
+							</div>
+							<div class="form-group date input-append date" id="dpDOB">
+	    						<span class="input-group-addon"></span>
+								<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" /> 
+							</div>
+							
+							<div class="col-xs-12">
+								<div id="endDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
+							</div>
+							<div class="form-group date input-append date" id="dpDOB2">
+	    						<span class="input-group-addon"></span>
+								<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
+							</div>
+							
+							<div class="col-xs-12">
+								<div id="dueDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
+							</div>
+							<div class="form-group date input-append date" id="dpDOB3">
+	    						<span class="input-group-addon"></span>
+								<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
+							</div>
 	<!-- 									<div class="form-group required text-right">		
 											<button type="button" class="btn btn-default btn-sm" id="save" onClick="formCheck();">Save</button>		
 										</div> -->
-									<input type="hidden" id="codeParam" name="code" value="${boardInfo[0].code}">
-									<div class="form-group required">
-										<button type="button" class="btn btn-lg btn-primary btn-block btn-signin" id="save" onClick="formCheck();" >Save</button>
-						    	</div>
-								</form>	
+							<input type="hidden" id="codeParam" name="code" value="${boardInfo[0].code}">
+							<div class="form-group required">
+								<button type="button" class="btn btn-sm btn-block btn-a" id="save" onClick="formCheck();" >Create New Meeting</button>
+				    	</div>
+				    </div>	
+					</form>	
         </div>
       </div>
       <br>
@@ -321,9 +344,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-container">
           <!-- <p><button class="w3-button w3-block w3-theme-l4">Project User Upload</button></p> -->
 	        <div class="form-group required text-center">
-				<button type="button" class="w3-button w3-block w3-theme-l4" id="excelUp" onClick="excelUploadCall(); return false;">Project User Upload</button>		
+	        <div class="container" style="padding-top:15px;">
+					<button type="button" class="w3-button w3-block w3-theme-l4" id="excelUp" onClick="excelUploadCall(); return false;" style="background-color: rgb(77, 99, 111); color: #ffffff; font-size: 14px;"><i class="fa fa-table w3-margin-right"></i>Member Upload</button>
 <!-- 			<button type="button" class="btn btn-default btn-sm" id="excelDown" onClick="excelDown(); return false;">Excel Download</button>		 -->
-			</div>
+					</div>
+					</div>
 
          <table style="height: 100px;">
          <tbody>
