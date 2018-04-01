@@ -1,6 +1,9 @@
 package com.ibm.board.biz;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,10 +54,62 @@ public class BoardBizImpl  implements BoardBiz{
 	public List<String> getSceduleList(String code) {
 		logger.info("******************* 일정불러오기 ****************");
 		List<String> sceduleList = new ArrayList<String>();
+		List<String> sceduleLists = new ArrayList<String>(); //새로
 		Map<String, Object> params = new HashMap<String, Object>();
 		String oneDay = null;
 		int i =0;
 		
+		params.put("code", code);
+		
+		Map<String, Object> date = boardDao.selectStartEndDate(params);
+		
+		logger.info("date : {}" , date);
+
+		
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
+		
+		
+		Date endDateD;
+		Date startDateD;
+		long diffDays = 0;
+		Date period;
+		try {
+			
+			String end = date.get("end_date").toString();
+		
+			endDateD = dateFormat.parse(end);
+			
+			String endDateS = dateFormat2.format(endDateD);
+			
+			
+			String start =  date.get("start_date").toString();
+			startDateD =dateFormat.parse(start);
+			String startDateS = dateFormat2.format(startDateD);
+			period = dateFormat.parse(start);
+			
+			long diff = endDateD.getTime() - startDateD.getTime();
+			diffDays = diff / (24 * 60 * 60 * 1000 );
+			logger.info("diffDays : " + diffDays);
+			String periodS = dateFormat.format(period);
+			for ( int f = 0 ; f <= diffDays; f++) {
+				sceduleLists.add(periodS);
+				logger.info("period : {} " , periodS);
+				period = new Date(period.getTime() + (24 * 60 * 60 * 1000 + 1) );
+				periodS = dateFormat.format(period);
+			}
+			
+		} catch (ParseException e) {
+		
+			e.printStackTrace();
+		}
+	
+		
+		
+		
+		
+		/*
 		while(true) {
 			
 			params.put("code", code);
@@ -66,6 +121,7 @@ public class BoardBizImpl  implements BoardBiz{
 			
 			 if(oneDay == null) {
 				 logger.info("sceduleList : {} " , sceduleList );
+				 logger.info("sceduleLists : {} " , sceduleLists );
 				 break;
 			 }
 			 sceduleList.add(oneDay);
@@ -73,10 +129,10 @@ public class BoardBizImpl  implements BoardBiz{
 			 
 			
 			
-		}
+		}*/
 		
 		
-		return sceduleList;
+		return sceduleLists;
 	}
 
 	@Override
@@ -109,8 +165,11 @@ public class BoardBizImpl  implements BoardBiz{
 	}
 
 	@Override
-	public List<ArrayList<String>> getsceduleLogList(Map<String, Object> params) {
+	public List<ArrayList<String>> getsceduleLogList(Map<String, Object> params)  {
 		List<ArrayList<String>> sceduleLogList = new ArrayList<ArrayList<String>>();
+		List<ArrayList<String>> sceduleLogLists = new ArrayList<ArrayList<String>>();
+		
+		ArrayList<String> sceduleOneLogs = new ArrayList<String>();
 		ArrayList<String> sceduleOneLog = new ArrayList<String>();
 		
 		String oneDay = null;
@@ -120,8 +179,77 @@ public class BoardBizImpl  implements BoardBiz{
 		sceduleOneLog.add( "Date" );
 		sceduleOneLog.add("Scedule");
 		sceduleLogList.add(0, sceduleOneLog ); 
+		
+		sceduleOneLogs.add( "Date" );
+		sceduleOneLogs.add("Scedule");
+		sceduleLogLists.add(0, sceduleOneLog ); 
+		
+		
+		
+		Map<String, Object> date = boardDao.selectStartEndDate(params);
+		
+		logger.info("date : {}" , date);
+
+		
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat dateFormat3 = new SimpleDateFormat("MM/dd");
+		params.put("params {}", params);
+		
+		Date endDateD;
+		Date startDateD;
+		long diffDays = 0;
+		Date period;
+		try {
+			logger.info("date : {}" , date);
+			String end = date.get("end_date").toString();
+			logger.info("date : {}" , date);
+			endDateD = dateFormat.parse(end);
+			logger.info("date : {}" , date);
+			String endDateS = dateFormat2.format(endDateD);
+			
+			logger.info("date : {}" , date);
+			String start =  date.get("start_date").toString();
+			startDateD =dateFormat.parse(start);
+			String startDateS = dateFormat2.format(startDateD);
+			period = dateFormat.parse(start);
+			
+			long diff = endDateD.getTime() - startDateD.getTime();
+			diffDays = diff / (24 * 60 * 60 * 1000 );
+			logger.info("diffDays : " + diffDays);
+			String periodS = dateFormat.format(period);
+			for ( int f = 0 ; f <= diffDays; f++) {
+				
+				params.put("count", f);
+				params.put("oneDay", periodS);
+				sceduleOneLogs = new ArrayList<String>();
+				
+				periodS = dateFormat.format(period);
+				
+				logCount = boardDao.selectOneDayLogCount(params);
+				
+				 sceduleOneLogs.add(periodS);
+				 sceduleOneLogs.add(logCount);
+				
+				 
+				 sceduleLogLists.add(f + 1 , sceduleOneLogs);
+				 period = new Date(period.getTime() + (24 * 60 * 60 * 1000 + 1) );
+				
+				
+			}
+			
+			
+			
+			
+		} catch (ParseException e) {
+		
+			e.printStackTrace();
+		}
+		
+		 logger.info("sceduleLists : {} " , sceduleLogLists );
 	
-		while(true) {
+	/*	while(true) {
 			
 			params.put("count", i);
 		
@@ -138,6 +266,7 @@ public class BoardBizImpl  implements BoardBiz{
 			
 			 if(oneDay == null) {
 				 logger.info("sceduleList : {} " , sceduleLogList );
+				 logger.info("sceduleLists : {} " , sceduleLogLists );
 				 break;
 			 }
 			params.put("oneDay", oneDay);
@@ -160,8 +289,8 @@ public class BoardBizImpl  implements BoardBiz{
 			 
 			
 			
-		}
-		return sceduleLogList;
+		}*/
+		return sceduleLogLists;
 	}
 
 	@Override
@@ -174,11 +303,57 @@ public class BoardBizImpl  implements BoardBiz{
 	public List<String> getSceduleListWithBoardId(String boardId) {
 		logger.info("******************* 일정불러오기 ****************");
 		List<String> sceduleList = new ArrayList<String>();
+		List<String> sceduleLists = new ArrayList<String>();
 		Map<String, Object> params = new HashMap<String, Object>();
 		String oneDay = null;
 		int i =0;
 		
-		while(true) {
+		params.put("code1", boardId);
+       Map<String, Object> date = boardDao.selectStartEndDate(params);
+		
+		logger.info("date : {}" , date);
+
+		
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
+		
+		
+		Date endDateD;
+		Date startDateD;
+		long diffDays = 0;
+		Date period;
+		try {
+			
+			String end = date.get("end_date").toString();
+		
+			endDateD = dateFormat.parse(end);
+			
+			String endDateS = dateFormat2.format(endDateD);
+			
+			logger.info("date : {}" , date);
+			String start =  date.get("start_date").toString();
+			startDateD =dateFormat.parse(start);
+			String startDateS = dateFormat2.format(startDateD);
+			period = dateFormat.parse(start);
+			
+			long diff = endDateD.getTime() - startDateD.getTime();
+			diffDays = diff / (24 * 60 * 60 * 1000 );
+			logger.info("diffDays : " + diffDays);
+			String periodS = dateFormat.format(period);
+			for ( int f = 0 ; f <= diffDays; f++) {
+				logger.info("period : {} " , periodS);
+				sceduleLists.add(periodS);
+				period = new Date(period.getTime() + (24 * 60 * 60 * 1000 + 1) );
+				periodS = dateFormat.format(period);
+			}
+			
+		} catch (ParseException e) {
+		
+			e.printStackTrace();
+		}
+		
+		/*while(true) {
 			
 			params.put("code1", boardId);
 			params.put("count", i);
@@ -188,6 +363,7 @@ public class BoardBizImpl  implements BoardBiz{
 			oneDay =  boardDao.selectOneDayWithInSceduleBoardId(params);
 			
 			 if(oneDay == null) {
+				 logger.info("sceduleLists : {} " , sceduleLists );
 				 logger.info("sceduleList : {} " , sceduleList );
 				 break;
 			 }
@@ -196,10 +372,10 @@ public class BoardBizImpl  implements BoardBiz{
 			 
 			
 			
-		}
+		}*/
 		
 		
-		return sceduleList;
+		return sceduleLists;
 	}
 
 	@Override

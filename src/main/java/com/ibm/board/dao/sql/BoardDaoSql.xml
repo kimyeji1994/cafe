@@ -225,4 +225,25 @@
 		 WHERE cmt.board_id = #{boardId}
 		 ORDER BY cmt.comment_id
 	</select>
+	
+	
+	
+	
+	
+	<select id="selectStartEndDate" parameterType="map"  resultType="map">
+		
+		SELECT  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date
+		FROM boards a 
+		where 1=1
+		<choose>
+			<when test="code1 != null and code1 !=''">
+				and board_id = #{code1}
+			</when>
+			<otherwise>
+				and a.code = #{code}
+			</otherwise>
+		</choose>
+	</select>
+	
+	
 </mapper>

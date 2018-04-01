@@ -139,6 +139,12 @@ public class BoardDaoImpl  extends SqlSessionDaoSupport implements BoardDao{
 	public List<Object> getCommentList(Map<String, Object> paramMap) {
 		return getSqlSession().selectList("BoardDao.getCommentList", paramMap);
 	}
+
+	@Override
+	public Map<String, Object> selectStartEndDate(Map<String, Object> params) {
+	
+		return getSqlSession().selectOne("BoardDao.selectStartEndDate", params);
+	}
 }
 	
 
