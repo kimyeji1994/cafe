@@ -323,7 +323,7 @@
 			              </span>		
 
 										<!-- <span class="input-group-addon"></span> -->
-										<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" /> 
+										<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" readOnly="true" /> 
 									</div>
 									</div>
 									
@@ -339,7 +339,7 @@
 			              </span>		
 									
 	      					<!-- 	<span class="input-group-addon"></span> -->
-										<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
+										<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" readOnly="true" /> 
 									</div>
 									</div>
 									
@@ -353,7 +353,7 @@
 			                	<i class="fa fa-calendar"></i>
 			                </button>
 			              </span>											
-										<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
+										<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" readOnly="true" /> 
 									</div>
 									</div>
 	<!-- 									<div class="form-group required text-right">		
@@ -421,7 +421,7 @@
 			                	<i class="fa fa-calendar"></i>
 			                </button>
 			              </span>			      						
-										<input type="text" class="form-control" id="startDate2" name="startDate" placeholder="From Date" /> 
+										<input type="text" class="form-control" id="startDate2" name="startDate" placeholder="From Date" readOnly="true"/> 
 									</div>
 									</div>
 									
@@ -436,7 +436,7 @@
 			                	<i class="fa fa-calendar"></i>
 			                </button>
 			              </span>		
-										<input type="text" class="form-control" id="endDate2" name="endDate" placeholder="To Date" /> 
+										<input type="text" class="form-control" id="endDate2" name="endDate" placeholder="To Date" readOnly="true"/> 
 									</div>
 									</div>
 			
@@ -451,7 +451,7 @@
 			                	<i class="fa fa-calendar"></i>
 			                </button>
 			              </span>		
-										<input type="text" class="form-control" id="dueDate2" name="dueDate" placeholder="Due Date" /> 
+										<input type="text" class="form-control" id="dueDate2" name="dueDate" placeholder="Due Date" readOnly="true" /> 
 									</div>
 									</div>
 									<div class="form-group">

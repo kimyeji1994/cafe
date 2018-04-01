@@ -82,7 +82,7 @@
 		
 		function init(){
 			$('#msg').val('');
-			$('#rphone').val('');
+			$('#phone').val('');
 		}
 	</script>
 	
