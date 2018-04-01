@@ -15,8 +15,6 @@
 	  <property name="url" value="jdbc:mysql://localhost:3306/ibm?useSSL=false"></property>
 	  <property name="username" value="root"></property>
 	  <property name="password" value=""></property>
-</bean>
-<!-- <bean id ="dataSource"
 </bean>  <!-- <bean id ="dataSource"
 	  class = "org.apache.commons.dbcp.BasicDataSource">
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
