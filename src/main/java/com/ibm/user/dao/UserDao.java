@@ -28,6 +28,10 @@ public interface UserDao {
 
 	List<HashMap<String, Object>> getProjectUserList(Map<String, Object> params);
 
+	boolean insertCodePeople(Map<String, Object> params);
+
+	String getVoterInBoardId(Map<String, Object> params);
+
 	
 
 }

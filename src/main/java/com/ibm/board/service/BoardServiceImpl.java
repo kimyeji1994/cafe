@@ -86,6 +86,10 @@ public class BoardServiceImpl implements BoardService {
 		boolean isInsertManager = userBiz.insertManager(params);
 		logger.info("isInsertManager : " + isInsertManager);
 		
+		
+		//codePeople 
+		boolean isInsertCodePeople = userBiz.insertCodePeople(params);
+		logger.info("isInsertCodePeople : " + isInsertCodePeople);
 
 		
 		return String.valueOf(code);
@@ -116,7 +120,7 @@ public class BoardServiceImpl implements BoardService {
 			 code = checkCode;
 		 }
 		 else {
-			 return "";
+			 return null;
 		 }
 		 
 		//user가 있는지 확인 
@@ -133,6 +137,9 @@ public class BoardServiceImpl implements BoardService {
 				boolean isInsertUser =  userBiz.insertUser(params);
 				logger.info("isInsertUser : " + isInsertUser);
 			}
+			
+			
+			 userBiz.insertCodePeople(params);
 			
 		 
 		 
@@ -245,7 +252,9 @@ public class BoardServiceImpl implements BoardService {
 		boolean isInsertManager = userBiz.insertManager(params);
 		logger.info("isInsertManager : " + isInsertManager);
 		
-
+		//codePeople 
+		boolean isInsertCodePeople = userBiz.insertCodePeople(params);
+		logger.info("isInsertCodePeople : " + isInsertCodePeople);
 		
 		return String.valueOf(code);
 	}
@@ -343,6 +352,12 @@ public class BoardServiceImpl implements BoardService {
 		
 		
 		return isInsertManager;
+	}
+
+	@Override
+	public String getVoterInBoardId(Map<String, Object> params) {
+		
+		return userBiz.getVoterInBoardId(params);
 	}
 	
 	

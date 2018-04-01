@@ -82,5 +82,17 @@ public class UserBizImpl implements UserBiz{
 
 		return userDao.getProjectUserList(params);
 	}
+
+	@Override
+	public boolean insertCodePeople(Map<String, Object> params) {
+	
+		return userDao.insertCodePeople(params);
+	}
+
+	@Override
+	public String getVoterInBoardId(Map<String, Object> params) {
+		
+		return userDao.getVoterInBoardId(params);
+	}
 	
 }
