@@ -6,31 +6,76 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-<!-- validation -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css">
-  
-<!-- bootbox -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
 <script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
-	
 <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
-<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+
+<style type="text/css">
+	@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+</style>
 
 <script type="text/javascript">
+	var myPhone = '${myPhone}';
+	
 	function submitMyMsg(){
-		console.log("hi");
-		$("#chat").append('<div class="form-group input-group date input-append" style="width:100%"><div id="userNm" class="text-right" style="color:#00000;"><b>도경</b></div><div class="form-control" style="width:50%; float:right"></div></div>');
+		$('#msg').val($('#myMsg').val());
+		var formData = $('#frm').serialize();
+		var boardId = $("#boardId").val();
+
+		var myMsg = $('#myMsg').val().replace(/ /gi, '');
+
+		if(myMsg == '') {
+			return;
+		}
+		
+		$.ajax({
+			url: '/project/addComment',
+			type: 'POST',
+			data: formData,
+			success: function(result){
+				$('#chat').empty();
+				$('#chat').append(result);
+				$('#myMsg').val('');
+				$('#submit').css('color', '#ffffff');
+				chatScrollBar();
+			}
+		})
 	}
+	
+	function chatScrollBar() {
+		$("#chatroomBox").scrollTop($("#chatroomBox")[0].scrollHeight);
+	}
+	
+	function validation(){
+		var myMsg = $('#myMsg').val();
+		if(myMsg == '') {
+			$('#submit').css('color', '#ffffff');
+		} else {
+			$('#submit').css('color', '#000000');
+			enterKeyPress();
+		}
+	}
+	
+	function enterKeyPress(){
+		 if (window.event.keyCode == 13) {
+			 $('#submit').click();
+		 }
+	}
+	
+	$(function(){
+		chatScrollBar();
+	});
 </script>
 
 <style>
 	.yourChatBox {
-    	width:50% !important;;
+    	width:50% !important;
     	overflow:hidden;
     	height:auto;
 	}
@@ -38,18 +83,25 @@
     	width:50% !important;
     	overflow:hidden;
     	height:auto;
-    	float: right !important;;
+    	float: right !important;
 	}
 	.chatBox {
 		width:100% !important;
 	}
 	.yourChatName {
-		font-weight: bold;
 		color: #736F6E;
+		margin:0 0 4px 0;
 	}
 	.myChatName {
-		font-weight: bold;
-		color: #157DEC;
+		color: #736F6E;
+		margin:0 0 4px 0;
+	}
+	body {
+		font-family: Nanum Gothic;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #333;
+		background-color: #fff;
 	}
 </style>
 
@@ -58,46 +110,52 @@
 <body>
 	<div class="container">
 		<div class="col-sm-4 col-sm-offset-4">
-			<br /><br />
-		    <form id="frm" name="frm">
-		        
-		   </form>
-		   	<div class="form-group required text-left" style="height:450px; background-color:#F2F4F4; overflow-y:scroll;">
+		   	<div id="chatroomBox" class="form-group required text-left" style="height:450px; background-color:#F2F4F4; overflow-y:scroll;">
 				<div id="chat" style="margin:20px 20px 0 20px;">
-			   		<div class="form-group input-group date input-append chatBox">
-			   			<div id="userNm" class="text-left small yourChatName">진무</div>
-	    				<div class="form-control yourChatBox">나는 진무야</div>
-			   		</div>
-			   		<div class="form-group input-group date input-append chatBox">
-			   			<div id="userNm" class="text-left small yourChatName">예지</div>
-	    				<div class="form-control yourChatBox">나는 예지야나는 예지야나는 예지야나는 예지야나는 예지야</div>
-			   		</div>
-			   		<div class="form-group input-group date input-append chatBox">
-			   			<div id="userNm" class="text-right small myChatName">도경</div>
-	    				<div class="form-control myChatBox">나는 도경이야나는 도경이야나는 도경이야나는 도경이야</div>
-	    	   		</div>
-			   		<div class="form-group input-group date input-append chatBox">
-			   			<div id="userNm" class="text-left small yourChatName">예지</div>
-	    				<div class="form-control yourChatBox">나는 예지야</div>
-			   		</div>
-			   		<div class="form-group input-group date input-append chatBox">
-			   			<div id="userNm" class="text-right small myChatName">도경</div>
-	    				<div class="form-control myChatBox">나는 도경이야</div>
-	    	   		</div>
-	    	   		<div class="form-group input-group date input-append chatBox">
-			   			<div id="userNm" class="text-left small yourChatName">진무</div>
-	    				<div class="form-control yourChatBox">나는 진무야나는 진무야나는 진무야</div>
-			   		</div>
+				
+					<c:forEach items="${chatList}"  var ="list" varStatus="status">
+						<c:if test='${list.phone != myPhone}'>
+							<div class="form-group input-group date input-append chatBox">
+								<div class="text-left small yourChatName">
+									<i class="fa fa-user fa-fw w3-text-theme"></i>
+									${list.name}
+								</div>
+							    <div class="form-control yourChatBox">
+									${list.comment}
+								</div>
+							</div>
+						</c:if>
+						
+						<c:if test='${list.phone == myPhone}'>
+							<div class="form-group input-group date input-append chatBox">
+								<div class="text-right small myChatName">
+									${list.name}<i class="fa fa-user fa-fw w3-text-theme"></i>
+								</div>
+							    <div class="form-control myChatBox">
+									${list.comment}
+								</div>
+							</div>
+						</c:if>
+						
+					</c:forEach>
 		   		</div>
 			</div>
 		   
 		   	<div class="form-group required text-center">
 		   		<div class="form-group input-group date input-append">
-    				<input type="text" id="msg" name="msg" class="form-control">
-    				<span class="input-group-addon add-on" onClick="submitMyMsg();">전송</span>
+    				<input type="text" id="myMsg" name="myMsg" class="form-control" onkeyup="validation(); return false;">
+    				<span id="submit" class="input-group-addon add-on" onClick="submitMyMsg();" style="color:white">전송</span>
 		   		</div>
 	    	</div>
+	    	
+	    	<form id="frm" name="frm">
+    			<input type="hidden" id="msg" name="msg" class="form-control">
+				<input type="hidden" id="boardId" name="boardId" value="${boardId}">
+			</form>
 		</div>
 	</div>
 </body>
+
+<script>
+</script>
 </html>

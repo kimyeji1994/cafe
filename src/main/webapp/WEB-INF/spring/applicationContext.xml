@@ -66,4 +66,7 @@ class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" 
 	</bean>
 	<bean id="excelDownloader" class="com.ibm.user.web.ExcelDownloader">
 	</bean>
+	
+	<bean id="smsController" class="com.ibm.board.web.SmsController">
+	</bean>
 </beans>

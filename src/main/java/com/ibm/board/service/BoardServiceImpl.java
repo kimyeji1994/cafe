@@ -348,9 +348,6 @@ public class BoardServiceImpl implements BoardService {
 		boolean isInsertManager = userBiz.insertManager(params);
 		logger.info("isInsertManager : " + isInsertManager );
 		
-		
-		
-		
 		return isInsertManager;
 	}
 
@@ -359,13 +356,15 @@ public class BoardServiceImpl implements BoardService {
 		
 		return userBiz.getVoterInBoardId(params);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public int addComment(Map<String, Object> paramMap) {
+		return boardBiz.addComment(paramMap);
+	}
+
+	@Override
+	public List<Object> getCommentList(Map<String, Object> paramMap) {
+		return boardBiz.getCommentList(paramMap);
+	}
 
 }

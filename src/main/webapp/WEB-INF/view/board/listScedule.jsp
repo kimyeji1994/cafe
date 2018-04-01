@@ -15,6 +15,12 @@
 
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+
+<script type="text/javascript" src="<c:url value="/static/js/spin.js"/>"></script>
+
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 .w3-text-teal, .w3-hover-text-teal:hover {
@@ -109,13 +115,38 @@ width: 100%;
 .w3-margin-tops {
 margin-top: 5%
 }
+
+.btn-etc {
+	width: auto;
+	float: right;
+	margin: 2px 2px 0 2px;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 </style>
 <title>Insert title here</title>
 <script type="text/javascript" src="<c:url value="/static/js/jquery-3.1.1.min.js"/>"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-
-
 
 function sceduleClick(date) {
 	var sceduleId = "#" + String(date);
@@ -192,6 +223,12 @@ function viewScedule(date) {
 	
 }
 
+function getComment() {
+	var url = "/board/commentMain";
+	var boardId = $("#boardId").val();
+	
+	popUp(url, 350, 550, 'recommend','', boardId);
+};
 
 function addComment(){
 	var boardId = $("#boardId").val();
@@ -208,16 +245,30 @@ function addComment(){
 	
 }
 
-function addRecommand(){
-	var boardId = $("#boardId").val();
-	window.location.href = "/project/viewRecommand?boardId=" + boardId ;
+function popUp(url, w, h, name, option, param) {
+	var pozX, pozY;
+	var sw = screen.availWidth;
+	var sh = screen.availHeight;
+	var scroll = 0;
+	var boardId = $('#boardId').val();
+	
+	if (option == 'scroll') {
+	        scroll = 1;
+	}
+	pozX = (sw - w) / 2;
+	pozY = (sh - h) / 2;
 
+	var url = url + '?boardId=' + boardId;
+	window.open(url, name, "location=0,status=0,scrollbars=" + scroll + ",resizable=1,width=" + w + ",height=" + h + ",left=" + pozX + ",top=" + pozY);
 
 }
 
-
-
-  
+function addRecommand(){
+	var boardId = $("#boardId").val();
+	var url = "/project/viewRecommand?boardId=" + boardId ;
+	
+	popUp(url, 700, 500, 'recommend','scroll', '');
+}
 
 google.charts.load('current', {'packages':['corechart','bar']});
 google.charts.setOnLoadCallback(drawChart);
@@ -261,12 +312,6 @@ function drawChart() {
   chart.draw(data, options);
 }
 
-
-
-
-
-
-
 $().ready(function(){
 var userLog ="";	
 	<c:forEach items="${userLog}"  var ="userLog" varStatus="status">
@@ -274,26 +319,64 @@ var userLog ="";
 		userLog ="#"+"${userLog}";
 		$(userLog).css('background',  '#3F5E9F');	
 	</c:forEach>
-	
-	
 });
 
+function sendSMS(){
+	var url = "/board/smsMain";
+	popUp(url, 500, 400, 'SMS','scroll', '');
+}
 
+
+var spinner;
+
+jQuery(function(){
+    spinner = new Spinner().spin().el;
+    jQuery(document.body).append(spinner);
+    
+    var spinerTextFontSize = 14;
+    var spinerTextPadding = 10;
+    var spinerTextWidth = 200;
+    var spinerTextBorderWidth = 2;
+    var spinerTextMarginTop = (((spinerTextFontSize + (spinerTextBorderWidth * 2) + (spinerTextPadding * 2)) / 2) * -1);
+    var spinnerMarginLeft = (spinerTextWidth/2);
+ 
+    $(spinner).append('<div class="spinerText"></div>');
+    $(".spinerText").css("width",spinerTextWidth + "px");
+    $(".spinerText").css("font-size",spinerTextFontSize + "px");
+    $(".spinerText").css("line-height",spinerTextFontSize + "px");
+    $(".spinerText").css("margin-top",spinerTextMarginTop + "px");
+    $(".spinerText").css("padding",spinerTextPadding + "px");
+    $(".spinerText").css("font-weight","bold");
+    $(".spinerText").css("display","table");
+    $(".spinerTextDiv").css("display","table-cell");
+    $(".spinerTextDiv").css("text-align","center");
+    $(".spinerTextDiv").css("vertical-align","middle");
+ 
+    $(spinner).css('margin-left','-' + spinnerMarginLeft + 'px');
+});
+
+window.onload = function(){
+	$(spinner).empty();
+}
 </script>
 </head>
 <body class="w3-light-grey">
 
 <!-- Page Container -->
 <!-- Navbar -->
-
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
   <div class="w3-top">
  <div class="w3-bars w3-theme-d2 w3-left-align w3-large">
 
   <a href="/" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Scodule</a>
-
+<a href="/samplePeople" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="Messages"><i class="fa fa-group"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="Account Settings"><i class="fa fa-film"></i></a>
+  <a href="/sample" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="News"><i class="fa fa-search"></i></a> 
  </div>
+   
+ 
+  
 </div>
 </div>
 
@@ -364,12 +447,19 @@ var userLog ="";
     <!-- Right Column -->
     <div class="w3-twothird">
 
-      <div class="w3-container w3-card w3-white w3-margin-bottom">
-           <h2 class="w3-text-grey w3-padding-16" id="miseon"><i class="fa fa-calendar fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Current Status</h2>
-         <p onclick="addComment()">comment</p>
-           <p onclick="addRecommand()">recommand</p>
+	<div class="w3-container w3-card w3-white w3-margin-bottom">
+		<br />
+      	<div class="container">
+      		<button type="button" class="w3-button w3-block w3-theme-l4 btn-etc" onclick="sendSMS(); return false;">SMS</button>
+			<button type="button" class="w3-button w3-block w3-theme-l4 btn-etc" onclick="addRecommand()">Recommend</button>
+			<button type="button" class="w3-button w3-block w3-theme-l4 btn-etc" onclick="getComment(); return false;">Comment</button>
+		</div>
+		<br/>
+		<br/>
+		<h2 class="w3-text-grey w3-padding-16" id="miseon"><i class="fa fa-calendar fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Current Status</h2>
+         	
         <div id="curve_chart" style="width: 100%; height: 550px"></div>
-      </div>
+		</div>
 
       <div class="w3-container w3-card w3-white">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Attendances</h2>
@@ -546,5 +636,6 @@ var userLog ="";
 </footer>
 
 </body>
+
 </html>
 

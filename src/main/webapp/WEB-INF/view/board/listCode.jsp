@@ -32,17 +32,17 @@
 							</tr>   -->    
 			       	<tr>
 					      <input type="button" class="btn btn-sm btn-block btn-code" value="codeList 1" onClick="joinFormCheck();">
-							</tr>
+					</tr>
 							<c:forEach items = "${sceduleList}"  var = "scedules">
 								<tr>
 								<td><input type="button" class="rosy" id ="${scedules[1]}" value="${scedules[0]}" onClick="sceduleClick('${scedules[0]}')"><i class="fa fa-users fa-fw w3-margin-lefts" onClick="viewScedule('${scedules[0]}')"></i></td>
 								</tr>
 							</c:forEach>							     						      	
 			    		<c:forEach items = "${codeList}"  var = "codeList" varStatus="status">
-				       	<tr>
-						      <td class="align-middle">${codeList}</td>
-								</tr>   
-	          	</c:forEach>
+					       	<tr>
+							      <td class="align-middle">${codeList}</td>
+							</tr>   
+	          			</c:forEach>
 	          </tbody>
 	         </table> 
          </div>

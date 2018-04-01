@@ -51,4 +51,8 @@ public interface BoardService {
 
 	String getVoterInBoardId(Map<String, Object> params);
 
+	int addComment(Map<String, Object> paramMap);
+
+	List<Object> getCommentList(Map<String, Object> paramMap);
+
 }

@@ -83,18 +83,18 @@ request.setCharacterEncoding("UTF-8");
     <div class="social-icons">
       <ul class="list-unstyled text-center mb-0">
         <li class="list-unstyled-item">
-          <a href="#">
-            <i class="fa fa-twitter"></i>
+          <a href="/sample">
+            <i class="fa fa-search"></i>
           </a>
         </li>
         <li class="list-unstyled-item">
           <a href="#">
-            <i class="fa fa-facebook"></i>
+            <i class="fa fa-film"></i>
           </a>
         </li>
         <li class="list-unstyled-item">
-          <a href="#">
-            <i class="fa fa-instagram"></i>
+          <a href="/samplePeople">
+            <i class="fa fa-group"></i>
           </a>
         </li>
       </ul>
