@@ -49,5 +49,7 @@ public interface BoardDao {
 	int addComment(Map<String, Object> paramMap);
 
 	public List<Object> getCommentList(Map<String, Object> paramMap);
+
+	public Map<String, Object> selectStartEndDate(Map<String, Object> params);
 	
 }
