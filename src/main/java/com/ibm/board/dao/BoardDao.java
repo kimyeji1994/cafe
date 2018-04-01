@@ -45,6 +45,9 @@ public interface BoardDao {
 	public String selectCompulsoryCount(Map<String, Object> params);
 
 	public Map<String, Object> getProjectCodewithPhone(Map<String, Object> params);
-	
+
+	int addComment(Map<String, Object> paramMap);
+
+	public List<Object> getCommentList(Map<String, Object> paramMap);
 	
 }

@@ -62,7 +62,7 @@
 		    	$("#msgError").hide();
 		    };
 		    
-		    var phone = $("#phone").val();
+/* 		    var phone = $("#phone").val();
 		    if (phone == null || phone == "" || phone.length <= 10) {
 		    	flag = 0;
 		        $("#phoneError").show();
@@ -74,7 +74,7 @@
 		    	}
 		    };
 		    
-		    $("#rphone").val(phone);
+		    $("#rphone").val(phone); */
 		}
 		
 		function init(){

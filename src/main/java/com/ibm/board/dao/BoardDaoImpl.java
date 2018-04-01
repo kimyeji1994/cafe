@@ -129,9 +129,16 @@ public class BoardDaoImpl  extends SqlSessionDaoSupport implements BoardDao{
 	
 		return  getSqlSession().selectOne("BoardDao.getProjectCodewithPhone", params);
 	}
-	
-	
-	
+
+	@Override
+	public int addComment(Map<String, Object> paramMap) {
+		return getSqlSession().insert("BoardDao.addComment", paramMap);
+	}
+
+	@Override
+	public List<Object> getCommentList(Map<String, Object> paramMap) {
+		return getSqlSession().selectList("BoardDao.getCommentList", paramMap);
+	}
 }
 	
 

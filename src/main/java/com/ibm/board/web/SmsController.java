@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class SmsController {
+	@RequestMapping(value ="/board/smsMain", method=RequestMethod.GET)
+	public String smsIndex() {
+		return "board/sms_send";
+	}
 	@RequestMapping(value ="/board/smsSend", method=RequestMethod.POST)
 	@ResponseBody
 	public String SmsSend(@RequestParam Map<String, Object> paramMap) throws Exception{
@@ -53,6 +57,9 @@ public class SmsController {
 			List<String> rphoneTmpList = new ArrayList<String>();
 			
 			List<String> rphoneList = new ArrayList<String>();
+			
+			rphoneList.add("01092344349");
+			rphoneList.add("01065343426");
 			
 			for (String phone : rphoneTmpList) {
 				if(phone.indexOf("-") <= 0) {

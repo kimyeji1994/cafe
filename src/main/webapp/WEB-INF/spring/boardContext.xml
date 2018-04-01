@@ -3,8 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-
 <bean id="boardDaoImpl" class="com.ibm.board.dao.BoardDaoImpl" >
 	<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
 </bean>
@@ -14,13 +12,9 @@
 <property name="boardDao" ref="boardDaoImpl"></property>
 </bean>
 
-
-
 <bean id ="boardServiceImpl" class="com.ibm.board.service.BoardServiceImpl">
 	<property name="boardBiz" ref="boardBizImpl"></property>
 	<property name="userBiz" ref="userBizImpl"></property> 
 </bean>
-
-
 
 </beans>

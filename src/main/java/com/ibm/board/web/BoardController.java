@@ -390,18 +390,53 @@ public class BoardController {
 		
 	}
 	
-	
-	@RequestMapping(value ="/project/addComment", method=RequestMethod.GET)
-	public String addComment(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
-		logger.info("********comment********");
+	@RequestMapping(value ="/board/commentMain", method=RequestMethod.GET)
+	public ModelAndView commentMainView(@RequestParam Map<String, Object> paramMap, HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		
 		UserVo user =  (UserVo) session.getAttribute("_USER_");
-		logger.info("params {}" , params);
-		//Boolean isSuccessComment = boardService.addComment(params);
 		
-		return "";
+		String myPhone = user.getPhone();
+		String boardId = (String) paramMap.get("boardId");
 		
+		List<Object> chatList = boardService.getCommentList(paramMap);
+
+		mav.addObject("myPhone", myPhone);
+		mav.addObject("boardId", boardId);
+		mav.addObject("chatList", chatList);
+		
+		mav.setViewName("board/comment");
+		
+		return mav;
 	}
 	
+	@RequestMapping(value ="/project/addComment", method=RequestMethod.POST)
+	public ModelAndView addComment(@RequestParam Map<String , Object> params, HttpServletRequest request, HttpServletResponse response ,ModelMap map, HttpSession session ){
+		logger.info("********comment********");
+		ModelAndView mav = new ModelAndView();
+		
+		UserVo user =  (UserVo) session.getAttribute("_USER_");
+		String newMsg = (String) params.get("msg");
+		String phone = user.getPhone();
+		String boardId = (String) params.get("boardId");
+		logger.info("params {}" , params);
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("boardId", boardId);
+		paramMap.put("newMsg", newMsg);
+		paramMap.put("phone", phone);
+		
+		int isSuccessComment = boardService.addComment(paramMap);
+		
+		List<Object> chatList = boardService.getCommentList(paramMap);
+
+		mav.addObject("chatList", chatList);
+		mav.addObject("myPhone", phone);
+		mav.setViewName("board/comment_ajax");
+		
+		return mav;
+	}
 	
 	
 	@RequestMapping(value ="/project/viewRecommand", method=RequestMethod.GET)

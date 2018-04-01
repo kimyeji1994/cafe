@@ -36,9 +36,8 @@ public interface BoardBiz {
 
 	Map<String, Object> getProjectCodewithPhone(Map<String, Object> params);
 
+	int addComment(Map<String, Object> paramMap);
 
-
-	
-	
+	List<Object> getCommentList(Map<String, Object> paramMap);
 	
 }

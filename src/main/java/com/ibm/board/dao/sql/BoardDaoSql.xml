@@ -207,7 +207,22 @@
 	
 	</select> 
 	
+	<insert id="addComment" parameterType="map">
+		INSERT INTO ibm.comment
+		(comment, board_id, phone)
+		VALUES(#{newMsg}, #{boardId}, #{phone})
+	</insert>
 	
-	
-
+	<select id="getCommentList" parameterType="map" resultType="map">
+		SELECT cmt.comment_id
+			 , cmt.comment
+			 , cmt.board_id
+			 , cmt.phone
+			 , usr.name
+		  FROM comment cmt
+		   	   inner join user usr
+		      	  on cmt.phone = usr.phone
+		 WHERE cmt.board_id = #{boardId}
+		 ORDER BY cmt.comment_id
+	</select>
 </mapper>

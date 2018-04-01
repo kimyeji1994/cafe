@@ -279,14 +279,14 @@ public class BoardBizImpl  implements BoardBiz{
 		return boardDao.getProjectCodewithPhone(params);
 	}
 
+	@Override
+	public int addComment(Map<String, Object> paramMap) {
+		return boardDao.addComment(paramMap);
+	}
 
-	
+	@Override
+	public List<Object> getCommentList(Map<String, Object> paramMap) {
+		return boardDao.getCommentList(paramMap);
+	}
 
-
-		
-	
-	
-	
-	
-	
 }
