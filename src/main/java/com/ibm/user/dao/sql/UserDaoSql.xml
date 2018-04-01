@@ -124,5 +124,13 @@
 	 	 
 				 	 
 	 	 </delete>
+	 	 
+	 	 	<insert id="insertCodePeople" parameterType="map" >
+			INSERT INTO codepeople(phone, code)
+			VALUES(#{phone}, #{code})
+
+	
+	
+	</insert> 
 
 </mapper>

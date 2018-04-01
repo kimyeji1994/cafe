@@ -334,7 +334,7 @@ var userLog ="";
 			
 			          <br>
 
-          <p class="w3-large w3-text-theme"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Progress</b></p>
+         
           <div class="w3-half">
           <p>DeadLine : D - ${boardInfo.dday}</p>
          
