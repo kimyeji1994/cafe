@@ -219,7 +219,7 @@ function getComment() {
 	var url = "/board/commentMain";
 	var boardId = $("#boardId").val();
 	
-	popUp(url, 350, 550, 'recommend','', boardId);
+	popUp(url, 350, 600, 'recommend','', boardId);
 };
 
 function addComment(){

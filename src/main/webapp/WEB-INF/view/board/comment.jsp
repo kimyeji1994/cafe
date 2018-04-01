@@ -129,7 +129,7 @@
 	
 	
 .w3-margin-tops {
-	margin-top: 10%
+	margin-top: 20%
 }
 </style>
 
