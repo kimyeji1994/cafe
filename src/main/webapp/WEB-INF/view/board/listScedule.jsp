@@ -336,12 +336,12 @@ var userLog ="";
 
          
           <div class="w3-half">
-          <p>DeadLine : D - ${boardInfo.dday}</p>
+          <p>DeadLine : D  ${boardInfo.dday}</p>
          
            
           </div>
           <div class="w3-half">
-          <p>Voter</p>
+          <p>Voter : ${voter}</p>
          </div>
           
           <br>

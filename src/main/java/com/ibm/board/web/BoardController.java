@@ -228,7 +228,7 @@ public class BoardController {
 		
 		logger.info("********** voter ********* " );
 		String voter = boardService.getVoterInBoardId(params);
-		
+		view.addObject("voter", voter);
 		
 		
 		view.setViewName("board/listScedule");
