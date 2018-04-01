@@ -81,7 +81,7 @@
 	<select id="selectBoardInfoWithCode" parameterType="map"  resultType="map">
 		
 		SELECT a.board_id, title, importance,  DATE_FORMAT(start_date , '%Y/%m/%d') start_date, DATE_FORMAT(end_date , '%Y/%m/%d') end_date, a.code, ifnull(code_name , project ) project 
-		,  DATEDIFF(due_date , now()) dday
+		,  DATEDIFF(now() , due_date) dday
 		FROM boards a , codet b
 		where 1=1
 		and a.code = b.code

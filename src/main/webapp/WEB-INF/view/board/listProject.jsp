@@ -42,8 +42,50 @@ $(document).ready(function () {
 		format: 'yyyy-mm-dd'	   	
 	});
 });
-
+//validation check
 function formCheck() {
+    // 사용하기 쉽도록 변수를 선언하여 담아주고,
+    
+    var title = $("#title").val();
+    if (title == null || title == "") { // null인지 비교한 뒤
+    $("#title").focus(); // 해당태그에 포커스를 준뒤")
+    $("#titleMsg").show();
+    }else{
+    	$("#titleMsg").hide();
+    };
+    
+    var startDate = $("#startDate").val();
+    if (startDate == null || startDate == "") { // null인지 비교한 뒤
+    $("#startDtMsg").show();
+    }else{
+    	$("#startDtMsg").hide();
+    };
+    
+    var endDate = $("#endDate").val();
+    if (endDate == null || endDate == "") { // null인지 비교한 뒤
+    $("#endDtMsg").show();
+    }else{
+    	$("#endDtMsg").hide();
+    };
+
+    var dueDate = $("#dueDate").val();
+    if (dueDate == null || dueDate == "") { // null인지 비교한 뒤
+    $("#dueDtMsg").show();
+    }else{
+    	$("#dueDtMsg").hide();
+    };
+    
+    if($("#titleMsg").css("display") == "block" || $("#startDtMsg").css("display") == "block" || $("#endDtMsg").css("display") == "block" || $("#dueDtMsg").css("display") == "block"){
+
+    	//하나라도 빈칸이 있는 것 이기 때문에 return false로 vali check!!!
+    	return false;
+    }else{
+    	saveClick();
+    }
+    	
+};
+
+function saveClick() {
 	
 	$.post(
 			"<c:url value="/project/addBoard" />",
@@ -55,7 +97,6 @@ function formCheck() {
 					location.reload();
 				}
 		}); 
-	
 	
 }
 
@@ -108,7 +149,7 @@ function userSave(){
 	$.ajax({
 		processData: false,
 		contentType: false,
-		url: '/user/excelUpload',
+		url: "/user/excelUpload",
 		type: 'POST',
 		data: formData,
 		success: function(result){
@@ -152,6 +193,35 @@ function excelDown(){
 </script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+.btn.btn-a {
+    /*background-color: #4d90fe; */
+    background-color: rgb(77, 99, 111);
+    color: #ffffff;
+    
+}
+.btn.btn-a:hover,
+.btn.btn-a:active,
+.btn.btn-a:focus {
+    background-color: rgba(77, 99, 111,0.70);
+}
+.container.box {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    padding-top: 15px;
+    margin-left: auto;
+}
+.w3-theme-d4 {
+    color: #fff !important;
+    background-color: #3F5E9F!important;
+}
+
+.w3-theme-d2 {
+    color: #fff !important;
+    background-color:#3F5E9F!important;
+}
+
 </style>
 <body class="w3-theme-l5">
 
@@ -160,7 +230,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
 
   <a href="/" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Scodule</a>
-
+ <a href="/samplePeople" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="Messages"><i class="fa fa-group"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="Account Settings"><i class="fa fa-film"></i></a>
+  <a href="/sample" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="News"><i class="fa fa-search"></i></a> 
 
  
  </div>
@@ -183,7 +255,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
+        <div class="container" style="padding-top:15px;">
          <h4 class="w3-center">Our Project</h4>
+         </div>
          <p class="w3-center">  <img src="/static/img/sceduler.jpeg" style="width:100%; height: 380px" alt="Avatar"></p>
          <hr>
          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> ${boardInfo[0].code_name}</p>
@@ -195,48 +269,50 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       <!-- Interests --> 
       <div class="w3-card w3-round w3-white ">
         <div class="w3-container">
-				  		<form id="writeForm">
-							   	<div class="col-xs-12">
-										<div id="titleMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
-									</div>
-							   	<div class="form-group input-group">
-						      	<div class="input-group-prepend">
-									    <span class="input-group-text" style="background: #fff;"><i class="fa fa-pencil"></i></span>
-									  </div>	
-										<input type="text" class="form-control" id="title" name="title" placeholder="Title">
-							   	</div>
-			
-									<div class="col-xs-12">
-										<div id="startDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
-									</div>
-									<div class="form-group date input-append date" id="dpDOB">
-	      						<span class="input-group-addon"></span>
-										<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" /> 
-									</div>
-									
-									<div class="col-xs-12">
-										<div id="endDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
-									</div>
-									<div class="form-group date input-append date" id="dpDOB2">
-	      						<span class="input-group-addon"></span>
-										<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
-									</div>
-									
-									<div class="col-xs-12">
-										<div id="dueDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
-									</div>
-									<div class="form-group date input-append date" id="dpDOB3">
-	      						<span class="input-group-addon"></span>
-										<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
-									</div>
+		  		<form id="writeForm">
+		  			<div class="container box">
+					   	<div class="col-xs-12">
+								<div id="titleMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out title!</div>
+							</div>
+					   	<div class="form-group input-group">
+				      	<div class="input-group-prepend">
+							    <span class="input-group-text" style="background: #fff;"><i class="fa fa-pencil"></i></span>
+							  </div>	
+								<input type="text" class="form-control" id="title" name="title" placeholder="Title">
+					   	</div>
+	
+							<div class="col-xs-12">
+								<div id="startDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out start date!</div>
+							</div>
+							<div class="form-group date input-append date" id="dpDOB">
+	    						<span class="input-group-addon"></span>
+								<input type="text" class="form-control" id="startDate" name="startDate" placeholder="From Date" /> 
+							</div>
+							
+							<div class="col-xs-12">
+								<div id="endDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out end date!</div>
+							</div>
+							<div class="form-group date input-append date" id="dpDOB2">
+	    						<span class="input-group-addon"></span>
+								<input type="text" class="form-control" id="endDate" name="endDate" placeholder="To Date" /> 
+							</div>
+							
+							<div class="col-xs-12">
+								<div id="dueDtMsg" class="text-right small" style="display:none; color:#ff6666;">* Please fill out due date!</div>
+							</div>
+							<div class="form-group date input-append date" id="dpDOB3">
+	    						<span class="input-group-addon"></span>
+								<input type="text" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date" /> 
+							</div>
 	<!-- 									<div class="form-group required text-right">		
 											<button type="button" class="btn btn-default btn-sm" id="save" onClick="formCheck();">Save</button>		
 										</div> -->
-									<input type="hidden" id="codeParam" name="code" value="${boardInfo[0].code}">
-									<div class="form-group required">
-										<button type="button" class="btn btn-lg btn-primary btn-block btn-signin" id="save" onClick="formCheck();" >Save</button>
-						    	</div>
-								</form>	
+							<input type="hidden" id="codeParam" name="code" value="${boardInfo[0].code}">
+							<div class="form-group required">
+								<button type="button" class="btn btn-sm btn-block btn-a" id="save" onClick="formCheck();" >Create New Meeting</button>
+				    	</div>
+				    </div>	
+					</form>	
         </div>
       </div>
       <br>
@@ -280,9 +356,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-container">
           <!-- <p><button class="w3-button w3-block w3-theme-l4">Project User Upload</button></p> -->
 	        <div class="form-group required text-center">
-				<button type="button" class="w3-button w3-block w3-theme-l4" id="excelUp" onClick="excelUploadCall(); return false;">Project User Upload</button>		
+	        <div class="container" style="padding-top:15px;">
+					<button type="button" class="w3-button w3-block w3-theme-l4" id="excelUp" onClick="excelUploadCall(); return false;" style="background-color: rgb(77, 99, 111); color: #ffffff; font-size: 14px;"><i class="fa fa-table w3-margin-right"></i>Member Upload</button>
 <!-- 			<button type="button" class="btn btn-default btn-sm" id="excelDown" onClick="excelDown(); return false;">Excel Download</button>		 -->
-			</div>
+					</div>
+					</div>
 
          <table style="height: 100px;">
          <tbody>

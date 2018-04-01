@@ -52,6 +52,7 @@ class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" 
 	</bean>
 	
 	<bean id="userController" class="com.ibm.user.web.UserController">
+		<property name="boardService" ref="boardServiceImpl" />
 	</bean>
 	
 	<bean class = "org.springframework.web.servlet.view.BeanNameViewResolver">

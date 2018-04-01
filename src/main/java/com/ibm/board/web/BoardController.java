@@ -53,10 +53,16 @@ public class BoardController {
 
 	}
 	
-	@RequestMapping(value ="/sample", method=RequestMethod.GET)
+	@RequestMapping(value ="/samplePeople", method=RequestMethod.GET)
 	public String sampleView(){
 
 		return "board/sample";
+
+	}
+	@RequestMapping(value ="/sample", method=RequestMethod.GET)
+	public String samplePeopleView(){
+
+		return "board/peopleSample";
 
 	}
 	@RequestMapping(value ="/project/write", method=RequestMethod.GET)
@@ -228,7 +234,7 @@ public class BoardController {
 		
 		logger.info("********** voter ********* " );
 		String voter = boardService.getVoterInBoardId(params);
-		
+		view.addObject("voter", voter);
 		
 		
 		view.setViewName("board/listScedule");

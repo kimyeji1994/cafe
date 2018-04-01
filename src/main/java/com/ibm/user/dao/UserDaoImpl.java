@@ -83,7 +83,7 @@ public class UserDaoImpl  extends SqlSessionDaoSupport implements UserDao{
 	@Override
 	public boolean insertCodePeople(Map<String, Object> params) {
 	
-		return  getSqlSession().insert("UserDao.getProjectUserList" , params) > 0;
+		return  getSqlSession().insert("UserDao.insertCodePeople" , params) > 0;
 	}
 
 	@Override
