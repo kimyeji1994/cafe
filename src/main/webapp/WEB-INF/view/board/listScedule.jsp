@@ -365,8 +365,8 @@ window.onload = function(){
         <div class="w3-container">
           <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.title}</p>
           <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.project} </p>
-       	 <p><i class="fa fa-user fa-fw w3-margin-right w3-large w3-text-teal"></i>${managerInfo.name}</p>
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>${managerInfo.phone}</p>
+       	 <p><i class="fa fa-user fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.name}</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.phone}</p>
            <p><i class="fa fa-lock fa-fw w3-margin-right w3-large w3-text-teal"></i>${boardInfo.code}</p>
           
           
